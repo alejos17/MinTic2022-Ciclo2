@@ -5,7 +5,7 @@
  */
 package reto1;
 import java.util.Scanner;
-import reto1.clsPaciente;
+import reto1.clsPersona;
 
 /**
  *
@@ -19,28 +19,28 @@ public class Reto1 {
     public static void main(String[] args) {
         // TODO code application logic here
         Scanner input = new Scanner(System.in);
-        clsPaciente pac1 = new clsPaciente();
-        String nombre, apellido;
-        int fecha_nac, edad;
-    
+        clsPersona per1 = new clsPersona();
+                
         System.out.println("******* BIENVENIDO **********");
-        System.out.println("Escriba el nombre");
-        pac1.setNombre(input.nextLine());
-        //nombre = input.nextLine();
-        System.out.println("Escriba el apellido");
-        pac1.setApellido(input.nextLine());
-        //apellido = input.nextLine();
-        System.out.println("Escriba la fecha de Nacimiento");
-        pac1.setFecha_nac(input.nextInt());
-        //fecha_nac = input.nextInt();
-        System.out.println("Escriba la edad");
-        pac1.setEdad(input.nextInt());
-        //edad = input.nextInt();
-    
-        System.out.println("Lo escrito es: ");
-        //System.out.println("Nombre Completo: "+nombre+" "+apellido);
-        System.out.println("Lo guardado en el objeto es: ");
-        pac1.mostrar();
+        System.out.print("Escriba el nombre: ");
+        per1.setNombre(input.nextLine());
+        System.out.print("Escriba el apellido: ");
+        per1.setApellido(input.nextLine());
+        System.out.print("Escriba su direccion de la casa: ");
+        per1.setDireccion(input.nextLine());
+        System.out.print("Escriba el telefono: ");
+        per1.setTelefono(input.nextLine());
+        
+        System.out.print("Escriba el año de Nacimiento: ");
+        per1.setAnoNac(input.nextInt());
+        System.out.println("********************************");
+        System.out.print("Escriba la etapa que le asignaron: ");
+        per1.setEtapa(input.nextInt());
+        System.out.println("********************************");
+        
+        per1.calcularEdad();
+        per1.vacuna();
+        System.out.println("********************************");
         
     }
     
