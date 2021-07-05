@@ -121,6 +121,12 @@ public class color {
             System.out.println("********************************************");
             System.out.println("el valor Y: "+y1+" "+" Cb: "+cb+" "+" Cr; "+cr);
             System.out.println("es en Y: "+y+" "+" I: "+i+" "+" Q; "+q);
+        }else if (getOp()==7){
+            System.out.println("Cerrando aplicación: SALIR");
+            System.exit(0);
+        }else {
+            System.out.print("Opción no válida, por favor intente de nuevo!!...  Saliendo");
+            System.exit(0);
         }
         
     }
