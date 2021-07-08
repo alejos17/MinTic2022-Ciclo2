@@ -5,11 +5,13 @@
  */
 package Classes;
 
+import Interfaces.*;
+
 /**
  *
  * @author alejos17
  */
-public class clsPets {
+public class clsPets implements IAnimal, IVertebrate {   //con implements triago las interfaces a la clase pet. como en el diagrama UML.
     private String code;
     private String name;
     private int born_year;
@@ -123,5 +125,17 @@ public class clsPets {
      */
     public void setVeterinary(clsVeterinary veterinary) {
         this.veterinary = veterinary;
+    }
+
+    //Sobrescritura de los metodos de cada interfaz creada retornando algo ya establecido.
+    
+    @Override
+    public String getAnimalType() {
+        return "domestico";
+    }
+
+    @Override
+    public int getNumberOfBones() {
+        return 0;
     }
 }
