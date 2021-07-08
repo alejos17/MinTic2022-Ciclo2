@@ -21,7 +21,12 @@ public class clsVeterinary {
         this.address = address;
         this.doctor = doctor;
     }
-
+    
+    public String petCare(clsPets pet){ //Devuelve el estado de salud de la mascota, este metodo recibe una mascota que es la que se evalua... por lo que se pone por parametro POLIMORFISMO PURO
+        System.out.println("Atendiendo a la mascosta "+ pet.getName());
+        return pet.getHealthStatus();   //Como pido string por parametro, retorno un string e imprimo mensaje por consola.
+    }
+    
     /**
      * @return the name
      */
