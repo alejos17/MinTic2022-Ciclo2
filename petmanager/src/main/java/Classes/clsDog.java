@@ -23,6 +23,17 @@ public class clsDog extends clsPets {
         System.out.println("El perro "+ super.getName() +" esta caminando.");  //Llamando de la clase padre el nombre del perro
     }
     
+    //Sobrecarga de metodos
+    
+    public void WalkAround(int km){
+        System.out.println("El perro "+super.getName()+" esta caminando "+km+" km");
+    }
+    
+    public void WalkAround(boolean dogLeash){
+        String hasLeash = dogLeash ? "con correa" : "sin correa";  //Condicional de una sola linea, se guarda en hasLeash para concatenar en el mensaje
+        System.out.println("El perro "+super.getName()+" esta caminando "+hasLeash);
+    }
+    
     @Override
     public void Sound(){
         System.out.println("El perro "+super.getName()+" hace guaaaaaauuuuu!");

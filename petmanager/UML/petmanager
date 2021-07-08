@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<XMI xmi.version="1.2" timestamp="2021-07-08T10:42:38" verified="false" xmlns:UML="http://schema.omg.org/spec/UML/1.4">
+<XMI xmi.version="1.2" timestamp="2021-07-08T10:52:38" verified="false" xmlns:UML="http://schema.omg.org/spec/UML/1.4">
  <XMI.header>
   <XMI.documentation>
    <XMI.exporter>umbrello uml modeller 2.32.2 http://umbrello.kde.org</XMI.exporter>
@@ -68,6 +68,16 @@
         <UML:Attribute isSpecification="false" xmi.id="u2xyae8wGPXON" name="breed" visibility="private" type="uXn1USg97yP5o"/>
         <UML:Attribute isSpecification="false" xmi.id="ubeqOAGTwhupy" name="Pedigree" visibility="private" type="uXn1USg97yP5o"/>
         <UML:Operation isSpecification="false" isLeaf="false" isRoot="false" isAbstract="false" xmi.id="uNjpPyx9AJJcO" name="WalkAround" visibility="public" isQuery="false" isOverride="false" isVirtual="false" isInline="false"/>
+        <UML:Operation isSpecification="false" isLeaf="false" isRoot="false" isAbstract="false" xmi.id="uxTLw3lr9LGGJ" name="WalkAround" visibility="public" isQuery="false" isOverride="false" isVirtual="false" isInline="false">
+         <UML:BehavioralFeature.parameter>
+          <UML:Parameter isSpecification="false" xmi.id="utMZKZJQ3rhHJ" name="km" visibility="private" type="ub5vCSKKr8MU4" value=""/>
+         </UML:BehavioralFeature.parameter>
+        </UML:Operation>
+        <UML:Operation isSpecification="false" isLeaf="false" isRoot="false" isAbstract="false" xmi.id="uFMKcBThP2PUd" name="WalkAround" visibility="public" isQuery="false" isOverride="false" isVirtual="false" isInline="false">
+         <UML:BehavioralFeature.parameter>
+          <UML:Parameter isSpecification="false" xmi.id="uihmMAVzT6bLL" name="dogLeash" visibility="private" type="ut9hNJTCVFzuD" value=""/>
+         </UML:BehavioralFeature.parameter>
+        </UML:Operation>
        </UML:Classifier.feature>
       </UML:Class>
       <UML:Generalization isSpecification="false" xmi.id="uhqBGgAuJiTIv" name="" namespace="Logical_View" visibility="public" discriminator="" child="ult4RPM7n0NvH" parent="urSw7NeyzaQkj"/>
@@ -106,9 +116,9 @@
      </UML:Namespace.ownedElement>
      <XMI.extension xmi.extender="umbrello">
       <diagrams resolution="101">
-       <diagram xmi.id="uoa1iYrnGjM2z" name="diagrama de clases" type="1" documentation="" backgroundcolor="#ffffff" fillcolor="#ffffff" font="Noto Sans,11,-1,5,50,0,0,0,0,0" griddotcolor="#cacaca" linecolor="#000000" linewidth="0" textcolor="#000000" usefillcolor="1" showattribassocs="1" showatts="1" showattsig="1" showops="1" showopsig="1" showpackage="1" showpubliconly="0" showscope="1" showstereotype="2" localid="-1" showgrid="1" snapgrid="0" snapcsgrid="0" snapx="25" snapy="25" zoom="152.087" canvasheight="371.793" canvaswidth="816.887" isopen="1">
+       <diagram xmi.id="uoa1iYrnGjM2z" name="diagrama de clases" type="1" documentation="" backgroundcolor="#ffffff" fillcolor="#ffffff" font="Noto Sans,11,-1,5,50,0,0,0,0,0" griddotcolor="#cacaca" linecolor="#000000" linewidth="0" textcolor="#000000" usefillcolor="1" showattribassocs="1" showatts="1" showattsig="1" showops="1" showopsig="1" showpackage="1" showpubliconly="0" showscope="1" showstereotype="2" localid="-1" showgrid="1" snapgrid="0" snapcsgrid="0" snapx="25" snapy="25" zoom="152.087" canvasheight="397.437" canvaswidth="816.887" isopen="1">
         <widgets>
-         <classwidget xmi.id="u7Y0nR6brTFbp" localid="uTxjxCi72TuQi" textcolor="#000000" linecolor="#000000" linewidth="0" usefillcolor="1" usesdiagramfillcolor="0" usesdiagramusefillcolor="0" fillcolor="#ffffff" font="Noto Sans,11,-1,5,50,0,0,0,0,0" autoresize="0" x="-115.723" y="-18.4105" width="175.204" height="109.314" isinstance="0" showstereotype="2" showoperations="1" showpubliconly="0" showopsigs="601" showpackage="1" showscope="1" showattributes="1" showattsigs="601" showstereotype="2"/>
+         <classwidget xmi.id="u7Y0nR6brTFbp" localid="uTxjxCi72TuQi" textcolor="#000000" linecolor="#000000" linewidth="0" usefillcolor="1" usesdiagramfillcolor="0" usesdiagramusefillcolor="0" fillcolor="#ffffff" font="Noto Sans,11,-1,5,50,0,0,0,0,0" autoresize="0" x="-115.723" y="-18.4105" width="256" height="134.957" isinstance="0" showstereotype="2" showoperations="1" showpubliconly="0" showopsigs="601" showpackage="1" showscope="1" showattributes="1" showattsigs="601" showstereotype="2"/>
          <classwidget xmi.id="ult4RPM7n0NvH" localid="uZot70UsNcjl3" textcolor="#000000" linecolor="#000000" linewidth="0" usefillcolor="1" usesdiagramfillcolor="0" usesdiagramusefillcolor="0" fillcolor="#ffffff" font="Noto Sans,11,-1,5,50,0,0,0,0,0" autoresize="0" x="-475.384" y="-9.86274" width="155.163" height="80.383" isinstance="0" showstereotype="2" showoperations="1" showpubliconly="0" showopsigs="601" showpackage="1" showscope="1" showattributes="1" showattsigs="601" showstereotype="2"/>
          <classwidget xmi.id="urSw7NeyzaQkj" localid="uJ8HnQGRBhR1d" textcolor="#000000" linecolor="#000000" linewidth="0" usefillcolor="1" usesdiagramfillcolor="0" usesdiagramusefillcolor="0" fillcolor="#ffffff" font="Noto Sans,11,-1,5,50,0,0,0,0,0" autoresize="1" x="-290.886" y="-280.89" width="162" height="180" isinstance="0" showstereotype="2" showoperations="1" showpubliconly="0" showopsigs="601" showpackage="1" showscope="1" showattributes="1" showattsigs="601" showstereotype="2"/>
          <classwidget xmi.id="uNR0Gv0Un2Uip" localid="uaLcBwTkQ8oiC" textcolor="#000000" linecolor="#000000" linewidth="0" usefillcolor="1" usesdiagramfillcolor="0" usesdiagramusefillcolor="0" fillcolor="#ffffff" font="Noto Sans,11,-1,5,50,0,0,0,0,0" autoresize="0" x="178.844" y="-12.4928" width="162.659" height="90.6575" isinstance="0" showstereotype="2" showoperations="1" showpubliconly="0" showopsigs="601" showpackage="1" showscope="1" showattributes="1" showattsigs="601" showstereotype="2"/>
@@ -162,7 +172,7 @@
   </UML:Model>
  </XMI.content>
  <XMI.extensions xmi.extender="umbrello">
-  <docsettings viewid="uoa1iYrnGjM2z" documentation="" uniqueid="uWYNq8xUiH5X2"/>
+  <docsettings viewid="uoa1iYrnGjM2z" documentation="" uniqueid="uihmMAVzT6bLL"/>
   <listview>
    <listitem id="Views" type="800" open="1">
     <listitem id="Entity_Relationship_Model" type="836" open="1"/>
@@ -183,6 +193,8 @@
       <listitem id="u2xyae8wGPXON" type="814" open="0"/>
       <listitem id="ubeqOAGTwhupy" type="814" open="0"/>
       <listitem id="uNjpPyx9AJJcO" type="815" open="0"/>
+      <listitem id="uFMKcBThP2PUd" type="815" open="0"/>
+      <listitem id="uxTLw3lr9LGGJ" type="815" open="0"/>
      </listitem>
      <listitem id="u5eYpksCGCtOH" type="813" open="1"/>
      <listitem id="urSw7NeyzaQkj" type="813" open="1">
