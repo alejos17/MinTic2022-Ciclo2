@@ -5,7 +5,7 @@
  */
 package petmanager;
 
-import Classes.clsPets;
+import Classes.*;
 import java.util.Date;
 
 /**
@@ -15,34 +15,35 @@ import java.util.Date;
 public class petmanager {
 
     public static void main(String[] args) {
-        clsPets pet1 = new clsPets();
-        pet1.setName("Firulais");
-        pet1.setBorn_year(2015);
-        pet1.setHealthStatus("Sano");
-        pet1.setCode("001");
-        pet1.setColor("Negro");
-        pet1.setBreed("Criollo");
         
-        clsPets pet2 = new clsPets("002","Carambas",2017,"Criollo","blanco","Enfermo");
+        
+        clsDog dog1 = new clsDog("Criollo",false,"001","Firulais",2013,"Negro","Sano");      
+        
+        clsCat cat1 = new clsCat("Angora","002","Minino",2017,"blanco","Enfermo");
+        
+        
         Date fecha_actual = new Date();
         int anioActual = fecha_actual.getYear();
-        int edadPet1 = anioActual - pet1.getBorn_year();
-        int edadPet2 = anioActual - pet2.getBorn_year();
+        int edadPet1 = anioActual - dog1.getBorn_year();
+        int edadPet2 = anioActual - cat1.getBorn_year();
         
         if(edadPet1 > edadPet2){
-            System.out.println("La mascota "+ pet1.getName() + " es mayor que la mascota "+ pet2.getName());
+            System.out.println("La mascota "+ dog1.getName() + " es mayor que la mascota "+ cat1.getName());
         }else {
             if(edadPet2 > edadPet1){
-                System.out.println("La mascota "+ pet2.getName() + " es mayor que la mascota "+ pet1.getName());
+                System.out.println("La mascota "+ cat1.getName() + " es mayor que la mascota "+ dog1.getName());
             }else{   
-                System.out.println("La mascota "+ pet1.getName() + " tiene la misma edad que la mascota "+ pet2.getName());
+                System.out.println("La mascota "+ dog1.getName() + " tiene la misma edad que la mascota "+ cat1.getName());
             }
         }
         
-        pet1.Eat();
-        pet2.Eat();
-        pet2.Move();
-        pet2.Sound();
+        dog1.Eat();
+        cat1.Eat();
+        cat1.Move();
+        cat1.Sound();
+        
+        dog1.WalkAround();
+        cat1.SelfCleaning();
         
         
     }
