@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main;
+package Classes;
 
 /**
  *
@@ -26,6 +26,15 @@ public class clsPersona {
         this.telefono = telefono;
     }
 
+    public void imprimir(){
+        System.out.println("Los datos son: ");
+        System.out.println("Documento: "+documento);
+        System.out.println("Nombre Completo: "+nombre+" "+apellido);
+        System.out.println("Dirección: "+direccion);
+        System.out.println("Teléfono: "+telefono);
+        System.out.println("E-mail; "+correo);
+    }
+    
     /**
      * @return the nombre
      */
@@ -109,7 +118,6 @@ public class clsPersona {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-    
     
     
 }
