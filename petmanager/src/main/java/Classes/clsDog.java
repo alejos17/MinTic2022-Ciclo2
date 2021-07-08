@@ -23,6 +23,11 @@ public class clsDog extends clsPets {
         System.out.println("El perro "+ super.getName() +" esta caminando.");  //Llamando de la clase padre el nombre del perro
     }
     
+    @Override
+    public void Sound(){
+        System.out.println("El perro "+super.getName()+" hace guaaaaaauuuuu!");
+    }
+    
     /**
      * @return the breed
      */

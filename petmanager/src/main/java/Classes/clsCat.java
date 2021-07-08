@@ -22,7 +22,13 @@ public class clsCat extends clsPets {
     public void SelfCleaning(){
         System.out.println("El gato "+ super.getName() +" se esta limpiando.");  //Trayendo nombre de gato desde la clase padre.
     }
-
+    
+    @Override
+    public void Sound(){
+        System.out.println("El gato "+super.getName()+" hace miaaaaauuuuu!");
+    }
+    
+    
     /**
      * @return the breed
      */
