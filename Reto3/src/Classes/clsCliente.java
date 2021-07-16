@@ -15,7 +15,7 @@ public class clsCliente extends clsPersona {
     private String idCliente;
     private clsCuentas cuentas;
 
-    public clsCliente(String idCliente, clsCuentas cuentas, String nombre, String apellido, String direccion, String telefono, String correo) {
+    public clsCliente(String idCliente, String nombre, String apellido, String direccion, String telefono, String correo) {
         super(nombre, apellido, direccion, telefono, correo);
         this.idCliente = idCliente;
     
