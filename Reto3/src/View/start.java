@@ -8,6 +8,7 @@ package View;
 import javax.swing.JOptionPane;
 import Classes.*;
 import java.util.LinkedList;
+import javax.swing.ComboBoxModel;
 import javax.swing.DefaultListModel;
 
 /**
@@ -36,12 +37,12 @@ public class start extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btnCrearCliente = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         clienteList = new javax.swing.JList<>();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnBuscarCLiente = new javax.swing.JButton();
+        btnEditarCliente = new javax.swing.JButton();
+        btnBorrarCliente = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txtidCliente = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -59,7 +60,13 @@ public class start extends javax.swing.JFrame {
         cuentassaldoList = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         cuentassinsaldoList = new javax.swing.JList<>();
-        jButton6 = new javax.swing.JButton();
+        btnCrearCuenta = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        txtidCuenta = new javax.swing.JTextField();
+        txtSaldo = new javax.swing.JTextField();
+        cbTipoCuenta = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -68,10 +75,10 @@ public class start extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Crear");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnCrearCliente.setText("Crear");
+        btnCrearCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnCrearClienteActionPerformed(evt);
             }
         });
 
@@ -82,11 +89,11 @@ public class start extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(clienteList);
 
-        jButton2.setText("Buscar");
+        btnBuscarCLiente.setText("Buscar");
 
-        jButton3.setText("Editar");
+        btnEditarCliente.setText("Editar");
 
-        jButton4.setText("Borrar");
+        btnBorrarCliente.setText("Borrar");
 
         jLabel1.setText("Código del Cliente");
 
@@ -108,13 +115,13 @@ public class start extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btnCrearCliente)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
+                        .addComponent(btnBuscarCLiente)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)
+                        .addComponent(btnEditarCliente)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                        .addComponent(jButton4))
+                        .addComponent(btnBorrarCliente))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
@@ -173,12 +180,12 @@ public class start extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2)
-                            .addComponent(jButton3)
-                            .addComponent(jButton4))
+                            .addComponent(btnCrearCliente)
+                            .addComponent(btnBuscarCLiente)
+                            .addComponent(btnEditarCliente)
+                            .addComponent(btnBorrarCliente))
                         .addGap(11, 11, 11)))
                 .addContainerGap())
         );
@@ -199,7 +206,15 @@ public class start extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(cuentassinsaldoList);
 
-        jButton6.setText("Crear Cuenta");
+        btnCrearCuenta.setText("Crear Cuenta");
+
+        jLabel8.setText("Código de Cuenta");
+
+        jLabel9.setText("Tipo de Cuenta");
+
+        jLabel10.setText("Saldo en Cuenta");
+
+        cbTipoCuenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tarjeta", "Corriente", "Ahorros" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -213,16 +228,42 @@ public class start extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton6)
+                        .addComponent(btnCrearCuenta)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtidCuenta))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel10))
+                                .addGap(27, 27, 27)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbTipoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jButton6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addGap(15, 15, 15)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnCrearCuenta)
+                        .addComponent(jLabel8))
+                    .addComponent(txtidCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(cbTipoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(txtSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
                     .addComponent(cuentasLIst))
@@ -239,7 +280,7 @@ public class start extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 350, Short.MAX_VALUE)
+            .addGap(0, 374, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Pedidos", jPanel3);
@@ -252,7 +293,7 @@ public class start extends javax.swing.JFrame {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 350, Short.MAX_VALUE)
+            .addGap(0, 374, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Cobros", jPanel4);
@@ -285,7 +326,7 @@ public class start extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnCrearClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearClienteActionPerformed
         // TODO add your handling code here:
         try {     //Try para encapsular errores en este caso por si ponen mal la fecha en el campo bornYear
             String idCliente = txtidCliente.getText();
@@ -309,10 +350,11 @@ public class start extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "*** ERROR ****");
         }
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnCrearClienteActionPerformed
 
     private void FillJlist(){
         DefaultListModel model = new DefaultListModel();
+               
         int index =0;
         
         //Modelo de lista model.
@@ -323,6 +365,8 @@ public class start extends javax.swing.JFrame {
         }
         
         clienteList.setModel(model);   //La lista toma el modelo de lista model
+        
+        
     }
     
     
@@ -362,23 +406,27 @@ public class start extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBorrarCliente;
+    private javax.swing.JButton btnBuscarCLiente;
+    private javax.swing.JButton btnCrearCliente;
+    private javax.swing.JButton btnCrearCuenta;
+    private javax.swing.JButton btnEditarCliente;
+    private javax.swing.JComboBox<String> cbTipoCuenta;
     private javax.swing.JList<String> clienteList;
     private javax.swing.JScrollPane cuentasLIst;
     private javax.swing.JList<String> cuentassaldoList;
     private javax.swing.JList<String> cuentassinsaldoList;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -390,7 +438,9 @@ public class start extends javax.swing.JFrame {
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtSaldo;
     private javax.swing.JTextField txtTelefono;
     private javax.swing.JTextField txtidCliente;
+    private javax.swing.JTextField txtidCuenta;
     // End of variables declaration//GEN-END:variables
 }
