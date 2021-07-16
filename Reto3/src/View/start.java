@@ -87,9 +87,19 @@ public class start extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        clienteList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clienteListMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(clienteList);
 
         btnBuscarCLiente.setText("Buscar");
+        btnBuscarCLiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarCLienteActionPerformed(evt);
+            }
+        });
 
         btnEditarCliente.setText("Editar");
 
@@ -207,6 +217,11 @@ public class start extends javax.swing.JFrame {
         jScrollPane2.setViewportView(cuentassinsaldoList);
 
         btnCrearCuenta.setText("Crear Cuenta");
+        btnCrearCuenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearCuentaActionPerformed(evt);
+            }
+        });
 
         jLabel8.setText("Código de Cuenta");
 
@@ -342,7 +357,8 @@ public class start extends javax.swing.JFrame {
             }else{
                 clsCliente cliente = new clsCliente(idCliente,nombre,apellido,direccion,telefono,correo);
                 clientesObjectList.add(cliente);    //Lo guarda en una lista
-                this.FillJlist();    //Asigna la lista al despliegue GUI
+                this.ListarClientes();
+                this.borrarCampos();
                 JOptionPane.showMessageDialog(this, "El nuevo cliente ha sido creado con éxito!");
             }
             
@@ -352,7 +368,39 @@ public class start extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnCrearClienteActionPerformed
 
-    private void FillJlist(){
+    private void btnCrearCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearCuentaActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnCrearCuentaActionPerformed
+
+    private void btnBuscarCLienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCLienteActionPerformed
+        // TODO add your handling code here:
+        String code = txtidCliente.getText();   //Campo de busqueda
+        boolean found = false;   //Variable de control para saber si encontro o no lo buscado
+        
+        for (clsCliente cliente : clientesObjectList) {
+            if (cliente.getIdCliente().equals(code)){
+                txtNombre.setText(cliente.getNombre());
+                txtApellido.setText(cliente.getApellido());
+                txtDireccion.setText(cliente.getDireccion());
+                txtTelefono.setText(cliente.getTelefono());
+                txtCorreo.setText(cliente.getCorreo());
+                found = true;
+                break;
+            }
+        }
+        
+        if (!found){
+            JOptionPane.showMessageDialog(this, "El código de Cliente no existe, intente de nuevo!");
+        }
+    }//GEN-LAST:event_btnBuscarCLienteActionPerformed
+
+    private void clienteListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clienteListMouseClicked
+        // TODO add your handling code here:
+      
+    }//GEN-LAST:event_clienteListMouseClicked
+
+    private void ListarClientes(){
         DefaultListModel model = new DefaultListModel();
                
         int index =0;
@@ -366,9 +414,17 @@ public class start extends javax.swing.JFrame {
         
         clienteList.setModel(model);   //La lista toma el modelo de lista model
         
-        
     }
     
+    public void borrarCampos(){
+        txtidCliente.setText("");
+        txtNombre.setText("");
+        txtApellido.setText("");
+        txtDireccion.setText("");
+        txtTelefono.setText("");
+        txtCorreo.setText("");
+    }
+        
     
     /**
      * @param args the command line arguments

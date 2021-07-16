@@ -17,6 +17,7 @@ public class clsPedidos {
     private int valorUnitario;
     private int iva;
     private int valorTotal;
+    private boolean cobrado;
     private clsInventario inventario;
 
     public clsPedidos(String idPedido, String producto, int cantidad, int valorUnitario, int iva, int valorTotal) {
@@ -26,6 +27,7 @@ public class clsPedidos {
         this.valorUnitario = valorUnitario;
         this.iva = iva;
         this.valorTotal = valorTotal;
+        cobrado = false;
     }
 
     
@@ -126,6 +128,20 @@ public class clsPedidos {
      */
     public void setInventario(clsInventario inventario) {
         this.inventario = inventario;
+    }
+
+    /**
+     * @return the cobrado
+     */
+    public boolean isCobrado() {
+        return cobrado;
+    }
+
+    /**
+     * @param cobrado the cobrado to set
+     */
+    public void setCobrado(boolean cobrado) {
+        this.cobrado = cobrado;
     }
     
     
