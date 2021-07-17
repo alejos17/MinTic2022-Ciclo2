@@ -5,6 +5,10 @@
  */
 package Classes;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
 
 /**
  *
@@ -13,18 +17,19 @@ package Classes;
 public class clsCliente extends clsPersona {
 
     private String idCliente;
-    private clsCuentas cuentas;
+    private List<clsCuentas> cuentas;  //Se crea una lista de cuentas para el objeto cliente
 
     public clsCliente(String idCliente, String nombre, String apellido, String direccion, String telefono, String correo) {
         super(nombre, apellido, direccion, telefono, correo);
         this.idCliente = idCliente;
-    
+        this.cuentas = new ArrayList<>();   //Se crea array para guardar la lista de cuentas de cada cliente
     }
 
+    public void asignarCuentas(clsCuentas cuentas){   //Metodo para guardar la cuenta en la lista del cliente
+        this.getCuentas().add(cuentas);
+    }
     
-    
-    
-    
+   
     /**
      * @return the idCliente
      */
@@ -42,18 +47,18 @@ public class clsCliente extends clsPersona {
     /**
      * @return the cuentas
      */
-    public clsCuentas getCuentas() {
+    public List<clsCuentas> getCuentas() {
         return cuentas;
     }
 
     /**
      * @param cuentas the cuentas to set
      */
-    public void setCuentas(clsCuentas cuentas) {
+    public void setCuentas(List<clsCuentas> cuentas) {
         this.cuentas = cuentas;
     }
-    
-    
+
+ 
 
     
     
