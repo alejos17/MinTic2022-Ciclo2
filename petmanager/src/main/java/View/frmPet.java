@@ -6,6 +6,7 @@
 package View;
 
 import Classes.*;
+import Controller.ctlPet;
 import java.util.LinkedList;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -15,8 +16,9 @@ import javax.swing.JOptionPane;
  * @author alejos17
  */
 public class frmPet extends javax.swing.JFrame {
-
-    LinkedList<clsDog> dogObjectList = new LinkedList<>();
+    
+    ctlPet ctlPet = new ctlPet();  //Instancia entre el controller y la vista
+    LinkedList<clsDog> dogObjectList = new LinkedList<>();  //Lista para guardar los objetos creados
     
     /**
      * Creates new form frmPet
@@ -383,7 +385,9 @@ public class frmPet extends javax.swing.JFrame {
     private void readDogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_readDogActionPerformed
         // TODO add your handling code here:
         String code = txtCodeDog.getText();   //Campo de busqueda
-        boolean found = false;   //Variable de control para saber si encontro o no lo buscado
+        clsDog dog = (clsDog) ctlPet.SearchPet(code, "Perro");  //Busqueda de un perro almacenado mandando su codigo y tipo
+        
+        /*boolean found = false;   //Variable de control para saber si encontro o no lo buscado
         
         for (clsDog dog : dogObjectList) {
             if (dog.getCode().equals(code)){
@@ -396,10 +400,17 @@ public class frmPet extends javax.swing.JFrame {
                 found = true;
                 break;
             }
-        }
-        
-        if (!found){
+        }*/
+        //Si la variable perro es nula, es porque no encontro nada y sale error de lo contrario muestra el contenido del objeto dog que se envio.
+        if (dog == null){
             JOptionPane.showMessageDialog(this, "Code not found");
+        }else{
+            txtNameDog.setText(dog.getName());
+            txtColorDog.setText(dog.getColor());
+            txtbornYearDog.setText(dog.getBorn_year()+"");
+            hsDog.setSelectedItem(dog.getHealthStatus());
+            breedDog.setSelectedItem(dog.getBreed());
+            chpedigree.setSelected(dog.getPedigree()); 
         }
         
     }//GEN-LAST:event_readDogActionPerformed
