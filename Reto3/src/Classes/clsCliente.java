@@ -19,17 +19,22 @@ public class clsCliente extends clsPersona implements Itipo {
 
     private String idCliente;
     private List<clsCuentas> cuentas;  //Se crea una lista de cuentas para el objeto cliente
+    private List<clsPedidos> pedidos;  //Lista de pedidos del cliente
 
     public clsCliente(String idCliente, String nombre, String apellido, String direccion, String telefono, String correo) {
         super(nombre, apellido, direccion, telefono, correo);
         this.idCliente = idCliente;
         this.cuentas = new ArrayList<>();   //Se crea array para guardar la lista de cuentas de cada cliente
+        this.pedidos = new ArrayList<>();   //Array para guardar los pedidos del cliente
     }
 
     public void asignarCuentas(clsCuentas cuentas){   //Metodo para guardar la cuenta en la lista del cliente
         this.getCuentas().add(cuentas);
     }
     
+    public void asignarPedido(clsPedidos pedido){
+        this.getPedidos().add(pedido);
+    }
    
     /**
      * @return the idCliente
@@ -62,6 +67,20 @@ public class clsCliente extends clsPersona implements Itipo {
     @Override
     public String tipoCambio() {
         return "Cliente";
+    }
+
+    /**
+     * @return the pedidos
+     */
+    public List<clsPedidos> getPedidos() {
+        return pedidos;
+    }
+
+    /**
+     * @param pedidos the pedidos to set
+     */
+    public void setPedidos(List<clsPedidos> pedidos) {
+        this.pedidos = pedidos;
     }
 
     

@@ -6,6 +6,8 @@
 package Classes;
 
 import Interface.Itipo;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -21,6 +23,7 @@ public class clsPedidos implements Itipo {
     private int valorTotal;
     private boolean cobrado;
     private clsInventario inventario;
+    private List<clsPedidos> pedidos;
 
     public clsPedidos(String idPedido, String producto, int cantidad, int valorUnitario, int iva, int valorTotal) {
         this.idPedido = idPedido;
@@ -30,6 +33,7 @@ public class clsPedidos implements Itipo {
         this.iva = iva;
         this.valorTotal = valorTotal;
         cobrado = false;
+        this.pedidos = new ArrayList<>();
     }
 
     
@@ -149,6 +153,20 @@ public class clsPedidos implements Itipo {
     @Override
     public String tipoCambio() {
         return "Pedido";
+    }
+
+    /**
+     * @return the pedidos
+     */
+    public List<clsPedidos> getPedidos() {
+        return pedidos;
+    }
+
+    /**
+     * @param pedidos the pedidos to set
+     */
+    public void setPedidos(List<clsPedidos> pedidos) {
+        this.pedidos = pedidos;
     }
     
     

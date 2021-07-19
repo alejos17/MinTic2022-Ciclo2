@@ -18,6 +18,7 @@ public class Control {
     private modelCliente modelCliente;
     private modelCuentas modelCuentas;
     private modelPedidos modelPedidos;
+    private modelInventario modelInventario;
     
     public Control() {
         this.modelCliente = new modelCliente();
@@ -25,6 +26,17 @@ public class Control {
         this.modelPedidos = new modelPedidos();
     }
     
+    public boolean Init(){
+        try{
+            this.modelCliente.InitClientes();
+            this.modelCuentas.InitCuentas();
+            this.modelPedidos.InitPedidos();
+            this.modelInventario.InitInventario();
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
     
     //Metodo para Crear objeto ya sea, persona, cliente, cuenta o pedido
     public boolean CrearCliente(clsCliente cliente){
@@ -55,35 +67,34 @@ public class Control {
         }
     }
     
-    //Para modificar
-    public boolean Editar(clsPersona persona){
-        try{
-        switch(persona.tipoCambio()){
-            case "Cliente":
-                
-                break;
-            case "Cuenta":
-                
-                
-                break;
-            case "Pedido":
-                
-                break;
-        }
-        return true;
-        }catch (Exception e){
-            return false;
-        }
-            
+    //Metodo para modificar Clientes solamente
+    public clsCliente EditarCliente(String idCliente, clsCliente clienteM){
         
+        try{
+            this.modelCliente.EditarCliente(idCliente, clienteM);
+        return null;
+        }catch (Exception e){
+            return null;
+        }
+    }
+    
+    //Metodo para modificar Clientes solamente
+    public clsCuentas EditarCuenta(String idCuenta, clsCuentas cuentaM){
+        
+        try{
+            this.modelCuentas.EditarCuenta(idCuenta, cuentaM);
+        return null;
+        }catch (Exception e){
+            return null;
+        }
     }
     
     //Para borrar, lo unico que eso hace es al llamarlo desde la vista, mira que tipo de mascota es y llama según el caso a los metodos del modelo.
-    public boolean Borrar(clsPersona persona){
+    public boolean Borrar(String type, String idCliente){
         try{
-        switch(persona.tipoCambio()){
+        switch(type){
             case "Cliente":
-                
+                    this.modelCliente.BorrarCliente(idCliente);
                 break;
             case "Cuenta":
                 
@@ -102,28 +113,26 @@ public class Control {
     }
     
     //Metodo para buscar, se recibe el codigo y el tipo de mascota para segun el switch ejecutar si es perro o gato y retornar el objeto pets indicado.
-    public clsPersona Buscar(String code, String type){
-        clsPersona persona = null;
+    public clsCliente BuscarCliente(String code){
+        clsCliente cliente = null;
         try{
-        switch(type){
-            case "Cliente":
-                this.modelCliente.BuscarCliente(code);
-                break;
-            case "Cuenta":
-                
-                
-                break;
-            case "Pedido":
-                
-                break;
-        }
-        return persona;
+            cliente = this.modelCliente.BuscarCliente(code);
+        return cliente;
         }catch (Exception e){
             return null;
         }
-            
-        
     }
+    
+    public clsCuentas BuscarCuenta(String code){
+        clsCuentas cuenta = null;
+        try{
+            cuenta = this.modelCuentas.BuscarCuenta(code);
+        return cuenta;
+        }catch (Exception e){
+            return null;
+        }
+    }
+    
     
     public DefaultListModel Listar(String tipo){
         DefaultListModel model = new DefaultListModel();
@@ -133,11 +142,11 @@ public class Control {
                 model = this.modelCliente.ListarClientes();
                 break;
             case "Cuenta":
-                
+                model = this.modelCuentas.ListarCuentas();
                 
                 break;
             case "Pedido":
-                
+                model = this.modelPedidos.ListarPedidos();
                 break;
         }
         return model;
@@ -147,5 +156,14 @@ public class Control {
         
     }
 
-    
+    public DefaultListModel ListarCuentaClientes(){
+        DefaultListModel model = new DefaultListModel();
+        try{
+            model = this.modelCliente.ListarCuentaClientes();
+        return model;
+        }catch (Exception e){
+            return null;
+        }
+        
+    }
 }
