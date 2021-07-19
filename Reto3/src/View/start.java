@@ -7,6 +7,7 @@ package View;
 
 import javax.swing.JOptionPane;
 import Classes.*;
+import Controller.*;
 import java.util.LinkedList;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -16,8 +17,9 @@ import javax.swing.DefaultListModel;
  * @author alejos17
  */
 public class start extends javax.swing.JFrame {
-
-     LinkedList<clsCliente> clientesObjectList = new LinkedList<>();  //Lista de Clientes
+    
+    Control control = new Control();  //Instancia de Controller 
+    
     /**
      * Creates new form start
      */
@@ -34,7 +36,6 @@ public class start extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton5 = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         btnCrearCliente = new javax.swing.JButton();
@@ -70,8 +71,6 @@ public class start extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-
-        jButton5.setText("jButton5");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -130,7 +129,7 @@ public class start extends javax.swing.JFrame {
                         .addComponent(btnBuscarCLiente)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnEditarCliente)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 373, Short.MAX_VALUE)
                         .addComponent(btnBorrarCliente))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -252,7 +251,7 @@ public class start extends javax.swing.JFrame {
                                     .addComponent(cbTipoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbCliente, 0, 133, Short.MAX_VALUE)
+                            .addComponent(cbCliente, 0, 487, Short.MAX_VALUE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel11)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
@@ -289,7 +288,7 @@ public class start extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 561, Short.MAX_VALUE)
+            .addGap(0, 915, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -302,7 +301,7 @@ public class start extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 561, Short.MAX_VALUE)
+            .addGap(0, 915, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -349,13 +348,15 @@ public class start extends javax.swing.JFrame {
             String telefono = txtTelefono.getText();
             String correo = txtCorreo.getText();
             
+            
             //Condicional para no agregar el objeto perro nuevo hasta que los campos tengan info, las selecciones no porque ya tienen algo seleccionado
             if (idCliente.equals("") || nombre.equals("") || apellido.equals("") || direccion.equals("") || telefono.equals("") || correo.equals("")){
                 JOptionPane.showMessageDialog(this, "** ERROR ** -- Campos Vacíos -- Por favor diligencie todos los campos");
             }else{
                 clsCliente cliente = new clsCliente(idCliente, nombre, apellido, direccion, telefono, correo);
-                clientesObjectList.add(cliente);    //Lo guarda en una lista
-                this.ListarClientes();
+                control.CrearCliente(cliente);
+                
+                this.Listar();
                 this.borrarCampos();
                 JOptionPane.showMessageDialog(this, "El nuevo cliente ha sido creado con éxito!");
             }
@@ -373,23 +374,17 @@ public class start extends javax.swing.JFrame {
             String tipoCuenta = cbTipoCuenta.getSelectedItem().toString();
             int saldo = Integer.parseInt(txtSaldo.getText());
             
-            
             //Condicional para no agregar el objeto perro nuevo hasta que los campos tengan info, las selecciones no porque ya tienen algo seleccionado
             if (idCuenta.equals("") || tipoCuenta.equals("")){
                 JOptionPane.showMessageDialog(this, "** ERROR ** -- Campos Vacíos -- Por favor diligencie todos los campos");
             }else{
-                clsCuentas cuenta = new clsCuentas(idCuenta, tipoCuenta, saldo);
-                String client = cbCliente.getSelectedItem().toString();
-                //Buscar el cliente seleccionado para traer el objeto y poder agregar la cuenta a ese objeto
-                for (clsCliente cliente : clientesObjectList) {  //Buscar en la lista de clientes
-                    if (cliente.getIdCliente().equals(client)){
-                        cliente.asignarCuentas(cuenta);  
-                    }
-                }    
-                //clientesObjectList.add(cliente);    //Lo guarda en una lista
-                this.ListarClientes();
+                clsCuentas cuenta = new clsCuentas(idCuenta, tipoCuenta, saldo);  //Crea instancia de Cuenta para crear
+                control.CrearCuenta(cuenta);  //Envia al controller la cuenta a crear
+                String client = cbCliente.getSelectedItem().toString();  //Lee el cliente propietario de la cuenta
+                control.AsignarCuentas(client,cuenta); //Envia tanto la cuenta como el cliente al controller para guardarlo
+                //this.ListarClientes();
                 this.borrarCampos();
-                JOptionPane.showMessageDialog(this, "El nuevo cliente ha sido creado con éxito!");
+                JOptionPane.showMessageDialog(this, "La Cuenta ha sido creada y asignada al cliente con éxito!");
             }
             
         }catch (Exception e){   //Mensaje a desplegar de error
@@ -400,23 +395,20 @@ public class start extends javax.swing.JFrame {
 
     private void btnBuscarCLienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCLienteActionPerformed
         // TODO add your handling code here:
-        String code = txtidCliente.getText();   //Campo de busqueda
+        String code = txtidCliente.getText();  //Campo de busqueda
+        String tipo = "Cliente";   // Tipo de busqueda
         boolean found = false;   //Variable de control para saber si encontro o no lo buscado
+        clsCliente cliente = (clsCliente) control.Buscar(code, tipo); //Instancia cliente para ir a control a buscar 
         
-        for (clsCliente cliente : clientesObjectList) {
-            if (cliente.getIdCliente().equals(code)){
-                txtNombre.setText(cliente.getNombre());
-                txtApellido.setText(cliente.getApellido());
-                txtDireccion.setText(cliente.getDireccion());
-                txtTelefono.setText(cliente.getTelefono());
-                txtCorreo.setText(cliente.getCorreo());
-                found = true;
-                break;
-            }
-        }
-        
-        if (!found){
+        //Si cliente retorna NUll quiere decir que no encontro cliente y genera mensaje de lo contrario lo muestra en los text
+        if (cliente == null){
             JOptionPane.showMessageDialog(this, "El código de Cliente no existe, intente de nuevo!");
+        }else{
+            txtNombre.setText(cliente.getNombre());
+            txtApellido.setText(cliente.getApellido());
+            txtDireccion.setText(cliente.getDireccion());
+            txtTelefono.setText(cliente.getTelefono());
+            txtCorreo.setText(cliente.getCorreo()); 
         }
     }//GEN-LAST:event_btnBuscarCLienteActionPerformed
 
@@ -425,8 +417,12 @@ public class start extends javax.swing.JFrame {
       
     }//GEN-LAST:event_clienteListMouseClicked
 
-    private void ListarClientes(){
-        DefaultListModel model = new DefaultListModel();  //Crea instancia de lista para lista de clientes en la pestaña clientes
+    private void Listar(){
+        DefaultListModel model = new DefaultListModel();
+        
+        model = control.Listar("Cliente");
+        
+        /*DefaultListModel model = new DefaultListModel();  //Crea instancia de lista para lista de clientes en la pestaña clientes
         DefaultListModel model2 = new DefaultListModel();  //Instancia de lista para las cuentas de cada cliente
         cbCliente.removeAllItems();  //Limpia el combo box de clientes del area de Cuentas
                        
@@ -440,10 +436,10 @@ public class start extends javax.swing.JFrame {
             model2.add(index, data2);
             cbCliente.addItem(cliente.getIdCliente());  //Agrega cada cliente creado a lista Combo Box de la pestaña Cuentas
             index++;
-        }
+        }*/
         
         clienteList.setModel(model);   //La lista toma el modelo de lista model
-        listaCuentas.setModel(model2);
+        //listaCuentas.setModel(model2);
     }
     
     public void borrarCampos(){
@@ -501,7 +497,6 @@ public class start extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbTipoCuenta;
     private javax.swing.JList<String> clienteList;
     private javax.swing.JScrollPane cuentasLIst;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

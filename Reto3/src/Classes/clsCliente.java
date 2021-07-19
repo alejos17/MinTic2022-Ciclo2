@@ -5,6 +5,7 @@
  */
 package Classes;
 
+import Interface.Itipo;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
  *
  * @author alejos17
  */
-public class clsCliente extends clsPersona {
+public class clsCliente extends clsPersona implements Itipo {
 
     private String idCliente;
     private List<clsCuentas> cuentas;  //Se crea una lista de cuentas para el objeto cliente
@@ -58,7 +59,12 @@ public class clsCliente extends clsPersona {
         this.cuentas = cuentas;
     }
 
- 
+    @Override
+    public String tipoCambio() {
+        return "Cliente";
+    }
+
+    
 
     
     

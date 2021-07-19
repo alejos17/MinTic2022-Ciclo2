@@ -5,11 +5,13 @@
  */
 package Classes;
 
+import Interface.Itipo;
+
 /**
  *
  * @author alejos17
  */
-public class clsCuentas {
+public class clsCuentas implements Itipo {
     
     private String idCuenta;
     private String Cuenta;
@@ -63,6 +65,11 @@ public class clsCuentas {
      */
     public void setSaldo(int saldo) {
         this.saldo = saldo;
+    }
+
+    @Override
+    public String tipoCambio() {
+        return "Cuenta";
     }
     
     

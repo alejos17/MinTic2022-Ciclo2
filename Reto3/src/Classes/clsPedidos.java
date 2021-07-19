@@ -5,11 +5,13 @@
  */
 package Classes;
 
+import Interface.Itipo;
+
 /**
  *
  * @author alejos17
  */
-public class clsPedidos {
+public class clsPedidos implements Itipo {
     
     private String idPedido;
     private String producto;
@@ -142,6 +144,11 @@ public class clsPedidos {
      */
     public void setCobrado(boolean cobrado) {
         this.cobrado = cobrado;
+    }
+
+    @Override
+    public String tipoCambio() {
+        return "Pedido";
     }
     
     

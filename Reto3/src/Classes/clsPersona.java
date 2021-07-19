@@ -5,11 +5,13 @@
  */
 package Classes;
 
+import Interface.Itipo;
+
 /**
  *
  * @author alejos17
  */
-public class clsPersona {
+public class clsPersona implements Itipo {
 
     private String nombre;
     private String apellido;
@@ -95,6 +97,11 @@ public class clsPersona {
      */
     public void setCorreo(String correo) {
         this.correo = correo;
+    }
+
+    @Override
+    public String tipoCambio() {
+        return "Persona";
     }
     
    

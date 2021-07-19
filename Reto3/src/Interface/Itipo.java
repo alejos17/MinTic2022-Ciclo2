@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller;
+package Interface;
 
 /**
  *
  * @author alejos17
  */
-public class control {
-    
+public interface Itipo {
+    public String tipoCambio();  //Firma de Metodo
 }
