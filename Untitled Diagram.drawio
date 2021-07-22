@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-07-22T02:08:29.317Z" agent="5.0 (X11)" etag="uUxwrJ9LfeDogOEL5P_f" version="14.9.1" type="github">
+<mxfile host="app.diagrams.net" modified="2021-07-22T02:32:45.116Z" agent="5.0 (X11)" etag="jd9WF8kBtzQnYfy1Cfqo" version="14.9.1" type="github" pages="2">
   <diagram id="gKRfP5l9c6VmXvw1GVtw" name="Page-1">
     <mxGraphModel dx="1422" dy="716" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -60,6 +60,89 @@
             <mxPoint x="400" y="390" as="sourcePoint" />
             <mxPoint x="450" y="340" as="targetPoint" />
           </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="5sDDr7JQ-Rd6ADQJljvZ" name="Page-2">
+    <mxGraphModel dx="1422" dy="716" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="TRE1HgafRopyLdIJjDo4-0" />
+        <mxCell id="TRE1HgafRopyLdIJjDo4-1" parent="TRE1HgafRopyLdIJjDo4-0" />
+        <mxCell id="TRE1HgafRopyLdIJjDo4-2" value="Pet" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;" vertex="1" parent="TRE1HgafRopyLdIJjDo4-1">
+          <mxGeometry x="150" y="210" width="160" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="TRE1HgafRopyLdIJjDo4-3" value="id&#xa;codename&#xa;born year&#xa;color&#xa;healthStatus" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" vertex="1" parent="TRE1HgafRopyLdIJjDo4-2">
+          <mxGeometry y="30" width="160" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="TRE1HgafRopyLdIJjDo4-4" value="Cat" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;" vertex="1" parent="TRE1HgafRopyLdIJjDo4-1">
+          <mxGeometry x="20" y="420" width="110" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="TRE1HgafRopyLdIJjDo4-5" value="id&#xa;breed&#xa;id_pet" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" vertex="1" parent="TRE1HgafRopyLdIJjDo4-4">
+          <mxGeometry y="30" width="110" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="TRE1HgafRopyLdIJjDo4-6" value="Dog" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;" vertex="1" parent="TRE1HgafRopyLdIJjDo4-1">
+          <mxGeometry x="300" y="400" width="110" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="TRE1HgafRopyLdIJjDo4-7" value="id&#xa;breed&#xa;pedigree&#xa;id_pet&#xa;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" vertex="1" parent="TRE1HgafRopyLdIJjDo4-6">
+          <mxGeometry y="30" width="110" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="TRE1HgafRopyLdIJjDo4-8" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERoneToMany;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=-0.012;entryY=0.667;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="TRE1HgafRopyLdIJjDo4-1" source="TRE1HgafRopyLdIJjDo4-4" target="TRE1HgafRopyLdIJjDo4-3">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="200" y="460" as="sourcePoint" />
+            <mxPoint x="140" y="340" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TRE1HgafRopyLdIJjDo4-10" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERoneToMany;entryX=0.813;entryY=1;entryDx=0;entryDy=0;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryPerimeter=0;" edge="1" parent="TRE1HgafRopyLdIJjDo4-1" source="TRE1HgafRopyLdIJjDo4-6" target="TRE1HgafRopyLdIJjDo4-3">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="370" y="420" as="sourcePoint" />
+            <mxPoint x="470" y="320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TRE1HgafRopyLdIJjDo4-11" value="Hospital" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;" vertex="1" parent="TRE1HgafRopyLdIJjDo4-1">
+          <mxGeometry x="480" y="220" width="160" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="TRE1HgafRopyLdIJjDo4-12" value="id&#xa;name&#xa;phone&#xa;address&#xa;patientType&#xa;doctorid&#xa;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" vertex="1" parent="TRE1HgafRopyLdIJjDo4-11">
+          <mxGeometry y="30" width="160" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="TRE1HgafRopyLdIJjDo4-13" value="Doctor" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;" vertex="1" parent="TRE1HgafRopyLdIJjDo4-1">
+          <mxGeometry x="480" y="430" width="160" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="TRE1HgafRopyLdIJjDo4-14" value="id&#xa;name&#xa;phone&#xa;address&#xa;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" vertex="1" parent="TRE1HgafRopyLdIJjDo4-13">
+          <mxGeometry y="30" width="160" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="TRE1HgafRopyLdIJjDo4-19" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERoneToMany;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="TRE1HgafRopyLdIJjDo4-1" source="TRE1HgafRopyLdIJjDo4-13" target="TRE1HgafRopyLdIJjDo4-12">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="370" y="420" as="sourcePoint" />
+            <mxPoint x="470" y="320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TRE1HgafRopyLdIJjDo4-20" value="PetHospital" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;" vertex="1" parent="TRE1HgafRopyLdIJjDo4-1">
+          <mxGeometry x="300" y="30" width="160" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="TRE1HgafRopyLdIJjDo4-21" value="idPet&#xa;idHospital&#xa;date&#xa;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" vertex="1" parent="TRE1HgafRopyLdIJjDo4-20">
+          <mxGeometry y="30" width="160" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="TRE1HgafRopyLdIJjDo4-22" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERoneToMany;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="TRE1HgafRopyLdIJjDo4-1" target="TRE1HgafRopyLdIJjDo4-20">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="230" y="210" as="sourcePoint" />
+            <mxPoint x="470" y="320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TRE1HgafRopyLdIJjDo4-23" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERoneToMany;entryX=1.013;entryY=0.411;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="TRE1HgafRopyLdIJjDo4-1" source="TRE1HgafRopyLdIJjDo4-11" target="TRE1HgafRopyLdIJjDo4-21">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="370" y="420" as="sourcePoint" />
+            <mxPoint x="470" y="320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TRE1HgafRopyLdIJjDo4-25" value="Siempre que haya una relacion de muchos a muchos, lo mejor es crear una nueva entidad para determinar en este caso las fechas de visita de cada mascota al hospital. ya que muchas mascotas pueden visitar el hospital muchas veces." style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="TRE1HgafRopyLdIJjDo4-1">
+          <mxGeometry x="520" y="40" width="170" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="TRE1HgafRopyLdIJjDo4-26" value="Relacion muchas mascotas pueden ser 1 gato." style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="TRE1HgafRopyLdIJjDo4-1">
+          <mxGeometry x="10" y="340" width="100" as="geometry" />
+        </mxCell>
+        <mxCell id="TRE1HgafRopyLdIJjDo4-27" value="Relacion un perro debe ser mascota, mas una mascota no es perro" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="TRE1HgafRopyLdIJjDo4-1">
+          <mxGeometry x="340" y="320" width="110" height="50" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
