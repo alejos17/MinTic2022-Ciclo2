@@ -25,10 +25,10 @@ public class ctlPet {
     public boolean CreatePet(clsPets pet){
         try{
         switch(pet.getAnimalType()){
-            case "Gato":
+            case "Cat":
                 
                 break;
-            case "Perro":
+            case "Dog":
                 this.modelDog.CreatePet((clsDog)pet);  //Envio el objeto a crear como un perro
                 
                 break;

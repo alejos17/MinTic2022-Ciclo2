@@ -370,7 +370,8 @@ public class frmPet extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Fill all fields");
             }else{
                 clsDog dog = new clsDog(breed,pedigree,code,name,bornYear,color,healthStatus);  //Crea el objeto perro
-                dogObjectList.add(dog);    //Lo guarda en una lista
+                ctlPet.CreatePet(dog);
+                //dogObjectList.add(dog);    //Lo guarda en una lista
                 this.FillJlist();    //Asigna la lista al despliegue GUI
                 JOptionPane.showMessageDialog(this, "The record has been saved");
             }

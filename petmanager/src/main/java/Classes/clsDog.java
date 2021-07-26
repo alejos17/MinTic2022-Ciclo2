@@ -39,6 +39,11 @@ public class clsDog extends clsPets {
         System.out.println("El perro "+super.getName()+" hace guaaaaaauuuuu!");
     }
     
+    @Override
+    public String getAnimalType(){
+        return "Dog";
+    }
+    
     /**
      * @return the breed
      */
@@ -65,6 +70,10 @@ public class clsDog extends clsPets {
      */
     public void setPedigree(Boolean Pedigree) {
         this.Pedigree = Pedigree;
+    }
+
+    public boolean isPedigree() {
+        return Pedigree;
     }
 
     

@@ -36,7 +36,7 @@ public class clsCat extends clsPets {
     
     @Override
     public String getAnimalType(){
-        return "Gato";
+        return "Cat";
     }
     
     /**
