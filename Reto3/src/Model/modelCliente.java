@@ -16,6 +16,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+
 /**
  *
  * @author alejos17
@@ -24,32 +25,11 @@ public class modelCliente {
     
     Database database;
 
-    LinkedList<clsCliente> ListaClientes = new LinkedList<>();  //Lista de Clientes
-    
     public modelCliente() {
         this.database = new Database();
     }
     
-    public boolean InitClientes(){
-        
-        try{
-            
-            clsCliente cliente1 = new clsCliente("001","Alejandro","Tamayo","Calle 25 34-09","3249087893","tam@gmail.com");
-            clsCliente cliente2 = new clsCliente("002","Carlos","Gonzalez","Craa 34 12-45","3120983451","cgonza@gmail.com");
-            clsCliente cliente3 = new clsCliente("003","Ramiro","Ramirez","Calle 65 12A-89","3003450976","ramram@gmail.com");
-            ListaClientes.add(cliente1);
-            ListaClientes.add(cliente2);
-            ListaClientes.add(cliente3);
-            
-        return true;
-        }catch (Exception e){
-            return false;
-        }
-        
-        
-        
-        
-    }
+    
     
     //Metodo para crear cliente y devolver con el boolean si lo guardo correctamente o no.
     public boolean CrearCliente(clsCliente cliente){
@@ -80,11 +60,7 @@ public class modelCliente {
         
         try{
             
-            for (clsCliente cliente : ListaClientes) {  //Buscar en la lista de clientes
-                    if (cliente.getIdCliente().equals(idCliente)){
-                        cliente.asignarCuentas(cuenta);  
-                    }
-                }    
+            
         
         return true;
         }catch (Exception e){
@@ -99,11 +75,7 @@ public class modelCliente {
         
         try{
             
-            for (clsCliente cliente : ListaClientes) {  //Buscar en la lista de clientes
-                    if (cliente.getIdCliente().equals(idCliente)){
-                        cliente.asignarPedido(pedido);  
-                    }
-                }    
+           
         
         return true;
         }catch (Exception e){
@@ -143,11 +115,7 @@ public class modelCliente {
     public boolean BorrarCliente(String idCliente){
         try{
             
-            for (clsCliente cliente : ListaClientes){
-                if (cliente.getIdCliente().equals(idCliente)){
-                    this.ListaClientes.remove(cliente);
-                }
-            }
+         
             
         return true;
         }catch (Exception e){
@@ -201,14 +169,11 @@ public class modelCliente {
                 clsCliente cliente1 = new clsCliente(idcliente, nombre, apellido, direccion, telefono, correo);
                 clienteList.add(cliente1);
             }
-                                   
-            
         }catch (Exception e){
             return null;
         }
         
         int index =0;
-        
         //Modelo de lista model.
         for (clsCliente cliente : clienteList){
             String data = cliente.getIdCliente() + " - "+ cliente.getNombre() +" "+ cliente.getApellido();
@@ -226,11 +191,7 @@ public class modelCliente {
         int index =0;
         
         //Modelo de lista model.
-        for (clsCliente cliente : ListaClientes){
-            String data = cliente.getIdCliente()+ " - "+ cliente.getNombre()+ " "+cliente.getApellido()+" -- "+cliente.getCuentas().toString();
-            model.add(index, data);  //Agrega cada cliente al modelo para aplicar a la lista
-            index++;
-        }
+      
         
         return model;
     }

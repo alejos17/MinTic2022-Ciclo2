@@ -26,18 +26,6 @@ public class Control {
         this.modelPedidos = new modelPedidos();
     }
     
-    public boolean Init(){
-        try{
-            this.modelCliente.InitClientes();
-            this.modelCuentas.InitCuentas();
-            this.modelPedidos.InitPedidos();
-            this.modelInventario.InitInventario();
-            return true;
-        }catch (Exception e){
-            return false;
-        }
-    }
-    
     //Metodo para Crear objeto ya sea, persona, cliente, cuenta o pedido
     public boolean CrearCliente(clsCliente cliente){
         try{
