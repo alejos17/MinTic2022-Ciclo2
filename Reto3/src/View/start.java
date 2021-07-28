@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import Classes.*;
 import Controller.*;
 import javax.swing.DefaultListModel;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
@@ -60,7 +61,6 @@ public class start extends javax.swing.JFrame {
         txtTelefono = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtCorreo = new javax.swing.JTextField();
-        btnCerrar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         cuentasLIst = new javax.swing.JScrollPane();
         listaCuentas = new javax.swing.JList<>();
@@ -77,13 +77,14 @@ public class start extends javax.swing.JFrame {
         listaCuentaClientes = new javax.swing.JList<>();
         btnBuscarCuenta = new javax.swing.JButton();
         btnEditarCuenta = new javax.swing.JButton();
-        jtxtCuentaCliente = new javax.swing.JTextField();
+        jLabelCuentaCliente = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         listaPedidos = new javax.swing.JList<>();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
+        btnCerrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -140,62 +141,51 @@ public class start extends javax.swing.JFrame {
 
         jLabel6.setText("Correo");
 
-        btnCerrar.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        btnCerrar.setText("Cerrar");
-        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCerrarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3))
+                        .addGap(15, 15, 15)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtApellido)
+                            .addComponent(txtDireccion)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(30, 30, 30)
+                        .addComponent(txtidCliente))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnEditarCliente)
+                                    .addComponent(btnCrearCliente))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtTelefono)
-                                    .addComponent(txtCorreo)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 12, Short.MAX_VALUE)
-                                .addComponent(btnCrearCliente)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnBuscarCLiente)
-                                .addGap(41, 41, 41)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnCerrar)
-                                    .addComponent(btnBorrarCliente)))
+                                    .addComponent(btnBuscarCLiente)
+                                    .addComponent(btnBorrarCliente))
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(3, 3, 3)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel3))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtApellido)
-                                    .addComponent(txtDireccion)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(30, 30, 30)
-                                .addComponent(txtidCliente)))
-                        .addGap(57, 57, 57))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(72, 72, 72)
-                        .addComponent(btnEditarCliente)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCorreo, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtTelefono))))))
+                .addGap(15, 15, 15)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -203,7 +193,9 @@ public class start extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
@@ -228,16 +220,15 @@ public class start extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnCrearCliente)
-                            .addComponent(btnBorrarCliente)
                             .addComponent(btnBuscarCLiente))
                         .addGap(18, 18, 18)
-                        .addComponent(btnEditarCliente)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCerrar)))
-                .addContainerGap())
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnEditarCliente)
+                            .addComponent(btnBorrarCliente))
+                        .addGap(26, 26, 26))))
         );
 
         jTabbedPane1.addTab("Clientes", jPanel1);
@@ -264,6 +255,12 @@ public class start extends javax.swing.JFrame {
 
         cbTipoCuenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tarjeta", "Corriente", "Ahorros" }));
 
+        cbCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbClienteActionPerformed(evt);
+            }
+        });
+
         jLabel11.setText("Cliente");
 
         jScrollPane2.setViewportView(listaCuentaClientes);
@@ -282,14 +279,16 @@ public class start extends javax.swing.JFrame {
             }
         });
 
+        jLabelCuentaCliente.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabelCuentaCliente.setText("jLabel12");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cuentasLIst)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnCrearCuenta)
@@ -308,16 +307,19 @@ public class start extends javax.swing.JFrame {
                                 .addGap(27, 27, 27)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cbTipoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbCliente, 0, 279, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel11)
+                                    .addComponent(cbTipoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(18, 18, 18)
-                        .addComponent(jtxtCuentaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbCliente, 0, 279, Short.MAX_VALUE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabelCuentaCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(cuentasLIst, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -333,7 +335,7 @@ public class start extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(txtidCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel11)
-                                .addComponent(jtxtCuentaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabelCuentaCliente)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
@@ -408,6 +410,14 @@ public class start extends javax.swing.JFrame {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Gestión de Clientes / Pedidos");
 
+        btnCerrar.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        btnCerrar.setText("Cerrar");
+        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -416,14 +426,20 @@ public class start extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTabbedPane1)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCerrar)
+                        .addGap(16, 16, 16)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCerrar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -467,7 +483,7 @@ public class start extends javax.swing.JFrame {
             String idCuenta = txtidCuenta.getText();
             String tipoCuenta = cbTipoCuenta.getSelectedItem().toString();
             int saldo = Integer.parseInt(txtSaldo.getText());
-            String idcuentacliente = jtxtCuentaCliente.getText();
+            String idcuentacliente = cbCliente.getSelectedItem().toString();
             
             //Condicional para no agregar el objeto perro nuevo hasta que los campos tengan info, las selecciones no porque ya tienen algo seleccionado
             if (idCuenta.equals("") || tipoCuenta.equals("")){
@@ -475,8 +491,6 @@ public class start extends javax.swing.JFrame {
             }else{
                 clsCuentas cuenta = new clsCuentas(idCuenta, tipoCuenta, saldo, idcuentacliente);  //Crea instancia de Cuenta para crear
                 control.CrearCuenta(cuenta);  //Envia al controller la cuenta a crear
-                //String client = cbCliente.getSelectedItem().toString();  //Lee el cliente propietario de la cuenta
-                //control.AsignarCuentas(client,cuenta); //Envia tanto la cuenta como el cliente al controller para guardarlo
                 //this.Listar("Cuenta");
                 //this.Listar("ListaCuentaClientes");
                 this.borrarCampos();
@@ -493,6 +507,7 @@ public class start extends javax.swing.JFrame {
         // TODO add your handling code here:
         String code = txtidCliente.getText();  //Campo de busqueda
         codesM = txtidCliente.getText();
+        System.out.println(codesM);
         clsCliente cliente = control.BuscarCliente(code); //Instancia cliente para ir a control a buscar 
         
         //Si cliente retorna NUll quiere decir que no encontro cliente y genera mensaje de lo contrario lo muestra en los text
@@ -541,7 +556,8 @@ public class start extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "*** ERROR ****");
         }
         
-        
+        codesM = "";
+        System.out.println(codesM);
     }//GEN-LAST:event_btnEditarClienteActionPerformed
 
     private void btnBorrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarClienteActionPerformed
@@ -568,6 +584,8 @@ public class start extends javax.swing.JFrame {
     private void btnBuscarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCuentaActionPerformed
         // TODO add your handling code here:
         String code = txtidCuenta.getText();  //Campo de busqueda
+        codesM = txtidCuenta.getText();
+        System.out.println(codesM);
         clsCuentas cuenta = control.BuscarCuenta(code); //Instancia cliente para ir a control a buscar 
         
         //Si cliente retorna NUll quiere decir que no encontro cliente y genera mensaje de lo contrario lo muestra en los text
@@ -576,6 +594,7 @@ public class start extends javax.swing.JFrame {
         }else{
             cbTipoCuenta.setSelectedItem(cuenta.getCuenta());
             txtSaldo.setText(cuenta.getSaldo()+"");
+            cbCliente.setSelectedItem(cuenta.getIdcuentacliente());
         }
     
     }//GEN-LAST:event_btnBuscarCuentaActionPerformed
@@ -583,6 +602,7 @@ public class start extends javax.swing.JFrame {
     private void btnEditarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarCuentaActionPerformed
         // TODO add your handling code here:
         String code = txtidCuenta.getText();  //Campo de busqueda
+        String cuentaCliente = cbCliente.getSelectedItem().toString();
         try {     //Try para encapsular errores en este caso por si ponen mal la fecha en el campo bornYear
             String tipoCuenta = cbTipoCuenta.getSelectedItem().toString();
             int saldo = Integer.parseInt(txtSaldo.getText());
@@ -591,9 +611,8 @@ public class start extends javax.swing.JFrame {
             if (code.equals("") || tipoCuenta.equals("")){
                 JOptionPane.showMessageDialog(this, "** ERROR ** -- Campos Vacíos -- Por favor diligencie todos los campos");
             }else{
-                //clsCuentas cuenta = new clsCuentas(code,tipoCuenta, saldo);
-                //control.EditarCuenta(code, cuenta);
-                
+                clsCuentas cuentaM = new clsCuentas(code,tipoCuenta, saldo, cuentaCliente);
+                control.EditarCuenta(codesM, cuentaM);
                 this.Listar("Cuenta");
                 this.borrarCampos();
                 JOptionPane.showMessageDialog(this, "La Cuenta ha sido modificada con éxito!");
@@ -602,20 +621,41 @@ public class start extends javax.swing.JFrame {
         }catch (Exception e){   //Mensaje a desplegar de error
             JOptionPane.showMessageDialog(this, "*** ERROR ****");
         }
+         codesM = "";
+         System.out.println(codesM);
     }//GEN-LAST:event_btnEditarCuentaActionPerformed
+
+    private void cbClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbClienteActionPerformed
+        // TODO add your handling code here:
+        System.out.println("Mensaje Seleccion");
+        
+        String code = cbCliente.getSelectedItem().toString();  //Campo de busqueda
+        clsCliente cliente = control.BuscarCliente(code); //Instancia cliente para ir a control a buscar 
+        
+        //Si cliente retorna NUll quiere decir que no encontro cliente y genera mensaje de lo contrario lo muestra en los text
+        if (cliente == null){
+            JOptionPane.showMessageDialog(this, "El código de Cliente no existe, intente de nuevo!");
+        }else{
+            jLabelCuentaCliente.setText(cliente.getNombre()+" "+cliente.getApellido());
+        }
+        
+    }//GEN-LAST:event_cbClienteActionPerformed
 
     private void Listar(String tipo){
         DefaultListModel model = new DefaultListModel();
+        DefaultComboBoxModel model2 = new DefaultComboBoxModel();
         
         switch (tipo){
             case "Cliente":
                 model = control.Listar("Cliente");
                 clienteList.setModel(model);   //La lista toma el modelo de lista model
+                model2 = control.ListarCuentaClientes();
+                cbCliente.setModel(model2);
             case "Cuenta":
                 model = control.Listar("Cuenta");
                 listaCuentas.setModel(model);
             case "ListaCuentaClientes":
-                model = control.ListarCuentaClientes();
+                //model = control.ListarCuentaClientes();
                 listaCuentaClientes.setModel(model);
             case "Pedido":
                 model = control.Listar("Pedido");
@@ -630,6 +670,8 @@ public class start extends javax.swing.JFrame {
         txtDireccion.setText("");
         txtTelefono.setText("");
         txtCorreo.setText("");
+        txtidCuenta.setText("");
+        txtSaldo.setText("");
     }
         
     
@@ -692,6 +734,7 @@ public class start extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelCuentaCliente;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -701,7 +744,6 @@ public class start extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jtxtCuentaCliente;
     private javax.swing.JList<String> listaCuentaClientes;
     private javax.swing.JList<String> listaCuentas;
     private javax.swing.JList<String> listaPedidos;

@@ -8,6 +8,7 @@ package Controller;
 import Classes.*;
 import Model.*;
 import javax.swing.DefaultListModel;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
@@ -29,7 +30,7 @@ public class Control {
     //Metodo para Crear objeto ya sea, persona, cliente, cuenta o pedido
     public boolean CrearCliente(clsCliente cliente){
         try{
-            this.modelCliente.CrearCliente(cliente);
+            this.modelCliente.Crear(cliente);
             return true;
         }catch (Exception e){
             return false;
@@ -38,7 +39,7 @@ public class Control {
     
     public boolean CrearCuenta(clsCuentas cuenta){
         try{
-            this.modelCuentas.CrearCuenta(cuenta);
+            this.modelCuentas.Crear(cuenta);
             return true;
         }catch (Exception e){
             return false;
@@ -59,7 +60,7 @@ public class Control {
     public clsCliente EditarCliente(String idCliente, clsCliente clienteM){
         
         try{
-            this.modelCliente.EditarCliente(idCliente, clienteM);
+            this.modelCliente.Editar(idCliente, clienteM);
         return null;
         }catch (Exception e){
             return null;
@@ -70,7 +71,7 @@ public class Control {
     public clsCuentas EditarCuenta(String idCuenta, clsCuentas cuentaM){
         
         try{
-            this.modelCuentas.EditarCuenta(idCuenta, cuentaM);
+            this.modelCuentas.Editar(idCuenta, cuentaM);
         return null;
         }catch (Exception e){
             return null;
@@ -82,7 +83,7 @@ public class Control {
         try{
         switch(type){
             case "Cliente":
-                    this.modelCliente.BorrarCliente(idCliente);
+                    this.modelCliente.Borrar(idCliente);
                 break;
             case "Cuenta":
                 
@@ -104,7 +105,7 @@ public class Control {
     public clsCliente BuscarCliente(String code){
         clsCliente cliente = null;
         try{
-            cliente = this.modelCliente.BuscarCliente(code);
+            cliente = this.modelCliente.Buscar(code);
         return cliente;
         }catch (Exception e){
             return null;
@@ -114,7 +115,7 @@ public class Control {
     public clsCuentas BuscarCuenta(String code){
         clsCuentas cuenta = null;
         try{
-            cuenta = this.modelCuentas.BuscarCuenta(code);
+            cuenta = this.modelCuentas.Buscar(code);
         return cuenta;
         }catch (Exception e){
             return null;
@@ -127,7 +128,7 @@ public class Control {
         try{
         switch(tipo){
             case "Cliente":
-                model = this.modelCliente.ListarClientes();
+                model = this.modelCliente.Listar();
                 break;
             case "Cuenta":
                 model = this.modelCuentas.ListarCuentas();
@@ -144,8 +145,8 @@ public class Control {
         
     }
 
-    public DefaultListModel ListarCuentaClientes(){
-        DefaultListModel model = new DefaultListModel();
+    public DefaultComboBoxModel ListarCuentaClientes(){
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
         try{
             model = this.modelCliente.ListarCuentaClientes();
         return model;
