@@ -9,6 +9,13 @@ import Model.*;
 import Controller.*;
 import java.util.LinkedList;
 import javax.swing.DefaultListModel;
+import Model.Database;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
@@ -16,16 +23,18 @@ import javax.swing.DefaultListModel;
  */
 public class modelCuentas {
     
+    Database database;
     private modelCliente modelCliente;
     LinkedList<clsCuentas> ListaCuentas = new LinkedList<>();  //Lista de Cuentas
     
     public modelCuentas() {
+         this.database = new Database();
     }
     
     public boolean InitCuentas(){
         try{
             
-            clsCuentas cuenta1 = new clsCuentas("345678902","Ahorros",2450000);
+            /*clsCuentas cuenta1 = new clsCuentas("345678902","Ahorros",2450000);
             clsCuentas cuenta2 = new clsCuentas("378984657","Tarjeta",457000);
             clsCuentas cuenta3 = new clsCuentas("789465902","Corriente",1060000);
             clsCuentas cuenta4 = new clsCuentas("132649865","Ahorros",135000);
@@ -43,7 +52,7 @@ public class modelCuentas {
             this.modelCliente.AsignarCuentas("002", cuenta3);
             this.modelCliente.AsignarCuentas("002", cuenta4);
             this.modelCliente.AsignarCuentas("003", cuenta5);
-            this.modelCliente.AsignarCuentas("004", cuenta6);
+            this.modelCliente.AsignarCuentas("004", cuenta6);*/
             
         return true;
         }catch (Exception e){
@@ -53,11 +62,19 @@ public class modelCuentas {
     
     //Metodo para crear cliente y devolver con el boolean si lo guardo correctamente o no.
     public boolean CrearCuenta(clsCuentas cuenta){
-        try{
-            
-            ListaCuentas.add(cuenta);
-            
-        return true;
+        try (Connection conexion = DriverManager.getConnection(database.getUrl())){   //Al colocar la conexión dentro del parentesis del try, si hay un error o se termina el try la conexion se cierra.
+            String query = "INSERT INTO cuenta (idcuenta, tipocuenta, saldo, id_cliente) VALUES (?, ?, ?, ?)";
+            PreparedStatement statementCuenta = conexion.prepareStatement(query);  //Aca mandamos los datos de pet (clase padre), se crea registro y luego se obtiene el KEY para saber luego a clase dog y entrar los datos en la tabla dog.
+            statementCuenta.setString(1, cuenta.getIdCuenta());  //Statements por cada ?
+            statementCuenta.setString(2, cuenta.getCuenta());
+            statementCuenta.setInt(3, cuenta.getSaldo());
+            statementCuenta.setString(4, cuenta.getIdcuentacliente());
+            int rowsInserted = statementCuenta.executeUpdate();  //Se cuenta la cantiad de datos insertados devolviendo un entero
+            if (rowsInserted > 0){     //Si es mayor a cero quiere decir que si guardo los datos
+                return true; 
+                }
+                        
+            return false;
         }catch (Exception e){
             return false;
         }

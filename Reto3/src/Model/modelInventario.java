@@ -8,6 +8,13 @@ package Model;
 import Classes.*;
 import Model.*;
 import java.util.LinkedList;
+import Model.Database;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
@@ -15,9 +22,11 @@ import java.util.LinkedList;
  */
 public class modelInventario {
 
+    Database database;
     LinkedList<clsInventario> Inventario = new LinkedList<>();  //Lista de Pedidos
     
     public modelInventario() {
+        this.database = new Database();
     }
     
     public boolean InitInventario(){

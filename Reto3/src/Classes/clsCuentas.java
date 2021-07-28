@@ -16,11 +16,13 @@ public class clsCuentas implements Itipo {
     private String idCuenta;
     private String Cuenta;
     private int saldo;
+    private String idcuentacliente;
 
-    public clsCuentas(String idCuenta, String Cuenta, int saldo) {
+    public clsCuentas(String idCuenta, String Cuenta, int saldo, String idcuentacliente) {
         this.idCuenta = idCuenta;
         this.Cuenta = Cuenta;
         this.saldo = saldo;
+        this.idcuentacliente = idcuentacliente;
     }
 
     
@@ -70,6 +72,20 @@ public class clsCuentas implements Itipo {
     @Override
     public String tipoCambio() {
         return "Cuenta";
+    }
+
+    /**
+     * @return the idcuentacliente
+     */
+    public String getIdcuentacliente() {
+        return idcuentacliente;
+    }
+
+    /**
+     * @param idcuentacliente the idcuentacliente to set
+     */
+    public void setIdcuentacliente(String idcuentacliente) {
+        this.idcuentacliente = idcuentacliente;
     }
     
     

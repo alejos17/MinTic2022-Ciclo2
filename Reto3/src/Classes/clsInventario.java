@@ -12,8 +12,10 @@ package Classes;
 public class clsInventario {
     
     private String idProducto;
+    private String Categoria;
     private String Producto;
     private int cant_ext;
+    private double iva;
     private int valorUnit;
 
     public clsInventario(String idProducto, String Producto, int cant_ext, int valorUnit) {
@@ -78,6 +80,34 @@ public class clsInventario {
      */
     public void setValorUnit(int valorUnit) {
         this.valorUnit = valorUnit;
+    }
+
+    /**
+     * @return the Categoria
+     */
+    public String getCategoria() {
+        return Categoria;
+    }
+
+    /**
+     * @param Categoria the Categoria to set
+     */
+    public void setCategoria(String Categoria) {
+        this.Categoria = Categoria;
+    }
+
+    /**
+     * @return the iva
+     */
+    public double getIva() {
+        return iva;
+    }
+
+    /**
+     * @param iva the iva to set
+     */
+    public void setIva(double iva) {
+        this.iva = iva;
     }
     
     
