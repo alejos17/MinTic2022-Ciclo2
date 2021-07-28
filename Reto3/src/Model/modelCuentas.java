@@ -103,14 +103,32 @@ public class modelCuentas {
         
     }
     
-    public DefaultListModel ListarCuentas(){
+    public DefaultListModel Listar(){
+        LinkedList<clsCuentas> cuentasList = new LinkedList<>();
         DefaultListModel model = new DefaultListModel();
+        try (Connection conexion = DriverManager.getConnection(database.getUrl())){   //Al colocar la conexión dentro del parentesis del try, si hay un error o se termina el try la conexion se cierra.
+            String query = "SELECT * FROM cuenta";
+            PreparedStatement statementCuenta = conexion.prepareStatement(query);  //Preparando statement
+            ResultSet result = statementCuenta.executeQuery();
+            while (result.next()){    //Ciclo al result set para sacar cada uno de los resultados en variables para crear el objeto y retornarlo.
+                String idcuenta = result.getString(1);
+                String tipocuenta = result.getString(2);
+                int saldo = result.getInt(3);
+                String id_cliente  = result.getString(4);
+                clsCuentas cuenta1 = new clsCuentas(idcuenta, tipocuenta, saldo, id_cliente);
+                cuentasList.add(cuenta1);
+            }
+        }catch (Exception e){
+            return null;
+        }
         
         int index =0;
-        
         //Modelo de lista model.
-      
-        
+        for (clsCuentas cuenta : cuentasList){
+            String data = cuenta.getIdCuenta() + " - "+ cuenta.getCuenta() +" -- cliente: "+ cuenta.getIdcuentacliente();
+            model.add(index, data);  //Agrega cada cliente al modelo para aplicar a la lista
+            index++;
+        }
         return model;
     }
     

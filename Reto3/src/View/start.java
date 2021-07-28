@@ -26,7 +26,7 @@ public class start extends javax.swing.JFrame {
     public start() {
         initComponents();
         //control.Init();
-        this.Listar("Cliente");
+        this.Listar("Cliente", null);
         //this.Listar("Cuenta");
         //this.Listar("ListaCuentaClientes");
         //this.Listar("Pedido");
@@ -280,7 +280,6 @@ public class start extends javax.swing.JFrame {
         });
 
         jLabelCuentaCliente.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        jLabelCuentaCliente.setText("jLabel12");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -288,7 +287,7 @@ public class start extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnCrearCuenta)
@@ -307,19 +306,16 @@ public class start extends javax.swing.JFrame {
                                 .addGap(27, 27, 27)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cbTipoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbCliente, 0, 279, Short.MAX_VALUE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel11)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabelCuentaCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(cbTipoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addComponent(cuentasLIst))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2)
+                    .addComponent(cbCliente, 0, 279, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(cuentasLIst, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel11)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jLabelCuentaCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -466,7 +462,7 @@ public class start extends javax.swing.JFrame {
                 clsCliente cliente = new clsCliente(idCliente, nombre, apellido, direccion, telefono, correo);
                 control.CrearCliente(cliente);
                 
-                this.Listar("Cliente");
+                this.Listar("Cliente", null);
                 this.borrarCampos();
                 JOptionPane.showMessageDialog(this, "El nuevo cliente ha sido creado con éxito!");
             }
@@ -547,7 +543,7 @@ public class start extends javax.swing.JFrame {
                 clsCliente clienteM = new clsCliente(code, nombre, apellido, direccion, telefono, correo);
                 control.EditarCliente(codesM, clienteM);
                 
-                this.Listar("Cliente");
+                this.Listar("Cliente", null);
                 this.borrarCampos();
                 JOptionPane.showMessageDialog(this, "El cliente ha sido cambiado con éxito!");
             }
@@ -571,7 +567,7 @@ public class start extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "El código de Cliente no existe, intente de nuevo!");
         }else{
             this.borrarCampos();
-            this.Listar("Cliente");
+            this.Listar("Cliente", null);
             JOptionPane.showMessageDialog(this, "El Cliente ha sido eliminado con éxito!");
         }
     }//GEN-LAST:event_btnBorrarClienteActionPerformed
@@ -613,7 +609,7 @@ public class start extends javax.swing.JFrame {
             }else{
                 clsCuentas cuentaM = new clsCuentas(code,tipoCuenta, saldo, cuentaCliente);
                 control.EditarCuenta(codesM, cuentaM);
-                this.Listar("Cuenta");
+                this.Listar("Cuenta", null);
                 this.borrarCampos();
                 JOptionPane.showMessageDialog(this, "La Cuenta ha sido modificada con éxito!");
             }
@@ -627,39 +623,31 @@ public class start extends javax.swing.JFrame {
 
     private void cbClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbClienteActionPerformed
         // TODO add your handling code here:
-        System.out.println("Mensaje Seleccion");
-        
         String code = cbCliente.getSelectedItem().toString();  //Campo de busqueda
         clsCliente cliente = control.BuscarCliente(code); //Instancia cliente para ir a control a buscar 
-        
-        //Si cliente retorna NUll quiere decir que no encontro cliente y genera mensaje de lo contrario lo muestra en los text
-        if (cliente == null){
-            JOptionPane.showMessageDialog(this, "El código de Cliente no existe, intente de nuevo!");
-        }else{
-            jLabelCuentaCliente.setText(cliente.getNombre()+" "+cliente.getApellido());
-        }
-        
+        jLabelCuentaCliente.setText(cliente.getNombre()+" "+cliente.getApellido());
+        this.Listar("ListaCuentaClientes", code);
     }//GEN-LAST:event_cbClienteActionPerformed
 
-    private void Listar(String tipo){
+    private void Listar(String tipo, String code){
         DefaultListModel model = new DefaultListModel();
         DefaultComboBoxModel model2 = new DefaultComboBoxModel();
         
         switch (tipo){
             case "Cliente":
-                model = control.Listar("Cliente");
+                model = control.Listar("Cliente", null);
                 clienteList.setModel(model);   //La lista toma el modelo de lista model
-                model2 = control.ListarCuentaClientes();
+                model2 = control.ListarComboBoxClientes();
                 cbCliente.setModel(model2);
             case "Cuenta":
-                model = control.Listar("Cuenta");
+                model = control.Listar("Cuenta", null);
                 listaCuentas.setModel(model);
             case "ListaCuentaClientes":
-                //model = control.ListarCuentaClientes();
+                model = control.Listar("ListaCuentaClientes", code);
                 listaCuentaClientes.setModel(model);
             case "Pedido":
-                model = control.Listar("Pedido");
-                listaPedidos.setModel(model);
+                model = control.Listar("Pedido", null);
+                //listaPedidos.setModel(model);
         }
     }
     

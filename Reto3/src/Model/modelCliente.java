@@ -169,7 +169,7 @@ public class modelCliente {
     }
     
     
-    public DefaultComboBoxModel ListarCuentaClientes(){
+    public DefaultComboBoxModel ListarComboBoxClientes(){
         LinkedList<clsCliente> clienteList = new LinkedList<>();
         DefaultComboBoxModel model = new DefaultComboBoxModel();
         try (Connection conexion = DriverManager.getConnection(database.getUrl())){   //Al colocar la conexión dentro del parentesis del try, si hay un error o se termina el try la conexion se cierra.
@@ -195,6 +195,36 @@ public class modelCliente {
         for (clsCliente cliente : clienteList){
             String data = cliente.getIdCliente();
             model.addElement(data);
+            index++;
+        }
+        return model;
+    }
+    
+    
+    public DefaultListModel ListarCuentaClientes(String code){
+        LinkedList<clsCuentas> cuentasList = new LinkedList<>();
+        DefaultListModel model = new DefaultListModel();
+        try (Connection conexion = DriverManager.getConnection(database.getUrl())){   //Al colocar la conexión dentro del parentesis del try, si hay un error o se termina el try la conexion se cierra.
+            String query = "SELECT idcuenta, tipocuenta, saldo FROM cuenta INNER JOIN cliente as c on id_cliente = c.idcliente WHERE id_cliente = ?;";
+            PreparedStatement statementCuentaCliente = conexion.prepareStatement(query);  //Preparando statement
+            statementCuentaCliente.setString(1, code);
+            ResultSet result = statementCuentaCliente.executeQuery();
+            while (result.next()){    //Ciclo al result set para sacar cada uno de los resultados en variables para crear el objeto y retornarlo.
+                String idcuenta = result.getString(1);
+                String tipocuenta = result.getString(2);
+                int saldo = result.getInt(3);
+                clsCuentas cuenta = new clsCuentas(idcuenta, tipocuenta, saldo, null);
+                cuentasList.add(cuenta);
+            }
+        }catch (Exception e){
+            return null;
+        }
+        
+        int index =0;
+        //Modelo de lista model.
+        for (clsCuentas cuenta : cuentasList){
+            String data = cuenta.getIdCuenta() + " - "+ cuenta.getCuenta() +" - "+ cuenta.getSaldo()+" ";
+            model.add(index, data);  //Agrega cada cliente al modelo para aplicar a la lista
             index++;
         }
         return model;

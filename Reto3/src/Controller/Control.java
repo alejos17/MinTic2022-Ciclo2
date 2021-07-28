@@ -123,7 +123,7 @@ public class Control {
     }
     
     
-    public DefaultListModel Listar(String tipo){
+    public DefaultListModel Listar(String tipo, String code){
         DefaultListModel model = new DefaultListModel();
         try{
         switch(tipo){
@@ -131,8 +131,10 @@ public class Control {
                 model = this.modelCliente.Listar();
                 break;
             case "Cuenta":
-                model = this.modelCuentas.ListarCuentas();
-                
+                model = this.modelCuentas.Listar();
+                break;
+            case "ListaCuentaClientes":
+                model = this.modelCliente.ListarCuentaClientes(code);
                 break;
             case "Pedido":
                 model = this.modelPedidos.ListarPedidos();
@@ -145,10 +147,10 @@ public class Control {
         
     }
 
-    public DefaultComboBoxModel ListarCuentaClientes(){
+    public DefaultComboBoxModel ListarComboBoxClientes(){
         DefaultComboBoxModel model = new DefaultComboBoxModel();
         try{
-            model = this.modelCliente.ListarCuentaClientes();
+            model = this.modelCliente.ListarComboBoxClientes();
         return model;
         }catch (Exception e){
             return null;
