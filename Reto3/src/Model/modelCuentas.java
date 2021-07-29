@@ -68,16 +68,19 @@ public class modelCuentas {
         }
     }
     
-    //Para borrar, lo unico que eso hace es al llamarlo desde la vista, mira que tipo de mascota es y llama según el caso a los metodos del modelo.
-    public boolean BorrarCuenta(clsCuentas cuenta){
-        try{
-                
-        return true;
+    public boolean Borrar(String idCuenta){
+        try (Connection conexion = DriverManager.getConnection(database.getUrl())){   //Al colocar la conexión dentro del parentesis del try, si hay un error o se termina el try la conexion se cierra.
+            String query = "DELETE FROM cuenta WHERE idcuenta = ?";
+            PreparedStatement statementCuenta = conexion.prepareStatement(query);  //Preparando statement
+            statementCuenta.setString(1, idCuenta);  //Statements en este caso le mando el codigo de usuario para busqueda
+            int rowsUpdated = statementCuenta.executeUpdate();  //Se cuenta la cantiad de datos insertados devolviendo un entero
+            if (rowsUpdated > 0){     //Si es mayor a cero quiere decir que si guardo los datos
+                return true; 
+                }
+            return false;
         }catch (Exception e){
             return false;
         }
-            
-        
     }
     
     //Metodo para buscar, se recibe el codigo y el tipo de mascota para segun el switch ejecutar si es perro o gato y retornar el objeto pets indicado.

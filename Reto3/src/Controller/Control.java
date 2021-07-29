@@ -79,14 +79,14 @@ public class Control {
     }
     
     //Para borrar, lo unico que eso hace es al llamarlo desde la vista, mira que tipo de mascota es y llama según el caso a los metodos del modelo.
-    public boolean Borrar(String type, String idCliente){
+    public boolean Borrar(String type, String code){
         try{
         switch(type){
             case "Cliente":
-                    this.modelCliente.Borrar(idCliente);
+                    this.modelCliente.Borrar(code);
                 break;
             case "Cuenta":
-                
+                    this.modelCuentas.Borrar(code);
                 
                 break;
             case "Pedido":
