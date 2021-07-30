@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2021-07-26T15:42:10.393Z" agent="5.0 (X11)" etag="WFjIvlVdE16KytlFaK5B" version="14.9.2" type="github" pages="3">
+<mxfile host="app.diagrams.net" modified="2021-07-30T22:41:10.698Z" agent="5.0 (X11)" etag="hUDUJwh_KwAlIqb-vTMA" version="14.9.2" type="github" pages="3">
   <diagram id="gKRfP5l9c6VmXvw1GVtw" name="Page-1">
-    <mxGraphModel dx="1422" dy="761" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1662" dy="761" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -148,7 +148,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="hi94CJzmjQQEQ_gi37_J" name="Page-3">
-    <mxGraphModel dx="1422" dy="761" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1662" dy="761" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="bUCIXgbHZLNIl66ZNkcK-0" />
         <mxCell id="bUCIXgbHZLNIl66ZNkcK-1" parent="bUCIXgbHZLNIl66ZNkcK-0" />
@@ -175,12 +175,6 @@
         </mxCell>
         <mxCell id="LKaX5k4RRb7FWXOqmFCc-8" value="id&#xa;categoria&#xa;producto&#xa;cantidad&#xa;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" parent="LKaX5k4RRb7FWXOqmFCc-7" vertex="1">
           <mxGeometry y="30" width="160" height="90" as="geometry" />
-        </mxCell>
-        <mxCell id="LKaX5k4RRb7FWXOqmFCc-9" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERoneToMany;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0.25;exitY=0;exitDx=0;exitDy=0;" parent="bUCIXgbHZLNIl66ZNkcK-1" source="LKaX5k4RRb7FWXOqmFCc-3" target="bUCIXgbHZLNIl66ZNkcK-3" edge="1">
-          <mxGeometry width="100" height="100" relative="1" as="geometry">
-            <mxPoint x="350" y="440" as="sourcePoint" />
-            <mxPoint x="450" y="340" as="targetPoint" />
-          </mxGeometry>
         </mxCell>
         <mxCell id="un9dYfIY4xJGMcahqC1d-0" value="clientePedido" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;" parent="bUCIXgbHZLNIl66ZNkcK-1" vertex="1">
           <mxGeometry x="330" y="40" width="160" height="120" as="geometry" />
@@ -236,22 +230,34 @@
             <mxPoint x="450" y="370" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="4oAN75q0JWQZFDYrzFK7-0" value="PedidoCompuesto" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;" vertex="1" parent="bUCIXgbHZLNIl66ZNkcK-1">
+        <mxCell id="4oAN75q0JWQZFDYrzFK7-0" value="PedidoCompuesto" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;" parent="bUCIXgbHZLNIl66ZNkcK-1" vertex="1">
           <mxGeometry x="460" y="461" width="160" height="120" as="geometry" />
         </mxCell>
-        <mxCell id="4oAN75q0JWQZFDYrzFK7-1" value="id&#xa;id_pedido&#xa;cobrado&#xa;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" vertex="1" parent="4oAN75q0JWQZFDYrzFK7-0">
+        <mxCell id="4oAN75q0JWQZFDYrzFK7-1" value="id&#xa;id_pedido&#xa;cobrado&#xa;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" parent="4oAN75q0JWQZFDYrzFK7-0" vertex="1">
           <mxGeometry y="30" width="160" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="4oAN75q0JWQZFDYrzFK7-2" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERoneToMany;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="bUCIXgbHZLNIl66ZNkcK-1" source="4oAN75q0JWQZFDYrzFK7-0" target="LKaX5k4RRb7FWXOqmFCc-6">
+        <mxCell id="4oAN75q0JWQZFDYrzFK7-2" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERoneToMany;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" parent="bUCIXgbHZLNIl66ZNkcK-1" source="4oAN75q0JWQZFDYrzFK7-0" target="LKaX5k4RRb7FWXOqmFCc-6" edge="1">
           <mxGeometry width="100" height="100" relative="1" as="geometry">
             <mxPoint x="350" y="452" as="sourcePoint" />
             <mxPoint x="450" y="352" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="4oAN75q0JWQZFDYrzFK7-3" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERoneToMany;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1.013;exitY=0.433;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="bUCIXgbHZLNIl66ZNkcK-1" source="1L7xKCtMu2uKqxoza55a-8" target="4oAN75q0JWQZFDYrzFK7-0">
+        <mxCell id="4oAN75q0JWQZFDYrzFK7-3" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERoneToMany;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1.013;exitY=0.433;exitDx=0;exitDy=0;exitPerimeter=0;" parent="bUCIXgbHZLNIl66ZNkcK-1" source="1L7xKCtMu2uKqxoza55a-8" target="4oAN75q0JWQZFDYrzFK7-0" edge="1">
           <mxGeometry width="100" height="100" relative="1" as="geometry">
             <mxPoint x="370" y="410" as="sourcePoint" />
             <mxPoint x="470" y="310" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qsQYZtQJK23HEx8O-MWX-0" value="Si tengo una tabla entre mucho a mucho..&amp;nbsp; en la relacion de BD, cuando vaya a recoger info de esta tabla tengo que crear un objeto, creo una clase para esos datos?" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="bUCIXgbHZLNIl66ZNkcK-1">
+          <mxGeometry x="30" y="650" width="550" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="qsQYZtQJK23HEx8O-MWX-1" value="&lt;div&gt;Metodo si el cliente tiene cuenta asignada puede realizar pedido y verificar si la cuenta tiene dinero.&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Metodo en la suma del pedido que no se pase de lo que tiene en la cuenta seleccionada para pagar.&lt;br&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="bUCIXgbHZLNIl66ZNkcK-1">
+          <mxGeometry x="680" y="10" width="380" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="qsQYZtQJK23HEx8O-MWX-2" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERoneToMany;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="bUCIXgbHZLNIl66ZNkcK-1" source="bUCIXgbHZLNIl66ZNkcK-3" target="LKaX5k4RRb7FWXOqmFCc-3">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="370" y="420" as="sourcePoint" />
+            <mxPoint x="470" y="320" as="targetPoint" />
           </mxGeometry>
         </mxCell>
       </root>
