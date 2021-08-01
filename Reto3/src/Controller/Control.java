@@ -26,6 +26,7 @@ public class Control {
         this.modelCliente = new modelCliente();
         this.modelCuentas = new modelCuentas();
         this.modelPedidos = new modelPedidos();
+        this.modelInventario = new modelInventario();
     }
     
     //Metodo para Crear objeto ya sea, persona, cliente, cuenta o pedido
@@ -141,7 +142,7 @@ public class Control {
                 model = this.modelCliente.ListarCuentaClientes(code);
                 break;
             case "Inventario":
-                model = this.modelCliente.ListarInv();
+                model = this.modelInventario.Listar();
                 break;
             case "Pedido":
                 model = this.modelPedidos.ListarPedidos();
@@ -195,5 +196,7 @@ public class Control {
             return null;
         }
     }
+    
+    
     
 }
