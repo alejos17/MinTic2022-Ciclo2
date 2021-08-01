@@ -10,6 +10,7 @@ import Classes.*;
 import Controller.*;
 import javax.swing.DefaultListModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -28,6 +29,7 @@ public class start extends javax.swing.JFrame {
         initComponents();
         //control.Init();
         this.Listar("Cliente", null);
+        this.Listar("Inventario", null);
         //this.Listar("Cuenta");
         //this.Listar("ListaCuentaClientes");
         //this.Listar("Pedido");
@@ -101,9 +103,9 @@ public class start extends javax.swing.JFrame {
         jtxtprodinv = new javax.swing.JTextField();
         jtxtvunit = new javax.swing.JTextField();
         jtxtextinv = new javax.swing.JTextField();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jtableinv = new javax.swing.JTable();
         jtxtiva = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        invList = new javax.swing.JList<>();
         jLabel7 = new javax.swing.JLabel();
         btnCerrar = new javax.swing.JButton();
 
@@ -486,18 +488,7 @@ public class start extends javax.swing.JFrame {
 
         cbcatinv.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Electrónica", "Software", "Videogames" }));
 
-        jtableinv.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "ID", "Categoria", "Producto", "Valor", "IVA", "Cantidad"
-            }
-        ));
-        jScrollPane4.setViewportView(jtableinv);
+        jScrollPane3.setViewportView(invList);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -531,7 +522,7 @@ public class start extends javax.swing.JFrame {
                             .addComponent(jtxtextinv)
                             .addComponent(jtxtiva))))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -540,7 +531,7 @@ public class start extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -939,7 +930,6 @@ public class start extends javax.swing.JFrame {
     private void Listar(String tipo, String code){
         DefaultListModel model = new DefaultListModel();
         DefaultComboBoxModel model2 = new DefaultComboBoxModel();
-        DefaultTableModel model3 = new DefaultTableModel();
         
         switch (tipo){
             case "Cliente":
@@ -953,13 +943,16 @@ public class start extends javax.swing.JFrame {
             case "ListaCuentaClientes":
                 model = control.Listar("ListaCuentaClientes", code);
                 listaCuentaClientes.setModel(model);
+            case "Inventario":
+                model = control.Listar("Inventario", null);
+                invList.setModel(model);
             case "Pedido":
                 model = control.Listar("Pedido", null);
                 //listaPedidos.setModel(model);
+            
         }
         
-        model3 = control.ListarInventario();
-        jtableinv.setModel(model3);
+        
     }
     
     public void borrarCampos(){
@@ -1034,6 +1027,7 @@ public class start extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbcatinv;
     private javax.swing.JList<String> clienteList;
     private javax.swing.JScrollPane cuentasLIst;
+    private javax.swing.JList<String> invList;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1062,9 +1056,8 @@ public class start extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jtableinv;
     private javax.swing.JTextField jtxtextinv;
     private javax.swing.JTextField jtxtidinv;
     private javax.swing.JTextField jtxtiva;

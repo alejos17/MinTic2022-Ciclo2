@@ -4,19 +4,14 @@
  * and open the template in the editor.
  */
 package Model;
-
 import Classes.*;
-import Model.*;
 import java.util.LinkedList;
 import javax.swing.DefaultListModel;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -108,39 +103,73 @@ public class modelInventario {
         }
     }
     
-    public DefaultTableModel Listar(){
-        String[] titulos = {"ID", "Categoria", "Producto", "Valor", "IVA", "Cantidad"};
-        //List<clsInventario> invList = new ArrayList<>();
-        DefaultTableModel model = new DefaultTableModel(null, titulos);
-        String[] registros = new String[6];
+    /*
+    public DefaultListModel Listar(){
+        LinkedList<clsCliente> clienteList = new LinkedList<>();
+        DefaultListModel model = new DefaultListModel();
         try (Connection conexion = DriverManager.getConnection(database.getUrl())){   //Al colocar la conexión dentro del parentesis del try, si hay un error o se termina el try la conexion se cierra.
-            String query = "SELECT * FROM inventario";
-            PreparedStatement statementInv = conexion.prepareStatement(query);  //Preparando statement
-            ResultSet result = statementInv.executeQuery();
+            String query = "SELECT * FROM cliente";
+            PreparedStatement statementCliente = conexion.prepareStatement(query);  //Preparando statement
+            ResultSet result = statementCliente.executeQuery();
             while (result.next()){    //Ciclo al result set para sacar cada uno de los resultados en variables para crear el objeto y retornarlo.
-                registros[0] = result.getString("ID");
-                registros[1] = result.getString("Categoria");
-                registros[2] = result.getString("Producto");
-                registros[3] = String.valueOf(result.getDouble("Valor"));
-                registros[4] = String.valueOf(result.getDouble("IVA"));
-                registros[5] = String.valueOf(result.getInt("Cantidad"));
-                //clsInventario inv1 = new clsInventario(idProducto, categoria, producto, existencia, iva, valorunitario);
-                //invList.add(inv1);
-                model.addRow(registros);
+                String idcliente = result.getString(1);
+                String nombre = result.getString(2);
+                String apellido = result.getString(3);
+                String direccion = result.getString(4);
+                String telefono = result.getString(5);
+                String correo = result.getString(6);
+                clsCliente cliente1 = new clsCliente(idcliente, nombre, apellido, direccion, telefono, correo);
+                clienteList.add(cliente1);
             }
         }catch (Exception e){
             return null;
         }
         
-        /*int index =0;
+        int index =0;
         //Modelo de lista model.
         for (clsCliente cliente : clienteList){
             String data = cliente.getIdCliente() + " - "+ cliente.getNombre() +" "+ cliente.getApellido()+" -- correo: "+ cliente.getCorreo();
             model.add(index, data);  //Agrega cada cliente al modelo para aplicar a la lista
             index++;
-        }*/
+        }
         return model;
-    }
+    }*/
+    
+    
+    
+    /*
+    public DefaultListModel Listar(){
+        LinkedList<clsInventario> invList = new LinkedList<>();
+        DefaultListModel model = new DefaultListModel();
+        
+        try (Connection conexion = DriverManager.getConnection(database.getUrl())){   //Al colocar la conexión dentro del parentesis del try, si hay un error o se termina el try la conexion se cierra.
+            String query = "SELECT * FROM inventario";
+            PreparedStatement statementInv = conexion.prepareStatement(query);  //Preparando statement
+            ResultSet result = statementInv.executeQuery();
+            while (result.next()){    //Ciclo al result set para sacar cada uno de los resultados en variables para crear el objeto y retornarlo.
+                String idinventario = result.getString(1);
+                String categoria = result.getString(2);
+                String producto = result.getString(3);
+                double valorunitario = Double.parseDouble(result.getString(4));
+                double iva = Double.parseDouble(result.getString(5));
+                int existencia = Integer.parseInt(result.getString(6));
+                clsInventario inv1 = new clsInventario(idinventario, categoria, producto, existencia, iva, valorunitario);
+                invList.add(inv1);
+            }
+           
+        }catch (Exception e){
+            return null;
+        }
+        
+        int index =0;
+        //Modelo de lista model.
+        for (clsInventario inv : invList){
+            String data = inv.getIdProducto() + " - "+ inv.getProducto() +" - "+ inv.getCant_ext()+" - "+ inv.getValorUnit()+" - "+ inv.getIva();
+            model.add(index, data);  //Agrega cada cliente al modelo para aplicar a la lista
+            index++;
+        }
+        return model; 
+    }*/
     
 }
 

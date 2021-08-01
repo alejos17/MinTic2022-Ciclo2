@@ -231,4 +231,41 @@ public class modelCliente {
     }
     
     
+    
+    public DefaultListModel ListarInv(){
+        LinkedList<clsInventario> invList = new LinkedList<>();
+        DefaultListModel model = new DefaultListModel();
+        
+        try (Connection conexion = DriverManager.getConnection(database.getUrl())){   //Al colocar la conexión dentro del parentesis del try, si hay un error o se termina el try la conexion se cierra.
+            String query = "SELECT * FROM inventario";
+            PreparedStatement statementInv = conexion.prepareStatement(query);  //Preparando statement
+            ResultSet result = statementInv.executeQuery();
+            while (result.next()){    //Ciclo al result set para sacar cada uno de los resultados en variables para crear el objeto y retornarlo.
+                String idinventario = result.getString(1);
+                String categoria = result.getString(2);
+                String producto = result.getString(3);
+                double valorunitario = Double.parseDouble(result.getString(4));
+                double iva = Double.parseDouble(result.getString(5));
+                int existencia = Integer.parseInt(result.getString(6));
+                clsInventario inv1 = new clsInventario(idinventario, categoria, producto, existencia, iva, valorunitario);
+                invList.add(inv1);
+            }
+           
+        }catch (Exception e){
+            return null;
+        }
+        
+        int index =0;
+        //Modelo de lista model.
+        for (clsInventario inv : invList){
+            String data = inv.getIdProducto() + " - "+ inv.getProducto() +" - "+ inv.getCant_ext()+" - "+ inv.getValorUnit()+" - "+ inv.getIva();
+            model.add(index, data);  //Agrega cada cliente al modelo para aplicar a la lista
+            index++;
+        }
+        return model; 
+    }
+    
+    
+    
+    
 }

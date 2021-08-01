@@ -140,9 +140,13 @@ public class Control {
             case "ListaCuentaClientes":
                 model = this.modelCliente.ListarCuentaClientes(code);
                 break;
+            case "Inventario":
+                model = this.modelCliente.ListarInv();
+                break;
             case "Pedido":
                 model = this.modelPedidos.ListarPedidos();
                 break;
+            
         }
         return model;
         }catch (Exception e){
@@ -162,15 +166,6 @@ public class Control {
         
     }
     
-    public DefaultTableModel ListarInventario(){
-        DefaultTableModel model = new DefaultTableModel();
-        try{
-            model = this.modelInventario.Listar();
-        return model;
-        }catch (Exception e){
-            return null;
-        }
-    }
     
     public boolean AgregarInventario(clsInventario inv){
         try{
