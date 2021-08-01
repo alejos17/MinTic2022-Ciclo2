@@ -11,9 +11,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
@@ -139,9 +137,9 @@ public class modelInventario {
         return model; 
     }
     
+    /*
     public DefaultTableModel Listar2(){
         String[] titulos = {"ID", "Categoria", "Producto", "Valor", "IVA", "Cantidad"};
-        //List<clsInventario> invList = new ArrayList<>();
         DefaultTableModel model = new DefaultTableModel(null, titulos);
         String[] registros = new String[6];
         try (Connection conexion = DriverManager.getConnection(database.getUrl())){   //Al colocar la conexión dentro del parentesis del try, si hay un error o se termina el try la conexion se cierra.
@@ -155,23 +153,14 @@ public class modelInventario {
                 registros[3] = String.valueOf(result.getDouble("Valor"));
                 registros[4] = String.valueOf(result.getDouble("IVA"));
                 registros[5] = String.valueOf(result.getInt("Cantidad"));
-                //clsInventario inv1 = new clsInventario(idProducto, categoria, producto, existencia, iva, valorunitario);
-                //invList.add(inv1);
                 model.addRow(registros);
             }
         }catch (Exception e){
             return null;
         }
         
-        /*int index =0;
-        //Modelo de lista model.
-        for (clsCliente cliente : clienteList){
-            String data = cliente.getIdCliente() + " - "+ cliente.getNombre() +" "+ cliente.getApellido()+" -- correo: "+ cliente.getCorreo();
-            model.add(index, data);  //Agrega cada cliente al modelo para aplicar a la lista
-            index++;
-        }*/
         return model;
-    }
+    }*/
     
     
 }

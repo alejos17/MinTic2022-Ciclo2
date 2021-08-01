@@ -167,6 +167,18 @@ public class Control {
         
     }
     
+    /*
+    public DefaultTableModel Listar2(){
+        DefaultTableModel model = new DefaultTableModel();
+        try{
+            model = this.modelInventario.Listar2();
+        return model;
+        }catch (Exception e){
+            return null;
+        }
+    }*/
+    
+    
     
     public boolean AgregarInventario(clsInventario inv){
         try{

@@ -10,8 +10,6 @@ import Classes.*;
 import Controller.*;
 import javax.swing.DefaultListModel;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -106,6 +104,7 @@ public class start extends javax.swing.JFrame {
         jtxtiva = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         invList = new javax.swing.JList<>();
+        jLabel21 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         btnCerrar = new javax.swing.JButton();
 
@@ -488,7 +487,15 @@ public class start extends javax.swing.JFrame {
 
         cbcatinv.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Electrónica", "Software", "Videogames" }));
 
+        invList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                invListMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(invList);
+
+        jLabel21.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel21.setText("Haga doble click para editar un Producto del Inventario");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -522,15 +529,20 @@ public class start extends javax.swing.JFrame {
                             .addComponent(btnBorrarInv)
                             .addComponent(btnEditarInv))))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel21)
+                        .addGap(0, 76, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3))
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel21)
+                .addGap(3, 3, 3)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnAgregarInv)
@@ -543,7 +555,7 @@ public class start extends javax.swing.JFrame {
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel15)
                             .addComponent(jtxtidinv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel16)
                             .addComponent(cbcatinv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -562,8 +574,9 @@ public class start extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel20)
-                            .addComponent(jtxtextinv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(56, Short.MAX_VALUE))
+                            .addComponent(jtxtextinv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Inventario", jPanel5);
@@ -587,7 +600,7 @@ public class start extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedPane1)
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 764, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -820,6 +833,7 @@ public class start extends javax.swing.JFrame {
             String[] parts = code.split(" ");  //Cortar la cadena en el primer espacio que es el id de cuenta
             String part1 = parts[0];   //Solo se guarda la primera parte id cuenta
             txtidCuenta.setText(part1);  //Se pone en el text de idcuenta para visualizacion del usuario
+            codesM = part1;
             clsCuentas cuenta = control.BuscarCuenta(part1); //Instancia cliente para ir a control a buscar 
             cbTipoCuenta.setSelectedItem(cuenta.getCuenta());   //Se traen los valores de la busqueda.
             txtSaldo.setText(cuenta.getSaldo()+"");
@@ -924,10 +938,27 @@ public class start extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnBorrarInvActionPerformed
 
+    private void invListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_invListMouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {   //Detectar el doble click en la lista para cargar la cuenta seleccionada
+            int index = invList.locationToIndex(evt.getPoint());  //Index para guardar la posicion donde se hace el doble click
+            String code = invList.getSelectedValue();   //Guarda la cadena seleccionada
+            String[] parts = code.split(" ");  //Cortar la cadena en el primer espacio que es el id de cuenta
+            String part1 = parts[0];   //Solo se guarda la primera parte id cuenta
+            jtxtidinv.setText(part1);  //Se pone en el text de idcuenta para visualizacion del usuario
+            codesM = part1;
+            clsInventario inv = control.BuscarInv(part1); //Instancia cliente para ir a control a buscar 
+            cbcatinv.setSelectedItem(inv.getCategoria());   //Se traen los valores de la busqueda.
+            jtxtprodinv.setText(inv.getProducto());
+            jtxtvunit.setText(inv.getValorUnit()+"");
+            jtxtiva.setText(inv.getIva()+"");
+            jtxtextinv.setText(inv.getCant_ext()+"");    
+        }
+    }//GEN-LAST:event_invListMouseClicked
+
     private void Listar(String tipo, String code){
         DefaultListModel model = new DefaultListModel();
         DefaultComboBoxModel model2 = new DefaultComboBoxModel();
-        DefaultTableModel model3 = new DefaultTableModel();
         
         switch (tipo){
             case "Cliente":
@@ -1039,6 +1070,7 @@ public class start extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
