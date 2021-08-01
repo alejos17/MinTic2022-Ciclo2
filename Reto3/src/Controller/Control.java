@@ -9,6 +9,7 @@ import Classes.*;
 import Model.*;
 import javax.swing.DefaultListModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -92,6 +93,9 @@ public class Control {
             case "Pedido":
                 
                 break;
+            case "Inventario":
+                    this.modelInventario.Borrar(code);
+                break;
         }
         return true;
         }catch (Exception e){
@@ -157,4 +161,44 @@ public class Control {
         }
         
     }
+    
+    public DefaultTableModel ListarInventario(){
+        DefaultTableModel model = new DefaultTableModel();
+        try{
+            model = this.modelInventario.Listar();
+        return model;
+        }catch (Exception e){
+            return null;
+        }
+    }
+    
+    public boolean AgregarInventario(clsInventario inv){
+        try{
+            this.modelInventario.Agregar(inv);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+    
+    public clsInventario BuscarInv(String code){
+        clsInventario inv = null;
+        try{
+            inv = this.modelInventario.Buscar(code);
+        return inv;
+        }catch (Exception e){
+            return null;
+        }
+    }
+    
+    public clsCliente EditarInventario(String code, clsInventario invM){
+        
+        try{
+            this.modelInventario.Editar(code, invM);
+        return null;
+        }catch (Exception e){
+            return null;
+        }
+    }
+    
 }

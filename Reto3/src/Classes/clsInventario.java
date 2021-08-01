@@ -16,16 +16,17 @@ public class clsInventario {
     private String Producto;
     private int cant_ext;
     private double iva;
-    private int valorUnit;
+    private double valorUnit;
 
-    public clsInventario(String idProducto, String Producto, int cant_ext, int valorUnit) {
+    public clsInventario(String idProducto, String Categoria, String Producto, int cant_ext, double iva, double valorUnit) {
         this.idProducto = idProducto;
+        this.Categoria = Categoria;
         this.Producto = Producto;
         this.cant_ext = cant_ext;
+        this.iva = iva;
         this.valorUnit = valorUnit;
     }
-
-      
+  
     /**
      * @return the idProducto
      */
@@ -71,14 +72,14 @@ public class clsInventario {
     /**
      * @return the valorUnit
      */
-    public int getValorUnit() {
+    public double getValorUnit() {
         return valorUnit;
     }
 
     /**
      * @param valorUnit the valorUnit to set
      */
-    public void setValorUnit(int valorUnit) {
+    public void setValorUnit(double valorUnit) {
         this.valorUnit = valorUnit;
     }
 
