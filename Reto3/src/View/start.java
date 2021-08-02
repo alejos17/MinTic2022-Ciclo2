@@ -29,6 +29,7 @@ public class start extends javax.swing.JFrame {
         //control.Init();
         this.Listar("Cliente", null);
         this.Listar("Inventario", null);
+        this.Fecha();
         //this.Listar("Cuenta");
         //this.Listar("ListaCuentaClientes");
         //this.Listar("Pedido");
@@ -138,6 +139,7 @@ public class start extends javax.swing.JFrame {
         jLabel21 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         btnCerrar = new javax.swing.JButton();
+        jLabel28 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -825,6 +827,8 @@ public class start extends javax.swing.JFrame {
             }
         });
 
+        jLabel28.setText("jLabel28");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -836,6 +840,8 @@ public class start extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel28)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCerrar)
                         .addGap(16, 16, 16)))
                 .addContainerGap())
@@ -846,7 +852,8 @@ public class start extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCerrar))
+                    .addComponent(btnCerrar)
+                    .addComponent(jLabel28))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -1242,14 +1249,22 @@ public class start extends javax.swing.JFrame {
             String idpedido = jtxtpedido.getText();   //tomo el numero del pedido
             int cantidad = Integer.parseInt(cbcantinvpedido.getSelectedItem().toString());  //La cantidad seleccionada por el cliente
             String code = jlidinv.getText();  //tiene el codigo del producto al momento de hacer doble clic en la lista de productos.
+            String idCliente = cbClientePedido.getSelectedItem().toString();
+            String idCuenta = cbCuentaPedido.getSelectedItem().toString();
+            String idInventario = jlidinv.getText();
             
             //Condicional para no agregar el objeto perro nuevo hasta que los campos tengan info, las selecciones no porque ya tienen algo seleccionado
             if (idpedido.equals("")){
                 JOptionPane.showMessageDialog(this, "** ERROR ** -- Campos Vacíos -- Por favor diligencie todos los campos");
             }else{
                 clsInventario inv = control.BuscarInv(code); //Instancia cliente para ir a control a buscar 
+                int cantinv = inv.getCant_ext();
+                double valorunit = inv.getValorUnit();
                 clsPedidos pedido = new clsPedidos(idpedido, inv.getProducto(), cantidad, 0, 0, 0, false);
-                model = control.CrearPedido(pedido, inv);
+                pedido.setCantinv(cantinv);    //atributos adicionales y temporales al objeto pedido que no estan en constructor para enviar a modelPedidos y crear en database
+                pedido.setIdinventario(idInventario);
+                pedido.setValorunit(valorunit);
+                model = control.CrearPedido(pedido, idCliente);
                 jlistprepedido.setModel(model);
                 
                 //this.Listar("Cliente", null);
@@ -1316,6 +1331,11 @@ public class start extends javax.swing.JFrame {
     
     public void PedidoMax(){
             JOptionPane.showMessageDialog(this, "*** Cantidad de Productos para el pedido es de 20, puede hacer el pedido y agregarlo a un pedido compuesto para continuar ****");
+    }
+    
+    public void Fecha(){
+        String fecha = control.fecha();
+        jLabel28.setText(fecha);
     }
     
     /**
@@ -1398,6 +1418,7 @@ public class start extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;

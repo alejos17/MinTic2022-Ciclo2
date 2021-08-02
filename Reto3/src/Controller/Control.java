@@ -8,6 +8,7 @@ package Controller;
 import Classes.*;
 import Model.*;
 import View.*;
+import java.text.SimpleDateFormat;
 import javax.swing.DefaultListModel;
 import javax.swing.DefaultComboBoxModel;
 
@@ -50,11 +51,11 @@ public class Control {
         }
     }
     
-    public DefaultListModel CrearPedido(clsPedidos pedido, clsInventario inv){
+    public DefaultListModel CrearPedido(clsPedidos pedido, String idCliente){
         DefaultListModel model = new DefaultListModel();
 
         try{
-            model = this.modelPedidos.CrearPedido(pedido, inv);
+            model = this.modelPedidos.CrearPedido(pedido, idCliente);
             return model;
         }catch (Exception e){
             return null;
@@ -238,6 +239,11 @@ public class Control {
         }catch (Exception e){
             
         }
+    }
+    
+    public String fecha(){
+        String fecha = this.modelPedidos.fecha();
+        return fecha;
     }
     
 }

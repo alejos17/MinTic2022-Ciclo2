@@ -22,6 +22,11 @@ public class clsPedidos implements Itipo {
     private int iva;
     private int valorTotal;
     private boolean cobrado;
+    
+    //Solo para pedidos procesados se meten por SET y GET
+    private String idinventario;
+    private int cantinv;
+    private double valorunit;
 
     public clsPedidos(String idPedido, String producto, int cantidad, int valorUnitario, int iva, int valorTotal, boolean cobrado) {
         this.idPedido = idPedido;
@@ -135,6 +140,48 @@ public class clsPedidos implements Itipo {
     @Override
     public String tipoCambio() {
         return "Pedido";
+    }
+
+    /**
+     * @return the idinventario
+     */
+    public String getIdinventario() {
+        return idinventario;
+    }
+
+    /**
+     * @param idinventario the idinventario to set
+     */
+    public void setIdinventario(String idinventario) {
+        this.idinventario = idinventario;
+    }
+
+    /**
+     * @return the cantinv
+     */
+    public int getCantinv() {
+        return cantinv;
+    }
+
+    /**
+     * @param cantinv the cantinv to set
+     */
+    public void setCantinv(int cantinv) {
+        this.cantinv = cantinv;
+    }
+
+    /**
+     * @return the valorunit
+     */
+    public double getValorunit() {
+        return valorunit;
+    }
+
+    /**
+     * @param valorunit the valorunit to set
+     */
+    public void setValorunit(double valorunit) {
+        this.valorunit = valorunit;
     }
 
         
