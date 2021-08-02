@@ -22,20 +22,16 @@ public class clsPedidos implements Itipo {
     private int iva;
     private int valorTotal;
     private boolean cobrado;
-    private clsInventario inventario;
-    private List<clsPedidos> pedidos;
 
-    public clsPedidos(String idPedido, String producto, int cantidad, int valorUnitario, int iva, int valorTotal) {
+    public clsPedidos(String idPedido, String producto, int cantidad, int valorUnitario, int iva, int valorTotal, boolean cobrado) {
         this.idPedido = idPedido;
         this.producto = producto;
         this.cantidad = cantidad;
         this.valorUnitario = valorUnitario;
         this.iva = iva;
         this.valorTotal = valorTotal;
-        cobrado = false;
-        this.pedidos = new ArrayList<>();
+        this.cobrado = false;
     }
-
     
     
     /**
@@ -123,20 +119,6 @@ public class clsPedidos implements Itipo {
     }
 
     /**
-     * @return the inventario
-     */
-    public clsInventario getInventario() {
-        return inventario;
-    }
-
-    /**
-     * @param inventario the inventario to set
-     */
-    public void setInventario(clsInventario inventario) {
-        this.inventario = inventario;
-    }
-
-    /**
      * @return the cobrado
      */
     public boolean isCobrado() {
@@ -155,20 +137,5 @@ public class clsPedidos implements Itipo {
         return "Pedido";
     }
 
-    /**
-     * @return the pedidos
-     */
-    public List<clsPedidos> getPedidos() {
-        return pedidos;
-    }
-
-    /**
-     * @param pedidos the pedidos to set
-     */
-    public void setPedidos(List<clsPedidos> pedidos) {
-        this.pedidos = pedidos;
-    }
-    
-    
-    
+        
 }

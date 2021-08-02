@@ -7,9 +7,10 @@ package Controller;
 
 import Classes.*;
 import Model.*;
+import View.*;
 import javax.swing.DefaultListModel;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
@@ -21,6 +22,7 @@ public class Control {
     private modelCuentas modelCuentas;
     private modelPedidos modelPedidos;
     private modelInventario modelInventario;
+    private start start;
     
     public Control() {
         this.modelCliente = new modelCliente();
@@ -45,6 +47,17 @@ public class Control {
             return true;
         }catch (Exception e){
             return false;
+        }
+    }
+    
+    public DefaultListModel CrearPedido(clsPedidos pedido, clsInventario inv){
+        DefaultListModel model = new DefaultListModel();
+
+        try{
+            model = this.modelPedidos.CrearPedido(pedido, inv);
+            return model;
+        }catch (Exception e){
+            return null;
         }
     }
     
@@ -156,10 +169,17 @@ public class Control {
         
     }
 
-    public DefaultComboBoxModel ListarComboBoxClientes(){
+    public DefaultComboBoxModel ListarComboBox(String tipo, String code){
         DefaultComboBoxModel model = new DefaultComboBoxModel();
         try{
-            model = this.modelCliente.ListarComboBoxClientes();
+        switch(tipo){
+            case "Cliente":    
+                model = this.modelCliente.ListarComboBoxClientes();
+                break;
+            case "ListarCuentaPedido":
+                model = this.modelPedidos.ListarComboBoxCuentaPedido(code);
+                break;
+        }
         return model;
         }catch (Exception e){
             return null;
@@ -210,5 +230,14 @@ public class Control {
     }
     
     
+    public void PedidoMax(){
+        
+        try{
+            this.start.PedidoMax();
+        
+        }catch (Exception e){
+            
+        }
+    }
     
 }
