@@ -62,6 +62,33 @@ public class Control {
         }
     }
     
+    public double TotalPedido(){
+        try{
+            double totalPedido = this.modelPedidos.getTotalPedido();
+            return totalPedido;
+        }catch (Exception e){
+            return 0;
+        }
+    }
+    
+    public int TamLista(){
+        try{
+            int tamLista = this.modelPedidos.getTamLista();
+            return tamLista;
+        }catch (Exception e){
+            return 0;
+        }
+    }
+    
+    public boolean HacerPedido(){
+        try{
+            this.modelPedidos.HacerPedido();
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+    
     //Metodo para asignar cuentas a clientes
     public boolean AsignarCuentas(String cliente, clsCuentas cuenta){
         try{
@@ -93,6 +120,8 @@ public class Control {
             return null;
         }
     }
+    
+    
     
     //Para borrar, lo unico que eso hace es al llamarlo desde la vista, mira que tipo de mascota es y llama según el caso a los metodos del modelo.
     public boolean Borrar(String type, String code){

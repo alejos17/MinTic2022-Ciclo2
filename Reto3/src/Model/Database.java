@@ -12,7 +12,7 @@ package Model;
 public class Database {
     
     private final String driver = "org.mariadb.jdbc.Driver";
-    private final String url = "jdbc:mariadb://192.168.1.2:3306/GPEDIDOS?user=root&password=Alesan.2021";
+    private final String url = "jdbc:mariadb://192.168.1.2:3306/GESTIONPEDIDOS?user=root&password=Alesan.2021";
 
     /**
      * @return the driver
