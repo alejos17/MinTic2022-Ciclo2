@@ -28,7 +28,7 @@ public class modelPedidos {
     private LinkedList<clsPedidos> pedidoList = new LinkedList<>();
     private DefaultListModel model = new DefaultListModel();
     private String idCliente;
-    private String idPedido;
+    private int idPedido;
     private double TotalPedido;
     private int tamLista;
     
@@ -57,7 +57,7 @@ public class modelPedidos {
         try{
             if (pedidoList.size() < 20){   //Restriccion de 20 elementos por pedido simple
                 pedidoList.add(pedido);     // Se guarda pedido capturado en la lista
-                idPedido = pedido.getIdPedido();
+                idPedido = Integer.parseInt(pedido.getIdPedido());
                 double valorTotal = (double) pedido.getCantidad() * pedido.getValorunit(); //calculo de valor subtotal por cantidad de prodcuto seleccionado
                 TotalPedido = TotalPedido + valorTotal;  //calculo del total del pedido completo
                 tamLista = pedidoList.size();    //Indicador del tamaño de la lista para desplegar en la vista
@@ -71,16 +71,6 @@ public class modelPedidos {
             return null;
         }
         
-        /*int index =0;
-            //Modelo de lista model.
-        for (int i = 0; i <= pedidoList.size(); i++){
-        //for (clsPedidos pedidos : pedidoList){
-            
-            
-            model.add(index, data);  //Agrega cada cliente al modelo para aplicar a la lista
-            index++;
-        }*/
-        
         return model; 
             
     }
@@ -90,48 +80,59 @@ public class modelPedidos {
     //y en la tabla clientepedido para asignar ese pedido a ese cliente.
     public boolean HacerPedido(){
         int r = 0;
-        for (clsPedidos pedidos : pedidoList){   //Recorre cada uno de los Productos colocados en la lista y los agrega como Pedido en Base de Datos
+        
+        //Primer TRY para guardar el pedido
+        try (Connection conexion = DriverManager.getConnection(database.getUrl())){
+            String query1 = "INSERT INTO pedido (idpedido, producto, valortotal, cobrado, fecha) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement statementPedido = conexion.prepareStatement(query1);  
+            statementPedido.setInt(1, idPedido);  //Statements por cada ?
+            statementPedido.setString(2, tamLista+"");
+            statementPedido.setDouble(3, TotalPedido);
+            statementPedido.setInt(4, 0);
+            Timestamp fechaSQL = this.fechaSQL();   //LLamo metodo para calcular fecha en formato SQL
+            statementPedido.setTimestamp(5, fechaSQL);
+            int rowsInsertedPedido = statementPedido.executeUpdate();  //Se cuenta la cantiad de datos insertados en tabla Pedido
+            if (rowsInsertedPedido > 0){
+                    r = 1;
+            }else{
+                    r = 0;
+            }
+        conexion.close();  //Cierre de Conexiones para cada ciclo.
+        statementPedido.close();
+        }catch (Exception e){
+            return false;
+        }
+        
+        //Se recorre la lista de productos seleccionados para ingresarlos al pedido
+        for (clsPedidos pedidos : pedidoList){ 
             try (Connection conexion = DriverManager.getConnection(database.getUrl())){           
-                String query1 = "INSERT INTO pedido (idpedido, producto, cantidad, valortotal) VALUES (?, ?, ?, ?)";
-                PreparedStatement statementPedido = conexion.prepareStatement(query1);  
-                statementPedido.setInt(1, Integer.parseInt(pedidos.getIdPedido()));  //Statements por cada ?
-                statementPedido.setString(2, pedidos.getProducto());
-                statementPedido.setInt(3, pedidos.getCantidad());
-                double valorTotal = (double) pedidos.getCantidad() * pedidos.getValorunit(); //Calcular el valor total en base a cantidad de producto
-                statementPedido.setDouble(4, valorTotal);
-                int rowsInsertedPedido = statementPedido.executeUpdate();  //Se cuenta la cantiad de datos insertados en tabla Pedido
                 //Para la tabla inventariopedido
-                String query2 = "INSERT INTO inventariopedido (id_pedido, id_inventario, fecha, cantidad) VALUES (?, ?, ?, ?)";
+                String query2 = "INSERT INTO inventariopedido (id_pedido, id_inventario, fecha, cantidad, subtotal) VALUES (?, ?, ?, ?, ?)";
                 PreparedStatement statementInvPedido = conexion.prepareStatement(query2);  
-                statementInvPedido.setInt(1, Integer.parseInt(pedidos.getIdPedido()));
+                statementInvPedido.setInt(1, idPedido);
                 statementInvPedido.setString(2, pedidos.getIdinventario());  
                 Timestamp fechaSQL = this.fechaSQL();   //LLamo metodo para calcular fecha en formato SQL
                 statementInvPedido.setTimestamp(3, fechaSQL);  //Envio parametro fecha
                 statementInvPedido.setInt(4, pedidos.getCantidad());
+                double valorTotal = (double) pedidos.getCantidad() * pedidos.getValorunit(); //Calcular el valor total en base a cantidad de producto
+                statementInvPedido.setDouble(5, valorTotal);
                 int rowsInsertedInvPedido = statementInvPedido.executeUpdate();  //Se cuenta la cantiad de datos insertados en tabla InventarioPedido
                 //Update para la tabla inventario donde se resta la cantidad seleccionada por el usuario.
-                //try{
-                    int cantidad_final = pedidos.getCantinv() - pedidos.getCantidad();   // Resta la cantidad al inventario
-                //}catch (Exception e){
-                    //System.out.println("Error en la resta no es");
-                //}
+                int cantidad_final = pedidos.getCantinv() - pedidos.getCantidad();   // Resta la cantidad al inventario
                 String query4 = "UPDATE inventario SET existencia = ? WHERE idinventario = ?";
                 PreparedStatement statementInventario = conexion.prepareStatement(query4);
                 statementInventario.setInt(1, cantidad_final);
                 statementInventario.setString(2, pedidos.getIdinventario());
                 int rowsInsertedInventario = statementInventario.executeUpdate();  //Se cuenta la cantiad de datos insertados en tabla InventarioPedido
                 
-                if (rowsInsertedPedido > 0){
-                    if (rowsInsertedInvPedido > 0){
-                        if (rowsInsertedInventario > 0){
-                            r = 1;
-                        }
+                if (rowsInsertedInvPedido > 0){
+                    if (rowsInsertedInventario > 0){
+                        r = 1;
                     }    
                 }else{
                     r = 0;
                 }
             conexion.close();  //Cierre de Conexiones para cada ciclo.
-            statementPedido.close();
             statementInvPedido.close();
             statementInventario.close();
             
@@ -142,24 +143,21 @@ public class modelPedidos {
         }
         
         //Ingreso a la tabla clientePedido que es solo 1 registro, pedido por cliente
-        //Ingreso a la tabla totalpedido que es solo 1 registro por pedido con el valortotal a cobrar.
         try (Connection conexion = DriverManager.getConnection(database.getUrl())){
             String query3 = "INSERT INTO clientepedido (id_cliente, id_pedido, fecha) VALUES (?, ?, ?)";
             PreparedStatement statementClientePedido = conexion.prepareStatement(query3);
             statementClientePedido.setString(1, idCliente);
-            statementClientePedido.setInt(2, Integer.parseInt(idPedido));
+            statementClientePedido.setInt(2, idPedido);
             Timestamp fechaSQL = this.fechaSQL();   //LLamo metodo para calcular fecha en formato SQL
             statementClientePedido.setTimestamp(3, fechaSQL);
             int rowsInsertedClientePedido = statementClientePedido.executeUpdate();
-            //Para la tabla totalpedido  - Que guarda el valorTotal del pedido completo que usará modelCobro para descontar a la cuenta.
-                String query5 = "INSERT INTO totalpedido (id_pedido, valortotal) VALUES (?, ?)";
-                PreparedStatement statementTotalPedido = conexion.prepareStatement(query5);  
-                statementTotalPedido.setInt(1, Integer.parseInt(idPedido)); 
-                statementTotalPedido.setDouble(2, TotalPedido);
-                int rowsInsertedTotalPedido = statementTotalPedido.executeUpdate();  
-        
+            if (rowsInsertedClientePedido > 0){
+                    r = 1;
+            }else{
+                    r = 0;
+            }
+        conexion.close();  //Cierre de Conexiones para cada ciclo.
         statementClientePedido.close();
-        statementTotalPedido.close();
         }catch (Exception e){
             return false;
         }
@@ -174,7 +172,7 @@ public class modelPedidos {
     
     public void LimpiarDatos(){
         idCliente = "";
-        idPedido = "";
+        idPedido = 0;
         TotalPedido = 0;
         tamLista = 0;
     }
