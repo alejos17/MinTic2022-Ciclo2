@@ -181,13 +181,8 @@ public class modelPedidos {
     
     //Para borrar, lo unico que eso hace es al llamarlo desde la vista, mira que tipo de mascota es y llama según el caso a los metodos del modelo.
     public boolean BorrarPedido(clsPedidos pedido){
-        try{
-                
-        return true;
-        }catch (Exception e){
-            return false;
-        }
-            
+       
+        return true;    
         
     }
     
@@ -263,7 +258,7 @@ public class modelPedidos {
         LinkedList<clsPedidos> pedidosList = new LinkedList<>();
         DefaultListModel model = new DefaultListModel();
         try (Connection conexion = DriverManager.getConnection(database.getUrl())){   //Al colocar la conexión dentro del parentesis del try, si hay un error o se termina el try la conexion se cierra.
-            String query = "SELECT p.idpedido, c.fecha , p.producto, p.valortotal , c.id_cliente FROM pedido p JOIN  clientepedido c ON p.idpedido = c.id_pedido";
+            String query = "SELECT p.idpedido, c.fecha , p.producto, p.valortotal , c.id_cliente FROM pedido p JOIN  clientepedido c ON p.idpedido = c.id_pedido WHERE p.cobrado = 0";
             PreparedStatement statementListarPedidos = conexion.prepareStatement(query);  //Preparando statement
             ResultSet result = statementListarPedidos.executeQuery();
             while (result.next()){    //Ciclo al result set para sacar cada uno de los resultados en variables para crear el objeto y retornarlo.
