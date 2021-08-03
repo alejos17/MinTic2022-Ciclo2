@@ -21,21 +21,25 @@ public class clsPedidos implements Itipo {
     private int valorUnitario;
     private int iva;
     private int valorTotal;
-    private boolean cobrado;
+    private int cobrado;
     
     //Solo para pedidos procesados se meten por SET y GET
-    private String idinventario;
-    private int cantinv;
-    private double valorunit;
+    private String idinventario;  //ID desde la tabla inventario para gestionar el pedido.
+    private int cantinv;   //Cantidad desde la tabla de inventario para gestionar el pedido.
+    private double valorunit;  //Valor en double del precio.
+    private String fecha;   //Fecha en la que se realiza un pedido
+    private String idCliente;  //Se usa para saber que cliente hace un pedido
+    private String idCuenta;  //Se usa para saber que cuenta usa un usuario para pagar un pedido.
+    private int tamListPedido;   //Entero para capturar la cantidad de items de un pedido.
 
-    public clsPedidos(String idPedido, String producto, int cantidad, int valorUnitario, int iva, int valorTotal, boolean cobrado) {
+    public clsPedidos(String idPedido, String producto, int cantidad, int valorUnitario, int iva, int valorTotal, int cobrado) {
         this.idPedido = idPedido;
         this.producto = producto;
         this.cantidad = cantidad;
         this.valorUnitario = valorUnitario;
         this.iva = iva;
         this.valorTotal = valorTotal;
-        this.cobrado = false;
+        this.cobrado = cobrado;
     }
     
     
@@ -126,14 +130,14 @@ public class clsPedidos implements Itipo {
     /**
      * @return the cobrado
      */
-    public boolean isCobrado() {
+    public int isCobrado() {
         return cobrado;
     }
 
     /**
      * @param cobrado the cobrado to set
      */
-    public void setCobrado(boolean cobrado) {
+    public void setCobrado(int cobrado) {
         this.cobrado = cobrado;
     }
 
@@ -182,6 +186,62 @@ public class clsPedidos implements Itipo {
      */
     public void setValorunit(double valorunit) {
         this.valorunit = valorunit;
+    }
+
+    /**
+     * @return the fecha
+     */
+    public String getFecha() {
+        return fecha;
+    }
+
+    /**
+     * @param fecha the fecha to set
+     */
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    /**
+     * @return the idCliente
+     */
+    public String getIdCliente() {
+        return idCliente;
+    }
+
+    /**
+     * @param idCliente the idCliente to set
+     */
+    public void setIdCliente(String idCliente) {
+        this.idCliente = idCliente;
+    }
+
+    /**
+     * @return the idCuenta
+     */
+    public String getIdCuenta() {
+        return idCuenta;
+    }
+
+    /**
+     * @param idCuenta the idCuenta to set
+     */
+    public void setIdCuenta(String idCuenta) {
+        this.idCuenta = idCuenta;
+    }
+
+    /**
+     * @return the tamListPedido
+     */
+    public int getTamListPedido() {
+        return tamListPedido;
+    }
+
+    /**
+     * @param tamListPedido the tamListPedido to set
+     */
+    public void setTamListPedido(int tamListPedido) {
+        this.tamListPedido = tamListPedido;
     }
 
         

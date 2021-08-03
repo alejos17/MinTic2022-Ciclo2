@@ -170,6 +170,25 @@ public class Control {
         }
     }
     
+    public clsPedidos BuscarPedido(String code){
+        clsPedidos pedido = null;
+        try{
+            pedido = this.modelPedidos.Buscar(code);
+        return pedido;
+        }catch (Exception e){
+            return null;
+        }
+    }
+    
+    public DefaultListModel BuscarPedidoL(String code){
+        DefaultListModel model = new DefaultListModel();
+        try{
+            model = this.modelPedidos.BuscarPedidoL(code);
+        return model;
+        }catch (Exception e){
+            return null;
+        }
+    }
     
     public DefaultListModel Listar(String tipo, String code){
         DefaultListModel model = new DefaultListModel();
