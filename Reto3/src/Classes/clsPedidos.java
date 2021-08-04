@@ -31,6 +31,8 @@ public class clsPedidos implements Itipo {
     private String idCliente;  //Se usa para saber que cliente hace un pedido
     private String idCuenta;  //Se usa para saber que cuenta usa un usuario para pagar un pedido.
     private int tamListPedido;   //Entero para capturar la cantidad de items de un pedido.
+    private int idCobro;  //Se utiliza para consultar el id del cobro para un pedido ya ejecutado.
+    private String fechaCobro;   //Se utiliza para consultar la fecha de un cobro ya ejecutado en un pedido.
 
     public clsPedidos(String idPedido, String producto, int cantidad, int valorUnitario, int iva, int valorTotal, int cobrado) {
         this.idPedido = idPedido;
@@ -125,20 +127,6 @@ public class clsPedidos implements Itipo {
      */
     public void setValorTotal(int valorTotal) {
         this.valorTotal = valorTotal;
-    }
-
-    /**
-     * @return the cobrado
-     */
-    public int isCobrado() {
-        return cobrado;
-    }
-
-    /**
-     * @param cobrado the cobrado to set
-     */
-    public void setCobrado(int cobrado) {
-        this.cobrado = cobrado;
     }
 
     @Override
@@ -242,6 +230,48 @@ public class clsPedidos implements Itipo {
      */
     public void setTamListPedido(int tamListPedido) {
         this.tamListPedido = tamListPedido;
+    }
+
+    /**
+     * @return the cobrado
+     */
+    public int getCobrado() {
+        return cobrado;
+    }
+
+    /**
+     * @param cobrado the cobrado to set
+     */
+    public void setCobrado(int cobrado) {
+        this.cobrado = cobrado;
+    }
+
+    /**
+     * @return the idCobro
+     */
+    public int getIdCobro() {
+        return idCobro;
+    }
+
+    /**
+     * @param idCobro the idCobro to set
+     */
+    public void setIdCobro(int idCobro) {
+        this.idCobro = idCobro;
+    }
+
+    /**
+     * @return the fechaCobro
+     */
+    public String getFechaCobro() {
+        return fechaCobro;
+    }
+
+    /**
+     * @param fechaCobro the fechaCobro to set
+     */
+    public void setFechaCobro(String fechaCobro) {
+        this.fechaCobro = fechaCobro;
     }
 
         
