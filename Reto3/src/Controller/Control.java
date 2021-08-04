@@ -23,6 +23,7 @@ public class Control {
     private modelCuentas modelCuentas;
     private modelPedidos modelPedidos;
     private modelInventario modelInventario;
+    private modelCobros modelCobros;
     private start start;
     
     public Control() {
@@ -30,6 +31,7 @@ public class Control {
         this.modelCuentas = new modelCuentas();
         this.modelPedidos = new modelPedidos();
         this.modelInventario = new modelInventario();
+        this.modelCobros = new modelCobros();
     }
     
     //Metodo para Crear objeto ya sea, persona, cliente, cuenta o pedido
@@ -83,6 +85,15 @@ public class Control {
     public boolean HacerPedido(){
         try{
             this.modelPedidos.HacerPedido();
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+    
+    public boolean EjecutarCobro(int idcobro){
+        try{
+            this.modelCobros.Ejecutar(idcobro);
             return true;
         }catch (Exception e){
             return false;
@@ -209,7 +220,12 @@ public class Control {
             case "Pedido":
                 model = this.modelPedidos.ListarPedidos();
                 break;
-            
+            case "CobrosinEjecutar":
+                model = this.modelCobros.ListarPedidosPendientesCobro();
+                break;
+            case "CobrosEjecutados":
+                model = this.modelCobros.ListarPedidosCobrados();
+                break;
         }
         return model;
         }catch (Exception e){
@@ -235,19 +251,6 @@ public class Control {
         }
         
     }
-    
-    /*
-    public DefaultTableModel Listar2(){
-        DefaultTableModel model = new DefaultTableModel();
-        try{
-            model = this.modelInventario.Listar2();
-        return model;
-        }catch (Exception e){
-            return null;
-        }
-    }*/
-    
-    
     
     public boolean AgregarInventario(clsInventario inv){
         try{

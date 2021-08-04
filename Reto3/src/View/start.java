@@ -30,6 +30,8 @@ public class start extends javax.swing.JFrame {
         this.Listar("Cliente", null);
         this.Listar("Inventario", null);
         this.Listar("Pedido", null);
+        this.Listar("Cobrosinejecutar", null);
+        this.Listar("CobrosEjecutados", null);
         this.Fecha();
         //this.Listar("Cuenta");
         //this.Listar("ListaCuentaClientes");
@@ -138,14 +140,16 @@ public class start extends javax.swing.JFrame {
         jlPedidosPendCobro = new javax.swing.JList<>();
         jLabel45 = new javax.swing.JLabel();
         jScrollPane9 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        jlPedidosCobrados = new javax.swing.JList<>();
         jLabel46 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btnCobrar = new javax.swing.JButton();
         jLabel47 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jtxtidcobro = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jLabel48 = new javax.swing.JLabel();
+        jLabel49 = new javax.swing.JLabel();
+        jLabel50 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         btnAgregarInv = new javax.swing.JButton();
         btnBuscarInv = new javax.swing.JButton();
@@ -819,28 +823,37 @@ public class start extends javax.swing.JFrame {
         });
         jScrollPane8.setViewportView(jlPedidosPendCobro);
 
+        jLabel45.setFont(new java.awt.Font("sansserif", 1, 16)); // NOI18N
         jLabel45.setText("Pedidos pendientes para Cobro");
 
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
+        jlPedidosCobrados.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane9.setViewportView(jList2);
+        jScrollPane9.setViewportView(jlPedidosCobrados);
 
+        jLabel46.setFont(new java.awt.Font("sansserif", 1, 16)); // NOI18N
         jLabel46.setText("Pedidos Cobrados con exito");
 
-        jButton2.setText("Realizar Cobro");
+        btnCobrar.setText("Realizar Cobro");
+        btnCobrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCobrarActionPerformed(evt);
+            }
+        });
 
         jLabel47.setText("Código del Cobro");
-
-        jTextField1.setText("jTextField1");
 
         jButton4.setText("Nuevo");
 
         jButton5.setText("Buscar");
 
-        jLabel48.setText("Seleccione los pedidos a aplicar para Cobro");
+        jLabel48.setText("Estos pedidos ya han sido realizados desde //Pedidos");
+
+        jLabel49.setText("ID -- Fecha del Pedido -- Valor -- Cuenta a Debitar -- Cobrado?");
+
+        jLabel50.setText("ID -- Fecha del Cobro -- Valor -- Cliente -- Cobrado?");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -850,26 +863,35 @@ public class start extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel48)
+                                    .addComponent(jLabel49)
+                                    .addComponent(jLabel45))))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane9)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel46)
+                                    .addComponent(jLabel50))
+                                .addContainerGap(100, Short.MAX_VALUE))))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel47)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2)
+                            .addComponent(btnCobrar)
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addComponent(jtxtidcobro, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton4)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton5))))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel48)
-                            .addComponent(jLabel45))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel46)
-                            .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(162, Short.MAX_VALUE))
+                                .addComponent(jButton5)))
+                        .addContainerGap())))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -877,21 +899,26 @@ public class start extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel47)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtxtidcobro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4)
                     .addComponent(jButton5))
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(btnCobrar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel45)
                     .addComponent(jLabel46))
                 .addGap(4, 4, 4)
-                .addComponent(jLabel48)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel48)
+                    .addComponent(jLabel50))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
-                    .addComponent(jScrollPane8))
+                    .addComponent(jScrollPane9)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel49)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -1561,6 +1588,21 @@ public class start extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jlPedidoRealizadoMouseClicked
 
+    private void btnCobrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCobrarActionPerformed
+        // TODO add your handling code here:
+        try {     //Try para encapsular errores en este caso por si ponen mal la fecha en el campo bornYear
+            int idcobro = Integer.parseInt(jtxtidcobro.getText());   //tomo el numero del pedido
+            control.EjecutarCobro(idcobro);
+            this.borrarCampos();
+            JOptionPane.showMessageDialog(this, "El Cobro "+idcobro+", ha sido ejecutado con éxito!");
+            this.Listar("Cobrosinejecutar", null);
+            this.Listar("CobrosEjecutados", null);
+            
+        }catch (Exception e){   //Mensaje a desplegar de error
+            JOptionPane.showMessageDialog(this, "*** ERROR ****");
+        }
+    }//GEN-LAST:event_btnCobrarActionPerformed
+
     private void Listar(String tipo, String code){
         DefaultListModel model = new DefaultListModel();
         DefaultComboBoxModel model2 = new DefaultComboBoxModel();
@@ -1585,11 +1627,15 @@ public class start extends javax.swing.JFrame {
             case "Pedido":
                 model = control.Listar("Pedido", null);
                 jlPedidoRealizado.setModel(model);
-                jlPedidosPendCobro.setModel(model);
             case "ListarCuentaPedido":
                 model2 = control.ListarComboBox("ListarCuentaPedido", code);
                 cbCuentaPedido.setModel(model2);
-                
+            case "CobrosinEjecutar":
+                model = control.Listar("CobrosinEjecutar", null);
+                jlPedidosPendCobro.setModel(model);
+            case "CobrosEjecutados":
+                model = control.Listar("CobrosEjecutados", null);
+                jlPedidosCobrados.setModel(model);
         }
         
         
@@ -1677,6 +1723,7 @@ public class start extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscarInv;
     private javax.swing.JButton btnBuscarPedido;
     private javax.swing.JButton btnCerrar;
+    private javax.swing.JButton btnCobrar;
     private javax.swing.JButton btnCrearCliente;
     private javax.swing.JButton btnCrearCuenta;
     private javax.swing.JButton btnEditarCliente;
@@ -1695,7 +1742,6 @@ public class start extends javax.swing.JFrame {
     private javax.swing.JScrollPane cuentasLIst;
     private javax.swing.JList<String> invList;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -1742,13 +1788,14 @@ public class start extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel48;
+    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelCuentaCliente;
-    private javax.swing.JList<String> jList2;
     private javax.swing.JList<String> jList3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -1765,9 +1812,9 @@ public class start extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel jlClientePedido;
     private javax.swing.JList<String> jlPedidoRealizado;
+    private javax.swing.JList<String> jlPedidosCobrados;
     private javax.swing.JList<String> jlPedidosPendCobro;
     private javax.swing.JLabel jlTotalPedido;
     private javax.swing.JLabel jlidinv;
@@ -1777,6 +1824,7 @@ public class start extends javax.swing.JFrame {
     private javax.swing.JLabel jlsaldocuentapedido;
     private javax.swing.JLabel jltamlista;
     private javax.swing.JTextField jtxtextinv;
+    private javax.swing.JTextField jtxtidcobro;
     private javax.swing.JTextField jtxtidinv;
     private javax.swing.JTextField jtxtiva;
     private javax.swing.JTextField jtxtpedido;
