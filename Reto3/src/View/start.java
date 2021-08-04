@@ -27,12 +27,7 @@ public class start extends javax.swing.JFrame {
     public start() {
         initComponents();
         //control.Init();
-        this.Listar("Cliente", null);
-        this.Listar("Inventario", null);
-        this.Listar("Pedido", null);
-        this.Listar("Cobrosinejecutar", null);
-        this.Listar("CobrosEjecutados", null);
-        this.Fecha();
+        this.update();
         //this.Listar("Cuenta");
         //this.Listar("ListaCuentaClientes");
         //this.Listar("Pedido");
@@ -617,6 +612,11 @@ public class start extends javax.swing.JFrame {
         jLabel33.setText("de 20");
 
         btnEliminarProducto.setText("Eliminar");
+        btnEliminarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarProductoActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Nuevo");
 
@@ -1125,7 +1125,7 @@ public class start extends javax.swing.JFrame {
                 clsCliente cliente = new clsCliente(idCliente, nombre, apellido, direccion, telefono, correo);
                 control.CrearCliente(cliente);
                 
-                this.Listar("Cliente", null);
+                this.update();
                 this.borrarCampos();
                 JOptionPane.showMessageDialog(this, "El nuevo cliente ha sido creado con éxito!");
             }
@@ -1150,8 +1150,8 @@ public class start extends javax.swing.JFrame {
             }else{
                 clsCuentas cuenta = new clsCuentas(idCuenta, tipoCuenta, saldo, idcuentacliente);  //Crea instancia de Cuenta para crear
                 control.CrearCuenta(cuenta);  //Envia al controller la cuenta a crear
-                //this.Listar("Cuenta");
-                //this.Listar("ListaCuentaClientes");
+                
+                this.update();
                 this.borrarCampos();
                 JOptionPane.showMessageDialog(this, "La Cuenta ha sido creada y asignada al cliente con éxito!");
             }
@@ -1206,7 +1206,7 @@ public class start extends javax.swing.JFrame {
                 clsCliente clienteM = new clsCliente(code, nombre, apellido, direccion, telefono, correo);
                 control.EditarCliente(codesM, clienteM);
                 
-                this.Listar("Cliente", null);
+                this.update();
                 this.borrarCampos();
                 JOptionPane.showMessageDialog(this, "El cliente ha sido cambiado con éxito!");
             }
@@ -1230,7 +1230,7 @@ public class start extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "El código de Cliente no existe, intente de nuevo!");
         }else{
             this.borrarCampos();
-            this.Listar("Cliente", null);
+            this.update();
             JOptionPane.showMessageDialog(this, "El Cliente ha sido eliminado con éxito!");
         }
     }//GEN-LAST:event_btnBorrarClienteActionPerformed
@@ -1272,7 +1272,7 @@ public class start extends javax.swing.JFrame {
             }else{
                 clsCuentas cuentaM = new clsCuentas(code,tipoCuenta, saldo, cuentaCliente);
                 control.EditarCuenta(codesM, cuentaM);
-                this.Listar("Cuenta", null);
+                this.update();
                 this.Listar("ListaCuentaClientes", cuentaCliente);
                 this.borrarCampos();
                 JOptionPane.showMessageDialog(this, "La Cuenta ha sido modificada con éxito!");
@@ -1342,7 +1342,7 @@ public class start extends javax.swing.JFrame {
             }else{
                 clsInventario inv = new clsInventario(idProducto, categoria, producto, existencia, iva, valorunitario);
                 control.AgregarInventario(inv);
-                this.Listar("Inventario", null);
+                this.update();
                 this.borrarCampos();
                 JOptionPane.showMessageDialog(this, "El producto ha sido agredado al inventario con éxito!");
             }
@@ -1393,7 +1393,7 @@ public class start extends javax.swing.JFrame {
                 clsInventario invM = new clsInventario(idProducto, categoria, producto, existencia, iva, valorunitario);
                 control.EditarInventario(codesM, invM);
                 
-                this.Listar("Inventario", null);
+                this.update();
                 this.borrarCampos();
                 JOptionPane.showMessageDialog(this, "El producto ha sido cambiado con éxito en el inventario!");
             }
@@ -1417,7 +1417,7 @@ public class start extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "El código del Producto no existe en Inventario, intente de nuevo!");
         }else{
             this.borrarCampos();
-            this.Listar("Inventario", null);
+            this.update();
             JOptionPane.showMessageDialog(this, "El Producto ha sido eliminado con éxito del Inventario!");
         }
     }//GEN-LAST:event_btnBorrarInvActionPerformed
@@ -1481,9 +1481,7 @@ public class start extends javax.swing.JFrame {
                 index++;
             }
             cbcantinvpedido.setModel(model);
-            //jtxtvunit.setText(inv.getValorUnit()+"");
-            //jtxtiva.setText(inv.getIva()+"");
-            //jtxtextinv.setText(inv.getCant_ext()+"");    
+            
         }
     }//GEN-LAST:event_jlinvpedidoMouseClicked
 
@@ -1509,27 +1507,29 @@ public class start extends javax.swing.JFrame {
                 pedido.setCantinv(cantinv);    //atributos adicionales y temporales al objeto pedido que no estan en constructor para enviar a modelPedidos y crear en database
                 pedido.setIdinventario(idInventario);
                 pedido.setValorunit(valorunit);
-                model = control.CrearPedido(pedido, idCliente);
+                model = control.CrearPedido(pedido, idCliente, idCuenta);
                 jlistprepedido.setModel(model);   //Muestra la lista con el pedido
                 double saldocuenta = Double.parseDouble(jlsaldocuentapedido.getText());
                 double totalpedido = control.TotalPedido();
                 jlTotalPedido.setText(totalpedido+"");  //Muestra el valor total del pedido a pagar
                 jltamlista.setText(control.TamLista()+"");     //Muestra la cantidad de items que el usuario va agregando al pedido
                 if (totalpedido > saldocuenta){    //Si el valor total del pedido supera el valor del saldo de la cuenta seleccionada  
+                    jlsaldocuentapedido.setForeground(Color.red);
                     jlTotalPedido.setForeground(Color.red);   //Se notifica en ROJO al usuario y se envia mensaje 
-                    JOptionPane.showMessageDialog(this, "*** El Valor Total del Pedido Supera el valor de la Cuenta, elimine Productos ****");
+                    JOptionPane.showMessageDialog(this, "*** El Valor Total del Pedido supera el Saldo de la Cuenta, elimine Productos ****");
                     btnHacerPedido.setEnabled(false);   //Se deshabilita el boton de hacer pedido.
                 }
                 
-                //this.Listar("Cliente", null);
-                //this.borrarCampos();
-                //JOptionPane.showMessageDialog(this, "El nuevo cliente ha sido creado con éxito!");
             }
             
         }catch (Exception e){   //Mensaje a desplegar de error
             JOptionPane.showMessageDialog(this, "*** ERROR ****");
-            JOptionPane.showMessageDialog(this, "*** Cantidad de Productos para el pedido es de 20, puede hacer el pedido y agregarlo a un pedido compuesto para continuar ****");
-            
+            if (model == null){
+                JOptionPane.showMessageDialog(this, "*** Cantidad de Productos para el pedido simple es de 20, haga el pedido y agrégelo a un pedido compuesto para continuar ****");
+            }else{
+                JOptionPane.showMessageDialog(this, "*** Producto seleccionado no cuenta con existencias actualmente en Inventario ****");
+            }
+             
         }
     }//GEN-LAST:event_btnagregapedidoActionPerformed
 
@@ -1539,11 +1539,11 @@ public class start extends javax.swing.JFrame {
             String idpedido = jtxtpedido.getText();   //tomo el numero del pedido
             control.HacerPedido();
             this.borrarCampos();
-            JOptionPane.showMessageDialog(this, "El Pedido "+idpedido+", ha sido generado con éxito!");
-            this.Listar("Pedido", null);
+            JOptionPane.showMessageDialog(this, "El Pedido ** "+idpedido+" **, ha sido generado con éxito!");
+            this.update();
             
         }catch (Exception e){   //Mensaje a desplegar de error
-            JOptionPane.showMessageDialog(this, "*** ERROR ****");
+            JOptionPane.showMessageDialog(this, "*** ERROR ***");
         }
     }//GEN-LAST:event_btnHacerPedidoActionPerformed
 
@@ -1594,13 +1594,26 @@ public class start extends javax.swing.JFrame {
             control.EjecutarCobro(idcobro);
             this.borrarCampos();
             JOptionPane.showMessageDialog(this, "El Cobro "+idcobro+", ha sido ejecutado con éxito!");
-            this.Listar("Cobrosinejecutar", null);
-            this.Listar("CobrosEjecutados", null);
+            this.update();
             
         }catch (Exception e){   //Mensaje a desplegar de error
             JOptionPane.showMessageDialog(this, "*** ERROR ****");
         }
     }//GEN-LAST:event_btnCobrarActionPerformed
+
+    private void btnEliminarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProductoActionPerformed
+        // TODO add your handling code here:
+        DefaultListModel model = new DefaultListModel();
+        model = control.BorrarProducto();
+        jlistprepedido.setModel(model);
+        jlsaldocuentapedido.setForeground(Color.black);  
+        jlTotalPedido.setForeground(Color.black);   //Color normal del Total del Pedido
+        jlTotalPedido.setText(control.TotalPedido()+"");  //Muestra el valor total del pedido a pagar
+        jltamlista.setText(control.TamLista()+""); 
+        
+        
+        
+    }//GEN-LAST:event_btnEliminarProductoActionPerformed
 
     private void Listar(String tipo, String code){
         DefaultListModel model = new DefaultListModel();
@@ -1669,7 +1682,16 @@ public class start extends javax.swing.JFrame {
     }
     
     public void PedidoMax(){
-            JOptionPane.showMessageDialog(this, "*** Cantidad de Productos para el pedido es de 20, puede hacer el pedido y agregarlo a un pedido compuesto para continuar ****");
+            JOptionPane.showMessageDialog(this, "*** Cantidad de Productos para el pedido simple es de 20, puede hacer el pedido así o agregarlo a un pedido compuesto para continuar ****");
+    }
+    
+    public void update(){
+        this.Listar("Cliente", null);
+        this.Listar("Inventario", null);
+        this.Listar("Pedido", null);
+        this.Listar("Cobrosinejecutar", null);
+        this.Listar("CobrosEjecutados", null);
+        this.Fecha();
     }
     
     public void Fecha(){

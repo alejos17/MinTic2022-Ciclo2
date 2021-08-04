@@ -25,9 +25,10 @@ public class modelPedidos {
     
     private Control control;
     Database database;
-    private LinkedList<clsPedidos> pedidoList = new LinkedList<>();
-    private DefaultListModel model = new DefaultListModel();
+    private LinkedList<clsPedidos> pedidoList = new LinkedList<>();  //Lista global que va guardando en el pedido los productos que selecciona el usuario.
+    private DefaultListModel model = new DefaultListModel();    //Model con la lista de productos en el pedido del cliente global para que vaya guardando fuera del metodo.
     private String idCliente;
+    private String idCuenta;
     private int idPedido;
     private double TotalPedido;
     private int tamLista;
@@ -52,8 +53,9 @@ public class modelPedidos {
     }
     
     //Crear Pedido, se envia desde la vista un Objeto Pedido y el codigo de cliente para preparar una lista de tipo Pedidos, con máx 20 items.
-    public DefaultListModel CrearPedido(clsPedidos pedido, String idCliente1){
+    public DefaultListModel CrearPedido(clsPedidos pedido, String idCliente1, String idCuenta1){
         idCliente = idCliente1;    //Se captura idcliente para asociarlo al pedido
+        idCuenta = idCuenta1;    // Se captura idCuenta para el pago del pedido.
         try{
             if (pedidoList.size() < 20){   //Restriccion de 20 elementos por pedido simple
                 pedidoList.add(pedido);     // Se guarda pedido capturado en la lista
@@ -64,7 +66,8 @@ public class modelPedidos {
                 String data = pedido.getCantidad() +" - "+   pedido.getProducto()+" - "+ valorTotal;  // Generador de model para la lista de los items en el pedido.
                 model.addElement(data);
             }else{
-                control.PedidoMax();
+                control.PedidoMax();  //Aunque no funciona, me lanza el catch de este try para retornar un null. sin este no me funciona
+                //En la vista, selecciono el mensaje de error si es por más de 20 productos o si es por inventario en cero.
             }
             
         }catch (Exception e){
@@ -72,6 +75,32 @@ public class modelPedidos {
         }
         
         return model; 
+            
+    }
+    
+    //Borra el ultimo producto de la lista Pedido antes de Hacerlo
+    public DefaultListModel BorrarProducto(){
+        DefaultListModel model2 = new DefaultListModel();  
+        try{
+            pedidoList.removeLast();     // Se guarda pedido capturado en la lista
+            TotalPedido = 0;   // Borra el total llevado por el pedido para volverlo a calcular de nuevo mas abajo.
+            //Al quitar el ultimo elemento de la lista como resto a TotalPedido, para que muestre el total real.
+            
+            for (clsPedidos pedido : pedidoList){
+                double valorTotal = (double) pedido.getCantidad() * pedido.getValorunit(); //calculo de valor subtotal por cantidad de prodcuto seleccionado
+                TotalPedido = TotalPedido + valorTotal;  //Calcula el valor total del pedido recorriendo la lista
+                String data = pedido.getCantidad() +" - "+   pedido.getProducto()+" - "+ valorTotal;  // Generador de model para la lista de los items en el pedido.
+                model2.addElement(data);
+            }
+            
+            model = model2;  //Reemplazo el model global con el nuevo model sin el ultimo producto.
+            tamLista = pedidoList.size();    //Indicador del tamaño de la lista para desplegar en la vista
+            
+        }catch (Exception e){
+            return null;
+        }
+        
+        return model2; 
             
     }
     
@@ -144,12 +173,13 @@ public class modelPedidos {
         
         //Ingreso a la tabla clientePedido que es solo 1 registro, pedido por cliente
         try (Connection conexion = DriverManager.getConnection(database.getUrl())){
-            String query3 = "INSERT INTO clientepedido (id_cliente, id_pedido, fecha) VALUES (?, ?, ?)";
+            String query3 = "INSERT INTO clientepedido (id_cliente, id_pedido, fecha, id_cuenta) VALUES (?, ?, ?, ?)";
             PreparedStatement statementClientePedido = conexion.prepareStatement(query3);
             statementClientePedido.setString(1, idCliente);
             statementClientePedido.setInt(2, idPedido);
             Timestamp fechaSQL = this.fechaSQL();   //LLamo metodo para calcular fecha en formato SQL
             statementClientePedido.setTimestamp(3, fechaSQL);
+            statementClientePedido.setString(4, idCuenta);
             int rowsInsertedClientePedido = statementClientePedido.executeUpdate();
             if (rowsInsertedClientePedido > 0){
                     r = 1;

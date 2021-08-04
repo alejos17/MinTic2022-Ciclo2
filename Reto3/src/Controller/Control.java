@@ -53,11 +53,22 @@ public class Control {
         }
     }
     
-    public DefaultListModel CrearPedido(clsPedidos pedido, String idCliente){
+    public DefaultListModel CrearPedido(clsPedidos pedido, String idCliente, String idCuenta){
         DefaultListModel model = new DefaultListModel();
 
         try{
-            model = this.modelPedidos.CrearPedido(pedido, idCliente);
+            model = this.modelPedidos.CrearPedido(pedido, idCliente, idCuenta);
+            return model;
+        }catch (Exception e){
+            return null;
+        }
+    }
+    
+    public DefaultListModel BorrarProducto(){
+        DefaultListModel model = new DefaultListModel();
+
+        try{
+            model = this.modelPedidos.BorrarProducto();
             return model;
         }catch (Exception e){
             return null;
