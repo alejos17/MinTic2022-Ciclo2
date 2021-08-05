@@ -1479,6 +1479,7 @@ public class start extends javax.swing.JFrame {
         clsCuentas cuenta = control.BuscarCuenta(code);
         if (cuenta.getSaldo()<10000){
             jlsaldocuentapedido.setForeground(Color.red);
+            JOptionPane.showMessageDialog(this, "*** La Cuenta seleccionada no tiene dinero suficiente o esta en cero, por favor recargue la cuenta ***");
         }else{
             jlsaldocuentapedido.setForeground(Color.black);
         }
@@ -1644,13 +1645,15 @@ public class start extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {     //Try para encapsular errores en este caso por si ponen mal la fecha en el campo bornYear
             int idpedidocomp = Integer.parseInt(txtPedidoComp.getText());   //tomo el numero del pedido
-            control.AgregarPedidoCompuesto(idpedidocomp);
+            String idCliente = cbClientePedido.getSelectedItem().toString();
+            System.out.println(idCliente);
+            control.AgregarPedidoCompuesto(idpedidocomp, idCliente);
             this.borrarCampos();
             JOptionPane.showMessageDialog(this, "El Pedido Compuesto ** "+idpedidocomp+" **, ha sido generado con éxito!");
             this.update();
             
         }catch (Exception e){   //Mensaje a desplegar de error
-            JOptionPane.showMessageDialog(this, "*** ERROR ***");
+            JOptionPane.showMessageDialog(this, "*** ERROR todos los pedidos no son del mismo cliente. ***");
         }
     }//GEN-LAST:event_btnPedidoCompActionPerformed
 

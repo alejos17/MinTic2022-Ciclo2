@@ -45,7 +45,8 @@ public class modelCobros {
         int r = 0;
         //Se recorre la lista de pedidos pendientes por cobro, osea con el campo cobro = 0
         for (clsPedidos pedidos : pedidosxCobrarList){ 
-            TotalCobro = TotalCobro + pedidos.getValorTotal();
+            //TotalCobro = TotalCobro + pedidos.getValorTotal();
+            //System.out.println(TotalCobro);
             try (Connection conexion = DriverManager.getConnection(database.getUrl())){           
                 //Para la tabla cobros
                 String query = "INSERT INTO cobros (idcobro, fecha, valorcobro, id_cuenta, id_pedido, id_pcompuesto) VALUES (?, ?, ?, ?, ?, ?)";
@@ -53,10 +54,11 @@ public class modelCobros {
                 statementCobro.setInt(1, idcobro);
                 Timestamp fechaSQL = this.fechaSQL();   //LLamo metodo para calcular fecha en formato SQL
                 statementCobro.setTimestamp(2, fechaSQL);  //Envio parametro fecha
-                statementCobro.setDouble(3, TotalCobro);
+                statementCobro.setDouble(3, pedidos.getValorTotal());
                 statementCobro.setString(4, pedidos.getIdCuenta());
                 statementCobro.setInt(5, Integer.parseInt(pedidos.getIdPedido()));  
-                statementCobro.setInt(6, Integer.parseInt(pedidos.getIdPedidoComp()));  
+                //statementCobro.setInt(6, Integer.parseInt(pedidos.getIdPedidoComp()));  
+                statementCobro.setInt(6, 0);  
                 int rowsInsertedCobro = statementCobro.executeUpdate();  
                 //Para la tabla cuenta realizando el descuento del saldo por el valor del pedido
                     //Capturar el saldo actual de la cuenta seleccionada para pagar el pedido

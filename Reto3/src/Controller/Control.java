@@ -102,9 +102,9 @@ public class Control {
         }
     }
     
-    public boolean AgregarPedidoCompuesto(int idpcomp){
+    public boolean AgregarPedidoCompuesto(int idpcomp, String idcliente){
         try{
-            this.modelPedidos.AgregarPedidoCompuesto(idpcomp);
+            this.modelPedidos.AgregarPedidoCompuesto(idpcomp, idcliente);
             return true;
         }catch (Exception e){
             return false;
