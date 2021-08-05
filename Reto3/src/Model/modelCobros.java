@@ -28,6 +28,7 @@ public class modelCobros {
     Database database;
     private LinkedList<clsPedidos> pedidosxCobrarList = new LinkedList<>();
     private int saldo_actual;
+    private double TotalCobro;
 
     public modelCobros() {
         this.database = new Database();
@@ -44,6 +45,7 @@ public class modelCobros {
         int r = 0;
         //Se recorre la lista de pedidos pendientes por cobro, osea con el campo cobro = 0
         for (clsPedidos pedidos : pedidosxCobrarList){ 
+            TotalCobro = TotalCobro + pedidos.getValorTotal();
             try (Connection conexion = DriverManager.getConnection(database.getUrl())){           
                 //Para la tabla cobros
                 String query = "INSERT INTO cobros (id_cuenta, id_pedido, id_pcompuesto, fecha, idcobro) VALUES (?, ?, ?, ?, ?)";
