@@ -102,6 +102,15 @@ public class Control {
         }
     }
     
+    public boolean AgregarPedidoCompuesto(int idpcomp){
+        try{
+            this.modelPedidos.AgregarPedidoCompuesto(idpcomp);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+    
     public boolean EjecutarCobro(int idcobro){
         try{
             this.modelCobros.Ejecutar(idcobro);
@@ -230,6 +239,9 @@ public class Control {
                 break;
             case "Pedido":
                 model = this.modelPedidos.ListarPedidos();
+                break;
+            case "PedidoComp":
+                model = this.modelPedidos.ListarPedidosComp();
                 break;
             case "CobrosinEjecutar":
                 model = this.modelCobros.ListarPedidosPendientesCobro();

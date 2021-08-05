@@ -32,6 +32,7 @@ public class clsPedidos implements Itipo {
     private String idCuenta;  //Se usa para saber que cuenta usa un usuario para pagar un pedido.
     private int tamListPedido;   //Entero para capturar la cantidad de items de un pedido.
     private int idCobro;  //Se utiliza para consultar el id del cobro para un pedido ya ejecutado.
+    private String idPedidoComp;  //ID si es pedidocompuesto.
     private String fechaCobro;   //Se utiliza para consultar la fecha de un cobro ya ejecutado en un pedido.
 
     public clsPedidos(String idPedido, String producto, int cantidad, int valorUnitario, int iva, int valorTotal, int cobrado) {
@@ -272,6 +273,20 @@ public class clsPedidos implements Itipo {
      */
     public void setFechaCobro(String fechaCobro) {
         this.fechaCobro = fechaCobro;
+    }
+
+    /**
+     * @return the idPedidoComp
+     */
+    public String getIdPedidoComp() {
+        return idPedidoComp;
+    }
+
+    /**
+     * @param idPedidoComp the idPedidoComp to set
+     */
+    public void setIdPedidoComp(String idPedidoComp) {
+        this.idPedidoComp = idPedidoComp;
     }
 
         

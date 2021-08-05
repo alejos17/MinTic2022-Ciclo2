@@ -26,12 +26,15 @@ public class modelPedidos {
     private Control control;
     Database database;
     private LinkedList<clsPedidos> pedidoList = new LinkedList<>();  //Lista global que va guardando en el pedido los productos que selecciona el usuario.
+    private LinkedList<clsPedidos> pedidosxCompList = new LinkedList<>();  //lista globarl que va guardando los pedidos simples despues de realizador por si se quiere crear un compuesto.
     private DefaultListModel model = new DefaultListModel();    //Model con la lista de productos en el pedido del cliente global para que vaya guardando fuera del metodo.
     private String idCliente;
     private String idCuenta;
     private int idPedido;
     private double TotalPedido;
+    private double TotalPedidoComp;
     private int tamLista;
+    private int tamListapcomp;
     
     public modelPedidos() {
         this.database = new Database();
@@ -200,6 +203,78 @@ public class modelPedidos {
         
     }
     
+    
+    
+    public boolean AgregarPedidoCompuesto(int idpcomp){
+        int r = 0;
+        tamListapcomp = pedidosxCompList.size();
+        
+        //Primer TRY para guardar el pedido en la tabla pedidocompuesto
+        try (Connection conexion = DriverManager.getConnection(database.getUrl())){
+            String query1 = "INSERT INTO pedidocompuesto (idpcompuesto, pedidos, valortotal, cobrado, fecha) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement statementPedido = conexion.prepareStatement(query1);  
+            statementPedido.setInt(1, idpcomp);  //Statements por cada ?
+            statementPedido.setString(2, getTamListapcomp()+"");
+            statementPedido.setDouble(3, getTotalPedidoComp());
+            statementPedido.setInt(4, 0);
+            Timestamp fechaSQL = this.fechaSQL();   //LLamo metodo para calcular fecha en formato SQL
+            statementPedido.setTimestamp(5, fechaSQL);
+            int rowsInsertedPedido = statementPedido.executeUpdate();  //Se cuenta la cantiad de datos insertados en tabla Pedido
+            if (rowsInsertedPedido > 0){
+                    r = 1;
+            }else{
+                    r = 0;
+            }
+        conexion.close();  //Cierre de Conexiones para cada ciclo.
+        statementPedido.close();
+        }catch (Exception e){
+            return false;
+        }
+        
+        //Se recorre la lista de productos seleccionados para ingresarlos al pedido
+        for (clsPedidos pedidos : pedidosxCompList){ 
+            try (Connection conexion = DriverManager.getConnection(database.getUrl())){           
+                //Para la tabla inventariopedido
+                String query2 = "INSERT INTO clientepedidocomp (id_pcompuesto, id_pedido, id_cliente, id_cuenta, valortotal, fecha) VALUES (?, ?, ?, ?, ?, ?)";
+                PreparedStatement statementClientePedidoComp = conexion.prepareStatement(query2);  
+                statementClientePedidoComp.setInt(1, idpcomp);
+                statementClientePedidoComp.setInt(2, Integer.parseInt(pedidos.getIdPedido()));
+                statementClientePedidoComp.setString(3, pedidos.getIdCliente());  
+                statementClientePedidoComp.setString(4, pedidos.getIdCuenta());  
+                double valorTotal = (double) pedidos.getCantidad() * pedidos.getValorunit(); //Calcular el valor total en base a cantidad de producto
+                statementClientePedidoComp.setDouble(5, valorTotal);
+                Timestamp fechaSQL = this.fechaSQL();   //LLamo metodo para calcular fecha en formato SQL
+                statementClientePedidoComp.setTimestamp(6, fechaSQL);  //Envio parametro fecha
+                int rowsInsertedClientePedidoComp = statementClientePedidoComp.executeUpdate();  //Se cuenta la cantiad de datos insertados en tabla InventarioPedido
+                //Update para la tabla inventario donde se resta la cantidad seleccionada por el usuario.
+                
+                
+                if (rowsInsertedClientePedidoComp > 0){
+                    r = 1;
+                }else{
+                    r = 0;
+                }
+            conexion.close();  //Cierre de Conexiones para cada ciclo.
+            statementClientePedidoComp.close();
+            
+            }catch (Exception e){
+                return false;
+            }
+                
+        }
+        
+        this.LimpiarDatos();
+        if (r == 1){
+            return true;
+        }else{
+            return false;
+        }
+        
+    }
+    
+    
+    
+    
     public void LimpiarDatos(){
         idCliente = "";
         idPedido = 0;
@@ -242,7 +317,7 @@ public class modelPedidos {
     }
     
     
-    //Metodo para buscar, se recibe el codigo y el tipo de mascota para segun el switch ejecutar si es perro o gato y retornar el objeto pets indicado.
+    
     public DefaultListModel BuscarPedidoL(String idPedido){
         LinkedList<clsPedidos> pedidosBList = new LinkedList<>();
         DefaultListModel model = new DefaultListModel();
@@ -266,6 +341,47 @@ public class modelPedidos {
                 pedido1.setCantidad(cantidad);
                 pedido1.setIdCliente(idcliente);
                 pedido1.setFecha(fechapedido);
+                TotalPedidoComp = getTotalPedidoComp() + valorTotal;
+                pedidosBList.add(pedido1);
+            }
+        }catch (Exception e){
+            return null;
+        }
+        
+        pedidosxCompList = (LinkedList) pedidosBList.clone();
+        
+        int index =0;
+        //Modelo de lista model.
+        for (clsPedidos pedido : pedidosBList){
+            String data = pedido.getIdPedido() + " - "+ pedido.getCantidad() +" - "+ pedido.getProducto()+" - "+ pedido.getValorunit();
+            model.add(index, data);  //Agrega cada cliente al modelo para aplicar a la lista
+            index++;
+        }
+        return model; 
+        
+        
+    }
+    
+    
+    public DefaultListModel BuscarPedidoCompL(int idPcomp){
+        LinkedList<clsPedidos> pedidosBList = new LinkedList<>();
+        DefaultListModel model = new DefaultListModel();
+        clsPedidos pedido1 = null;
+        try (Connection conexion = DriverManager.getConnection(database.getUrl())){   //Al colocar la conexión dentro del parentesis del try, si hay un error o se termina el try la conexion se cierra.
+            String query = "SELECT pc.idpcompuesto, pc.pedidos, pc.valortotal, cpc.id_cliente, cpc.fecha FROM clientepedidocomp cpc JOIN pedidocompuesto pc ON cpc.id_pcompuesto = pc.idpcompuesto JOIN pedido p on p.idpedido = cpc.id_pedido WHERE pc.idpcompuesto = ?";
+            PreparedStatement statementBuscarPedido = conexion.prepareStatement(query);  //Preparando statement
+            statementBuscarPedido.setInt(1, idPcomp);  //Statements en este caso le mando el codigo de usuario para busqueda
+            ResultSet result = statementBuscarPedido.executeQuery();
+            while (result.next()){    //Ciclo al result set para sacar cada uno de los resultados en variables para crear el objeto y retornarlo.
+                String idpcompuesto = result.getString(1);
+                String pedidos = result.getString(2);
+                int valoTotal = result.getInt(3);
+                String idcliente = result.getString(4);
+                String fechapedidocomp = result.getString(5);
+                pedido1 = new clsPedidos(idpcompuesto, pedidos, 0, 0,0,0,0);
+                pedido1.setValorTotal(valoTotal);
+                pedido1.setIdCliente(idcliente);
+                pedido1.setFecha(fechapedidocomp);
                 pedidosBList.add(pedido1);
             }
         }catch (Exception e){
@@ -281,7 +397,9 @@ public class modelPedidos {
         }
         return model; 
         
+        
     }
+    
     
     
     public DefaultListModel ListarPedidos(){
@@ -289,6 +407,40 @@ public class modelPedidos {
         DefaultListModel model = new DefaultListModel();
         try (Connection conexion = DriverManager.getConnection(database.getUrl())){   //Al colocar la conexión dentro del parentesis del try, si hay un error o se termina el try la conexion se cierra.
             String query = "SELECT p.idpedido, c.fecha , p.producto, p.valortotal , c.id_cliente FROM pedido p JOIN  clientepedido c ON p.idpedido = c.id_pedido WHERE p.cobrado = 0";
+            PreparedStatement statementListarPedidos = conexion.prepareStatement(query);  //Preparando statement
+            ResultSet result = statementListarPedidos.executeQuery();
+            while (result.next()){    //Ciclo al result set para sacar cada uno de los resultados en variables para crear el objeto y retornarlo.
+                String idpedido = result.getString(1);
+                String fecha = result.getString(2);
+                String productos = result.getString(3);
+                int valorTotal  = result.getInt(4);
+                String idcliente  = result.getString(5);
+                clsPedidos pedido1 = new clsPedidos(idpedido,productos,0,0,0,valorTotal,0);
+                pedido1.setFecha(result.getString(2));
+                pedido1.setIdCliente(result.getString(5));
+                pedidosList.add(pedido1);
+                
+            }
+        }catch (Exception e){
+            return null;
+        }
+        
+        int index =0;
+        //Modelo de lista model.
+        for (clsPedidos pedido : pedidosList){
+            String data = pedido.getIdPedido() + " - "+ pedido.getFecha() +" - "+ pedido.getProducto()+" - "+pedido.getValorTotal()+" -- cliente: "+pedido.getIdCliente();
+            model.add(index, data);  //Agrega cada cliente al modelo para aplicar a la lista
+            index++;
+        }
+        return model;
+    }
+    
+    
+    public DefaultListModel ListarPedidosComp(){
+        LinkedList<clsPedidos> pedidosList = new LinkedList<>();
+        DefaultListModel model = new DefaultListModel();
+        try (Connection conexion = DriverManager.getConnection(database.getUrl())){   //Al colocar la conexión dentro del parentesis del try, si hay un error o se termina el try la conexion se cierra.
+            String query = "SELECT pc.idpcompuesto , cpc.fecha , pc.pedidos , pc.valortotal, cpc.id_cliente FROM pedidocompuesto pc JOIN  clientepedidocomp cpc ON pc.idpcompuesto = cpc.id_pcompuesto WHERE pc.cobrado = 0";
             PreparedStatement statementListarPedidos = conexion.prepareStatement(query);  //Preparando statement
             ResultSet result = statementListarPedidos.executeQuery();
             while (result.next()){    //Ciclo al result set para sacar cada uno de los resultados en variables para crear el objeto y retornarlo.
@@ -357,6 +509,20 @@ public class modelPedidos {
      */
     public int getTamLista() {
         return tamLista;
+    }
+
+    /**
+     * @return the TotalPedidoComp
+     */
+    public double getTotalPedidoComp() {
+        return TotalPedidoComp;
+    }
+
+    /**
+     * @return the tamListapcomp
+     */
+    public int getTamListapcomp() {
+        return tamListapcomp;
     }
     
     

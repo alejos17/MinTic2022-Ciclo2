@@ -48,14 +48,15 @@ public class modelCobros {
             TotalCobro = TotalCobro + pedidos.getValorTotal();
             try (Connection conexion = DriverManager.getConnection(database.getUrl())){           
                 //Para la tabla cobros
-                String query = "INSERT INTO cobros (id_cuenta, id_pedido, id_pcompuesto, fecha, idcobro) VALUES (?, ?, ?, ?, ?)";
+                String query = "INSERT INTO cobros (idcobro, fecha, valorcobro, id_cuenta, id_pedido, id_pcompuesto) VALUES (?, ?, ?, ?, ?, ?)";
                 PreparedStatement statementCobro = conexion.prepareStatement(query);  
-                statementCobro.setString(1, pedidos.getIdCuenta());
-                statementCobro.setInt(2, Integer.parseInt(pedidos.getIdPedido()));  
-                statementCobro.setInt(3, 0);  
+                statementCobro.setInt(1, idcobro);
                 Timestamp fechaSQL = this.fechaSQL();   //LLamo metodo para calcular fecha en formato SQL
-                statementCobro.setTimestamp(4, fechaSQL);  //Envio parametro fecha
-                statementCobro.setInt(5, idcobro);
+                statementCobro.setTimestamp(2, fechaSQL);  //Envio parametro fecha
+                statementCobro.setDouble(3, TotalCobro);
+                statementCobro.setString(4, pedidos.getIdCuenta());
+                statementCobro.setInt(5, Integer.parseInt(pedidos.getIdPedido()));  
+                statementCobro.setInt(6, Integer.parseInt(pedidos.getIdPedidoComp()));  
                 int rowsInsertedCobro = statementCobro.executeUpdate();  
                 //Para la tabla cuenta realizando el descuento del saldo por el valor del pedido
                     //Capturar el saldo actual de la cuenta seleccionada para pagar el pedido
