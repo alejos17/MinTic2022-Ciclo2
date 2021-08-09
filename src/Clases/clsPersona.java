@@ -22,9 +22,16 @@ public class clsPersona {
         this.nombre = "Andres";
         this.apellido = "Lopez";
     }
+
+    public clsPersona() {
+        
+    }
     
-    public int walkarroud(int metros){
-        metroscaminados += metros;
+    public int walkarroud(int[] metros){
+        int i = 0;
+        for (int num : metros) {
+             metroscaminados += num;
+        }
         return metroscaminados;
     }  
     

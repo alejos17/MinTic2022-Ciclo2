@@ -29,29 +29,30 @@ public class Pruebas {
     clsPersona per;
     
     @Mock
-    
+    clsPersona prueba;
     
     public Pruebas() {
+        this.per = new clsPersona();
     }
     
     @BeforeClass
     public static void setUpClass() {
-        System.out.println("Antes de clase");
+        System.out.println("Inicio de Prueba Clase Persona");
     }
     
     @AfterClass
     public static void tearDownClass() {
-        System.out.println("Despues de clase");
+        System.out.println("Fin de Prueba Clase Persona");
     }
     
     @Before
     public void setUp() {
-        System.out.println("Antes de metodo");
+        System.out.println("Probando metodo ...");
     }
     
     @After
     public void tearDown() {
-        System.out.println("Despues de metodo");
+        System.out.println("Termino....");
     }
 
     // TODO add test methods here.
@@ -63,7 +64,31 @@ public class Pruebas {
     @Test
     public void PruebaWalkarround(){
         int[] metros = new int[]{5,6,2,5};
-        assertEquals(18, );
+        assertEquals(18, per.walkarroud(metros));
+    }
+    
+    @Test
+    public void PruebaAddRelative(){
+        int index = 0;
+        Mockito.when(this.per.addrelative(prueba)).thenReturn(index);
+        assertEquals(0, this.per.addrelative(prueba));
+    }
+    
+    @Test
+    public void PruebaUpdatePerson(){
+        boolean q = false;
+        Mockito.when(this.per.updateperson("Name", "Lastname")).thenReturn(q);
+        assertEquals(true, this.per.updateperson("Name", "LastName"));
+    }
+    
+    @Test (expected = Exception.class)
+    public void PruebaRemoveRelative(){
+        assertEquals(0, this.per.removerelative());
+    }
+    
+    @Test (expected = Exception.class)
+    public void PruebaRemoveRelativeError(){
+        assertEquals(Exception.class, this.per.removerelative());
     }
     
     
