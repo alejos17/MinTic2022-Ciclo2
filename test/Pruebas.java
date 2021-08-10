@@ -27,6 +27,7 @@ public class Pruebas {
     
     @InjectMocks
     clsPersona per;
+    clsPersona per1 = new clsPersona("Ramon", "Lopez");
     
     @Mock
     clsPersona prueba;
@@ -69,26 +70,23 @@ public class Pruebas {
     
     @Test
     public void PruebaAddRelative(){
-        int index = 0;
-        Mockito.when(this.per.addrelative(prueba)).thenReturn(index);
-        assertEquals(0, this.per.addrelative(prueba));
+        assertEquals(0, this.per.addrelative(per1));
     }
     
     @Test
     public void PruebaUpdatePerson(){
-        boolean q = false;
-        Mockito.when(this.per.updateperson("Name", "Lastname")).thenReturn(q);
         assertEquals(true, this.per.updateperson("Name", "LastName"));
     }
     
-    @Test (expected = Exception.class)
+    @Test /*(expected = Exception.class)*/
     public void PruebaRemoveRelative(){
-        assertEquals(0, this.per.removerelative());
+        this.per.addrelative(per1);
+        assertEquals(1, this.per.removerelative());
     }
     
-    @Test (expected = Exception.class)
+    @Test /*(expected = Exception.class)*/
     public void PruebaRemoveRelativeError(){
-        assertEquals(Exception.class, this.per.removerelative());
+        assertEquals(0, this.per.removerelative());
     }
     
     
