@@ -9,6 +9,7 @@ import Classes.*;
 import Model.*;
 import View.*;
 import java.text.SimpleDateFormat;
+import java.util.LinkedList;
 import javax.swing.DefaultListModel;
 import javax.swing.DefaultComboBoxModel;
 
@@ -24,6 +25,7 @@ public class Control {
     private modelPedidos modelPedidos;
     private modelInventario modelInventario;
     private modelCobros modelCobros;
+    private modelGraficos modelGraficos;
     private start start;
     
     public Control() {
@@ -32,6 +34,7 @@ public class Control {
         this.modelPedidos = new modelPedidos();
         this.modelInventario = new modelInventario();
         this.modelCobros = new modelCobros();
+        this.modelGraficos = new modelGraficos();
     }
     
     //Metodo para Crear objeto ya sea, persona, cliente, cuenta o pedido
@@ -318,6 +321,26 @@ public class Control {
     public String fecha(){
         String fecha = this.modelPedidos.fecha();
         return fecha;
+    }
+    
+    public LinkedList<clsInventario> ListarGraficoInventario(){
+        LinkedList<clsInventario> Lista = null;
+        try {
+            Lista = this.modelGraficos.InfoInventario();
+            return Lista;
+        }catch (Exception e){
+            return null;
+        }
+    }
+    
+    public LinkedList<clsInventario> ListarExportInventario(){
+        LinkedList<clsInventario> Lista = null;
+        try {
+            Lista = this.modelInventario.ListarExportInv();
+            return Lista;
+        }catch (Exception e){
+            return null;
+        }
     }
     
 }

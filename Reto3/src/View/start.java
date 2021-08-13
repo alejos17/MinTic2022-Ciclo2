@@ -8,9 +8,22 @@ package View;
 import javax.swing.JOptionPane;
 import Classes.*;
 import Controller.*;
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.util.LinkedList;
 import javax.swing.DefaultListModel;
 import javax.swing.DefaultComboBoxModel;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFFont;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.CellType;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.DefaultPieDataset;
 
 /**
  *
@@ -31,6 +44,7 @@ public class start extends javax.swing.JFrame {
         //this.Listar("Cuenta");
         //this.Listar("ListaCuentaClientes");
         //this.Listar("Pedido");
+        this.RefreshGraficos();
     }
 
     /**
@@ -168,6 +182,8 @@ public class start extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         invList = new javax.swing.JList<>();
         jLabel21 = new javax.swing.JLabel();
+        btnexport = new javax.swing.JButton();
+        jpgraficos = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         btnCerrar = new javax.swing.JButton();
         jLabel28 = new javax.swing.JLabel();
@@ -1001,6 +1017,13 @@ public class start extends javax.swing.JFrame {
         jLabel21.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         jLabel21.setText("Haga doble click para editar un Producto del Inventario");
 
+        btnexport.setText("Exportar a Excel");
+        btnexport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnexportActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -1008,6 +1031,14 @@ public class start extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnAgregarInv, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnBuscarInv, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnBorrarInv)
+                            .addComponent(btnEditarInv)))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel16)
@@ -1017,21 +1048,15 @@ public class start extends javax.swing.JFrame {
                             .addComponent(jLabel19)
                             .addComponent(jLabel20))
                         .addGap(23, 23, 23)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jtxtidinv)
-                            .addComponent(cbcatinv, 0, 150, Short.MAX_VALUE)
-                            .addComponent(jtxtprodinv)
-                            .addComponent(jtxtvunit)
-                            .addComponent(jtxtextinv)
-                            .addComponent(jtxtiva)))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnAgregarInv, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnBuscarInv, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnBorrarInv)
-                            .addComponent(btnEditarInv))))
+                            .addComponent(btnexport)
+                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jtxtidinv)
+                                .addComponent(cbcatinv, 0, 150, Short.MAX_VALUE)
+                                .addComponent(jtxtprodinv)
+                                .addComponent(jtxtvunit)
+                                .addComponent(jtxtextinv)
+                                .addComponent(jtxtiva)))))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
@@ -1080,10 +1105,25 @@ public class start extends javax.swing.JFrame {
                             .addComponent(jLabel20)
                             .addComponent(jtxtextinv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addGap(7, 7, 7)
+                .addComponent(btnexport)
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Inventario", jPanel5);
+
+        javax.swing.GroupLayout jpgraficosLayout = new javax.swing.GroupLayout(jpgraficos);
+        jpgraficos.setLayout(jpgraficosLayout);
+        jpgraficosLayout.setHorizontalGroup(
+            jpgraficosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 870, Short.MAX_VALUE)
+        );
+        jpgraficosLayout.setVerticalGroup(
+            jpgraficosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 435, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Graficos", jpgraficos);
 
         jLabel7.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -1657,6 +1697,35 @@ public class start extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnPedidoCompActionPerformed
 
+    private void btnexportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnexportActionPerformed
+        // TODO add your handling code here:
+        LinkedList<clsInventario> ListaInv = control.ListarExportInventario();
+        HSSFWorkbook book = new HSSFWorkbook();  //Nuevo Libro de excel
+        HSSFSheet sheet = book.createSheet();    //Nueva Hoja del libro
+        book.setSheetName(0, "Inventario");      //Nombre de la hoja del libro
+        
+        //CREACION DEL ENCABEZADO DE LA HOJA O TABLA
+        String[] headers = new String[]{"Producto", "Existencia"};  //Arreglo con los encabezamos de las columnas
+        CellStyle headerCellStyle = book.createCellStyle();  //Se crea estilo para los encabezados
+        HSSFFont font = book.createFont();   //Se crea fuente para los encabezamos
+        font.setBold(true);    // Se crea fuente negrita para el encabezado
+        headerCellStyle.setFont(font);   //Se aplica al estilo de celda del encabezado la negrita.
+        HSSFRow headerRow = sheet.createRow(0);  //Se le indica que en la primera posicion de la hoja en la primera fila
+        for (int i = 0; i < 10; i++){    //Recorrido para leear la matriz de encabezados
+            String header = headers[i];  //Se pone el encabezado
+            HSSFCell cell = headerRow.createCell(i);   //se crea nueva celda
+            cell.setCellStyle(headerCellStyle);   //se le pone el estilo creado para encabezado
+            cell.setCellValue(header);    //Se le pone el valor en la posicion del arreglo de encabezados
+        }
+        
+        //CREACION DE LAS LINEAS DE DATOS NORMALES
+        for (int i = 0; i < ListaInv.size(); i++) {
+            
+        }
+        
+        
+    }//GEN-LAST:event_btnexportActionPerformed
+
     private void Listar(String tipo, String code){
         DefaultListModel model = new DefaultListModel();
         DefaultComboBoxModel model2 = new DefaultComboBoxModel();
@@ -1745,6 +1814,24 @@ public class start extends javax.swing.JFrame {
         jLabel28.setText(fecha);
     }
     
+    public void RefreshGraficos(){
+        //Grafica de Cantidad de Productos en Inventario
+        LinkedList<clsInventario> ListaInv = control.ListarGraficoInventario();
+        DefaultPieDataset datasetinv = new DefaultPieDataset();
+        for (clsInventario inventario : ListaInv) {
+            datasetinv.setValue(inventario.getProducto(), inventario.getCant_ext());
+        }
+        JFreeChart chartInv = ChartFactory.createPieChart("Inventario", datasetinv, true, true, true);
+        ChartPanel panelInv = new ChartPanel(chartInv);
+        panelInv.setMouseWheelEnabled(true);
+        jpgraficos.setLayout(new java.awt.BorderLayout());
+        jpgraficos.add(panelInv, BorderLayout.CENTER);
+        jpgraficos.validate();
+        
+        
+        
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -1800,6 +1887,7 @@ public class start extends javax.swing.JFrame {
     private javax.swing.JButton btnHacerPedido;
     private javax.swing.JButton btnPedidoComp;
     private javax.swing.JButton btnagregapedido;
+    private javax.swing.JButton btnexport;
     private javax.swing.JComboBox<String> cbCliente;
     private javax.swing.JComboBox<String> cbClientePedido;
     private javax.swing.JComboBox<String> cbCuentaPedido;
@@ -1892,6 +1980,7 @@ public class start extends javax.swing.JFrame {
     private javax.swing.JList<String> jlistprepedido;
     private javax.swing.JLabel jlsaldocuentapedido;
     private javax.swing.JLabel jltamlista;
+    private javax.swing.JPanel jpgraficos;
     private javax.swing.JTextField jtxtextinv;
     private javax.swing.JTextField jtxtidcobro;
     private javax.swing.JTextField jtxtidinv;

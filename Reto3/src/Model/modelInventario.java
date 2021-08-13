@@ -137,30 +137,33 @@ public class modelInventario {
         return model; 
     }
     
-    /*
-    public DefaultTableModel Listar2(){
-        String[] titulos = {"ID", "Categoria", "Producto", "Valor", "IVA", "Cantidad"};
-        DefaultTableModel model = new DefaultTableModel(null, titulos);
-        String[] registros = new String[6];
+    
+    public LinkedList<clsInventario> ListarExportInv(){
+        LinkedList<clsInventario> invList = new LinkedList<>();
+        
         try (Connection conexion = DriverManager.getConnection(database.getUrl())){   //Al colocar la conexión dentro del parentesis del try, si hay un error o se termina el try la conexion se cierra.
             String query = "SELECT * FROM inventario";
             PreparedStatement statementInv = conexion.prepareStatement(query);  //Preparando statement
             ResultSet result = statementInv.executeQuery();
             while (result.next()){    //Ciclo al result set para sacar cada uno de los resultados en variables para crear el objeto y retornarlo.
-                registros[0] = result.getString("ID");
-                registros[1] = result.getString("Categoria");
-                registros[2] = result.getString("Producto");
-                registros[3] = String.valueOf(result.getDouble("Valor"));
-                registros[4] = String.valueOf(result.getDouble("IVA"));
-                registros[5] = String.valueOf(result.getInt("Cantidad"));
-                model.addRow(registros);
+                String idinventario = result.getString(1);
+                String categoria = result.getString(2);
+                String producto = result.getString(3);
+                double valorunitario = Double.parseDouble(result.getString(4));
+                double iva = Double.parseDouble(result.getString(5));
+                int existencia = Integer.parseInt(result.getString(6));
+                clsInventario inv1 = new clsInventario(idinventario, categoria, producto, existencia, iva, valorunitario);
+                invList.add(inv1);
             }
+           
         }catch (Exception e){
             return null;
         }
         
-        return model;
-    }*/
+        return invList; 
+    }
+    
+    
     
     
 }
