@@ -88,4 +88,25 @@ public class modelGraficos {
         return Lista;
     }
     
+    public LinkedList<clsCliente> InfoPedidosxCliente(){
+        LinkedList<clsCliente> Lista = new LinkedList<>();
+        //DefaultListModel model = new DefaultListModel();
+        try (Connection conexion = DriverManager.getConnection(database.getUrl())){   //Al colocar la conexión dentro del parentesis del try, si hay un error o se termina el try la conexion se cierra.
+            String query = "SELECT cliente.nombre, COUNT(clientepedido.id_pedido) FROM cliente INNER JOIN clientepedido ON cliente.idcliente = clientepedido.id_cliente GROUP BY cliente.idcliente";
+            PreparedStatement statementCuenta = conexion.prepareStatement(query);  //Preparando statement
+            ResultSet result = statementCuenta.executeQuery();
+            while (result.next()){    //Ciclo al result set para sacar cada uno de los resultados en variables para crear el objeto y retornarlo.
+                String nombre = result.getString(1);
+                int cantidad = result.getInt(2);   //Por la variable saldo que es tipo INT del objeto cuenta, para este caso envio la cantidad nada mas.
+                clsCliente cli1 = new clsCliente(null, nombre, null, null, null, null);
+                cli1.setCuentas(cantidad);
+                Lista.add(cli1);
+            }
+        }catch (Exception e){
+            return null;
+        }
+        
+        return Lista;
+    }
+    
 }

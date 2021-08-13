@@ -194,7 +194,6 @@ public class start extends javax.swing.JFrame {
         jpcuentacliente = new javax.swing.JPanel();
         jptipocuenta = new javax.swing.JPanel();
         jpedidocliente = new javax.swing.JPanel();
-        jpcobros = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         btnCerrar = new javax.swing.JButton();
         jLabel28 = new javax.swing.JLabel();
@@ -1175,19 +1174,6 @@ public class start extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Pedidos x Cliente", jpedidocliente);
 
-        javax.swing.GroupLayout jpcobrosLayout = new javax.swing.GroupLayout(jpcobros);
-        jpcobros.setLayout(jpcobrosLayout);
-        jpcobrosLayout.setHorizontalGroup(
-            jpcobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 824, Short.MAX_VALUE)
-        );
-        jpcobrosLayout.setVerticalGroup(
-            jpcobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 390, Short.MAX_VALUE)
-        );
-
-        jTabbedPane2.addTab("Cobros", jpcobros);
-
         javax.swing.GroupLayout jpgraficosLayout = new javax.swing.GroupLayout(jpgraficos);
         jpgraficos.setLayout(jpgraficosLayout);
         jpgraficosLayout.setHorizontalGroup(
@@ -1956,6 +1942,20 @@ public class start extends javax.swing.JFrame {
         jptipocuenta.add(panelTC, BorderLayout.CENTER);
         jptipocuenta.validate();
         
+        //Grafica Cantidad de Pedidos por CLiente
+        LinkedList<clsCliente> ListaPC = control.ListarGraficoPedidoxCliente();
+        DefaultPieDataset datasetPC = new DefaultPieDataset();
+        for (clsCliente cliente : ListaPC) {
+            datasetPC.setValue(cliente.getNombre(), cliente.getCuentas());
+        }
+        JFreeChart chartPC = ChartFactory.createPieChart("Cuentas por Cliente", datasetPC, true, true, true);
+        ChartPanel panelPC = new ChartPanel(chartPC);
+        panelPC.setMouseWheelEnabled(true);
+        jpedidocliente.setLayout(new java.awt.BorderLayout());
+        jpedidocliente.add(panelPC, BorderLayout.CENTER);
+        jpedidocliente.validate();
+        
+        
         
     }
     
@@ -2108,7 +2108,6 @@ public class start extends javax.swing.JFrame {
     private javax.swing.JList<String> jlistprepedido;
     private javax.swing.JLabel jlsaldocuentapedido;
     private javax.swing.JLabel jltamlista;
-    private javax.swing.JPanel jpcobros;
     private javax.swing.JPanel jpcuentacliente;
     private javax.swing.JPanel jpedidocliente;
     private javax.swing.JPanel jpgraficoinv;

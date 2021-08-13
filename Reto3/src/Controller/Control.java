@@ -363,4 +363,14 @@ public class Control {
         }
     }
     
+    public LinkedList<clsCliente> ListarGraficoPedidoxCliente(){
+        LinkedList<clsCliente> Lista = null;
+        try {
+            Lista = this.modelGraficos.InfoPedidosxCliente();
+            return Lista;
+        }catch (Exception e){
+            return null;
+        }
+    }
+    
 }
