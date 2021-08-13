@@ -10,6 +10,11 @@ import Classes.*;
 import Controller.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.util.LinkedList;
 import javax.swing.DefaultListModel;
 import javax.swing.DefaultComboBoxModel;
@@ -184,6 +189,12 @@ public class start extends javax.swing.JFrame {
         jLabel21 = new javax.swing.JLabel();
         btnexport = new javax.swing.JButton();
         jpgraficos = new javax.swing.JPanel();
+        jTabbedPane2 = new javax.swing.JTabbedPane();
+        jpgraficoinv = new javax.swing.JPanel();
+        jpcuentacliente = new javax.swing.JPanel();
+        jptipocuenta = new javax.swing.JPanel();
+        jpedidocliente = new javax.swing.JPanel();
+        jpcobros = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         btnCerrar = new javax.swing.JButton();
         jLabel28 = new javax.swing.JLabel();
@@ -1112,15 +1123,86 @@ public class start extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Inventario", jPanel5);
 
+        javax.swing.GroupLayout jpgraficoinvLayout = new javax.swing.GroupLayout(jpgraficoinv);
+        jpgraficoinv.setLayout(jpgraficoinvLayout);
+        jpgraficoinvLayout.setHorizontalGroup(
+            jpgraficoinvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 824, Short.MAX_VALUE)
+        );
+        jpgraficoinvLayout.setVerticalGroup(
+            jpgraficoinvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 390, Short.MAX_VALUE)
+        );
+
+        jTabbedPane2.addTab("Inventario", jpgraficoinv);
+
+        javax.swing.GroupLayout jpcuentaclienteLayout = new javax.swing.GroupLayout(jpcuentacliente);
+        jpcuentacliente.setLayout(jpcuentaclienteLayout);
+        jpcuentaclienteLayout.setHorizontalGroup(
+            jpcuentaclienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 824, Short.MAX_VALUE)
+        );
+        jpcuentaclienteLayout.setVerticalGroup(
+            jpcuentaclienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 390, Short.MAX_VALUE)
+        );
+
+        jTabbedPane2.addTab("Cuentas x Clientes", jpcuentacliente);
+
+        javax.swing.GroupLayout jptipocuentaLayout = new javax.swing.GroupLayout(jptipocuenta);
+        jptipocuenta.setLayout(jptipocuentaLayout);
+        jptipocuentaLayout.setHorizontalGroup(
+            jptipocuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 824, Short.MAX_VALUE)
+        );
+        jptipocuentaLayout.setVerticalGroup(
+            jptipocuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 390, Short.MAX_VALUE)
+        );
+
+        jTabbedPane2.addTab("Tipo de Cuentas", jptipocuenta);
+
+        javax.swing.GroupLayout jpedidoclienteLayout = new javax.swing.GroupLayout(jpedidocliente);
+        jpedidocliente.setLayout(jpedidoclienteLayout);
+        jpedidoclienteLayout.setHorizontalGroup(
+            jpedidoclienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 824, Short.MAX_VALUE)
+        );
+        jpedidoclienteLayout.setVerticalGroup(
+            jpedidoclienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 390, Short.MAX_VALUE)
+        );
+
+        jTabbedPane2.addTab("Pedidos x Cliente", jpedidocliente);
+
+        javax.swing.GroupLayout jpcobrosLayout = new javax.swing.GroupLayout(jpcobros);
+        jpcobros.setLayout(jpcobrosLayout);
+        jpcobrosLayout.setHorizontalGroup(
+            jpcobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 824, Short.MAX_VALUE)
+        );
+        jpcobrosLayout.setVerticalGroup(
+            jpcobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 390, Short.MAX_VALUE)
+        );
+
+        jTabbedPane2.addTab("Cobros", jpcobros);
+
         javax.swing.GroupLayout jpgraficosLayout = new javax.swing.GroupLayout(jpgraficos);
         jpgraficos.setLayout(jpgraficosLayout);
         jpgraficosLayout.setHorizontalGroup(
             jpgraficosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 870, Short.MAX_VALUE)
+            .addGroup(jpgraficosLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 824, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         jpgraficosLayout.setVerticalGroup(
             jpgraficosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 435, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpgraficosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane2)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Graficos", jpgraficos);
@@ -1705,13 +1787,13 @@ public class start extends javax.swing.JFrame {
         book.setSheetName(0, "Inventario");      //Nombre de la hoja del libro
         
         //CREACION DEL ENCABEZADO DE LA HOJA O TABLA
-        String[] headers = new String[]{"Producto", "Existencia"};  //Arreglo con los encabezamos de las columnas
+        String[] headers = new String[]{"ID", "Producto", "Existencia"};  //Arreglo con los encabezamos de las columnas
         CellStyle headerCellStyle = book.createCellStyle();  //Se crea estilo para los encabezados
         HSSFFont font = book.createFont();   //Se crea fuente para los encabezamos
         font.setBold(true);    // Se crea fuente negrita para el encabezado
         headerCellStyle.setFont(font);   //Se aplica al estilo de celda del encabezado la negrita.
         HSSFRow headerRow = sheet.createRow(0);  //Se le indica que en la primera posicion de la hoja en la primera fila
-        for (int i = 0; i < 10; i++){    //Recorrido para leear la matriz de encabezados
+        for (int i = 0; i < headers.length; i++){    //Recorrido para leear la matriz de encabezados
             String header = headers[i];  //Se pone el encabezado
             HSSFCell cell = headerRow.createCell(i);   //se crea nueva celda
             cell.setCellStyle(headerCellStyle);   //se le pone el estilo creado para encabezado
@@ -1719,9 +1801,29 @@ public class start extends javax.swing.JFrame {
         }
         
         //CREACION DE LAS LINEAS DE DATOS NORMALES
-        for (int i = 0; i < ListaInv.size(); i++) {
-            
+        for (int i = 0; i < ListaInv.size(); i++) {  //Recorrido de la lista de objetos para sacar la info
+            HSSFRow row = sheet.createRow(i+1);
+            String id = ListaInv.get(i).getIdProducto();
+            String producto = ListaInv.get(i).getProducto();
+            int existencia = ListaInv.get(i).getCant_ext();
+            row.createCell(0).setCellValue(id); 
+            row.createCell(1).setCellValue(producto);   //Asignación por celda de la información en la hoja.
+            row.createCell(2).setCellValue(existencia);
         }
+        
+        try{    //Para guardar el archivo en el disco
+            FileOutputStream file = new FileOutputStream("Export_Inventario.xls");
+            book.write(file);
+            file.close();
+            JOptionPane.showMessageDialog(this, "*** Archivo exportado con éxito en la carpeta ruta del projecto ****");
+        }catch (FileNotFoundException ex){
+            //Logger.getLogger(start.class.getName()).log(Level.ERROR, null, ex);
+            JOptionPane.showMessageDialog(this, "*** ERROR - Archivo no encontrado ****");
+        }catch (IOException ex){
+            //Logger.getLogger(start.class.getName()).log(Level.ERROR, null, ex);
+            JOptionPane.showMessageDialog(this, "*** ERROR ****");
+        }
+        
         
         
     }//GEN-LAST:event_btnexportActionPerformed
@@ -1824,10 +1926,35 @@ public class start extends javax.swing.JFrame {
         JFreeChart chartInv = ChartFactory.createPieChart("Inventario", datasetinv, true, true, true);
         ChartPanel panelInv = new ChartPanel(chartInv);
         panelInv.setMouseWheelEnabled(true);
-        jpgraficos.setLayout(new java.awt.BorderLayout());
-        jpgraficos.add(panelInv, BorderLayout.CENTER);
-        jpgraficos.validate();
+        jpgraficoinv.setLayout(new java.awt.BorderLayout());
+        jpgraficoinv.add(panelInv, BorderLayout.CENTER);
+        jpgraficoinv.validate();
         
+        //Grafica Cantidad de cuentas por cliente
+        LinkedList<clsCliente> ListaCC = control.ListarGraficoClienteCuentas();
+        DefaultPieDataset datasetCC = new DefaultPieDataset();
+        for (clsCliente cliente : ListaCC) {
+            datasetCC.setValue(cliente.getNombre(), cliente.getCuentas());
+        }
+        JFreeChart chartCC = ChartFactory.createPieChart("Cuentas por Cliente", datasetCC, true, true, true);
+        ChartPanel panelCC = new ChartPanel(chartCC);
+        panelCC.setMouseWheelEnabled(true);
+        jpcuentacliente.setLayout(new java.awt.BorderLayout());
+        jpcuentacliente.add(panelCC, BorderLayout.CENTER);
+        jpcuentacliente.validate();
+        
+        //Grafica de Tipo de cuentas en el sistema
+        LinkedList<clsCuentas> ListaTC = control.ListarGraficoTipoCuentas();
+        DefaultPieDataset datasetTC = new DefaultPieDataset();
+        for (clsCuentas cuenta : ListaTC) {   //En este caso el campo Saldo tiene el INT de la cantidad de cuentas solamente.
+            datasetTC.setValue(cuenta.getCuenta(), cuenta.getSaldo());
+        }
+        JFreeChart chartTC = ChartFactory.createPieChart("Tipo de Cuentas", datasetTC, true, true, true);
+        ChartPanel panelTC = new ChartPanel(chartTC);
+        panelTC.setMouseWheelEnabled(true);
+        jptipocuenta.setLayout(new java.awt.BorderLayout());
+        jptipocuenta.add(panelTC, BorderLayout.CENTER);
+        jptipocuenta.validate();
         
         
     }
@@ -1968,6 +2095,7 @@ public class start extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JLabel jlClientePedido;
     private javax.swing.JList<String> jlPedidoComp;
     private javax.swing.JList<String> jlPedidoRealizado;
@@ -1980,7 +2108,12 @@ public class start extends javax.swing.JFrame {
     private javax.swing.JList<String> jlistprepedido;
     private javax.swing.JLabel jlsaldocuentapedido;
     private javax.swing.JLabel jltamlista;
+    private javax.swing.JPanel jpcobros;
+    private javax.swing.JPanel jpcuentacliente;
+    private javax.swing.JPanel jpedidocliente;
+    private javax.swing.JPanel jpgraficoinv;
     private javax.swing.JPanel jpgraficos;
+    private javax.swing.JPanel jptipocuenta;
     private javax.swing.JTextField jtxtextinv;
     private javax.swing.JTextField jtxtidcobro;
     private javax.swing.JTextField jtxtidinv;

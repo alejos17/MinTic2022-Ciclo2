@@ -343,4 +343,24 @@ public class Control {
         }
     }
     
+    public LinkedList<clsCliente> ListarGraficoClienteCuentas(){
+        LinkedList<clsCliente> Lista = null;
+        try {
+            Lista = this.modelGraficos.InfoClienteCuenta();
+            return Lista;
+        }catch (Exception e){
+            return null;
+        }
+    }
+    
+    public LinkedList<clsCuentas> ListarGraficoTipoCuentas(){
+        LinkedList<clsCuentas> Lista = null;
+        try {
+            Lista = this.modelGraficos.InfoTipoCuenta();
+            return Lista;
+        }catch (Exception e){
+            return null;
+        }
+    }
+    
 }

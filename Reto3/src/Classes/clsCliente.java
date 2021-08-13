@@ -18,6 +18,7 @@ import java.util.List;
 public class clsCliente extends clsPersona implements Itipo {
 
     private String idCliente;
+    private int cuentas;  //Se usa para comprobar la cantidad de cuentas de cada cliente en la grafica 
     
     public clsCliente(String idCliente, String nombre, String apellido, String direccion, String telefono, String correo) {
         super(nombre, apellido, direccion, telefono, correo);
@@ -41,6 +42,20 @@ public class clsCliente extends clsPersona implements Itipo {
     @Override
     public String tipoCambio() {
         return "Cliente";
+    }
+
+    /**
+     * @return the cuentas
+     */
+    public int getCuentas() {
+        return cuentas;
+    }
+
+    /**
+     * @param cuentas the cuentas to set
+     */
+    public void setCuentas(int cuentas) {
+        this.cuentas = cuentas;
     }
 
 }

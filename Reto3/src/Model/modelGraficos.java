@@ -42,15 +42,50 @@ public class modelGraficos {
             return null;
         }
         
-        /*int index =0;
-        //Modelo de lista model.
-        for (clsInventario inv : Lista){
-            String data = inv.getProducto() + " - "+ inv.getCant_ext();
-            model.add(index, data);  //Agrega cada cliente al modelo para aplicar a la lista
-            index++;
-        }*/
         return Lista;
     }
     
+    
+    public LinkedList<clsCliente> InfoClienteCuenta(){
+        LinkedList<clsCliente> Lista = new LinkedList<>();
+        //DefaultListModel model = new DefaultListModel();
+        try (Connection conexion = DriverManager.getConnection(database.getUrl())){   //Al colocar la conexión dentro del parentesis del try, si hay un error o se termina el try la conexion se cierra.
+            String query = "SELECT cliente.nombre, COUNT(cuenta.idcuenta) FROM cliente INNER JOIN cuenta ON cliente.idcliente = cuenta.id_cliente GROUP BY cliente.idcliente";
+            PreparedStatement statementCuenta = conexion.prepareStatement(query);  //Preparando statement
+            ResultSet result = statementCuenta.executeQuery();
+            while (result.next()){    //Ciclo al result set para sacar cada uno de los resultados en variables para crear el objeto y retornarlo.
+                String nombre = result.getString(1);
+                int cuentas = result.getInt(2);
+                clsCliente cli1 = new clsCliente(null, nombre, null, null, null, null);
+                cli1.setCuentas(cuentas);
+                Lista.add(cli1);
+            }
+        }catch (Exception e){
+            return null;
+        }
+        
+        return Lista;
+    }
+    
+    
+    public LinkedList<clsCuentas> InfoTipoCuenta(){
+        LinkedList<clsCuentas> Lista = new LinkedList<>();
+        //DefaultListModel model = new DefaultListModel();
+        try (Connection conexion = DriverManager.getConnection(database.getUrl())){   //Al colocar la conexión dentro del parentesis del try, si hay un error o se termina el try la conexion se cierra.
+            String query = "SELECT tipocuenta, COUNT(idcuenta) FROM cuenta GROUP BY tipocuenta";
+            PreparedStatement statementCuenta = conexion.prepareStatement(query);  //Preparando statement
+            ResultSet result = statementCuenta.executeQuery();
+            while (result.next()){    //Ciclo al result set para sacar cada uno de los resultados en variables para crear el objeto y retornarlo.
+                String tipo = result.getString(1);
+                int cantidad = result.getInt(2);   //Por la variable saldo que es tipo INT del objeto cuenta, para este caso envio la cantidad nada mas.
+                clsCuentas cuenta1 = new clsCuentas(null, tipo, cantidad, null);
+                Lista.add(cuenta1);
+            }
+        }catch (Exception e){
+            return null;
+        }
+        
+        return Lista;
+    }
     
 }
